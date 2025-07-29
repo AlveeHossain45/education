@@ -1,3 +1,4 @@
+
 // ===================================================================================
 // --- APP STATE, STORE & CONFIG ---
 // ===================================================================================
@@ -10,7 +11,7 @@ const navConfig = {
         { icon: 'fa-chalkboard-teacher', text: 'Teachers', page: 'teachers' },
         { icon: 'fa-building', text: 'Departments', page: 'departments' },
         { icon: 'fa-school', text: 'Classes', page: 'classes' },
-        { icon: 'fa-calendar-check', text: 'Timetable', page: 'timetable' },
+        { icon: 'fa-calendar-alt', text: 'Timetable', page: 'timetable' },
         { icon: 'fa-file-invoice-dollar', text: 'Fees', page: 'fees' },
         { icon: 'fa-file-alt', text: 'Exams', page: 'exams' },
         { icon: 'fa-bullhorn', text: 'Notice Board', page: 'notices' },
@@ -21,22 +22,36 @@ const navConfig = {
     Teacher: [
         { icon: 'fa-tachometer-alt', text: 'Dashboard', page: 'dashboard' },
         { icon: 'fa-user-graduate', text: 'My Students', page: 'students' },
-        { icon: 'fa-calendar-alt', text: 'Attendance', page: 'attendance' },
-        { icon: 'fa-calendar-check', text: 'My Timetable', page: 'timetable' },
+        { icon: 'fa-calendar-check', text: 'Attendance', page: 'attendance' },
+        { icon: 'fa-calendar-alt', text: 'My Timetable', page: 'timetable' },
         { icon: 'fa-file-alt', text: 'Exams & Results', page: 'exams' },
         { icon: 'fa-bullhorn', text: 'Notice Board', page: 'notices' },
         { icon: 'fa-user-circle', text: 'Profile', page: 'profile' },
     ],
     Student: [
         { icon: 'fa-tachometer-alt', text: 'Dashboard', page: 'dashboard' },
-        { icon: 'fa-calendar-check', text: 'My Timetable', page: 'timetable' },
+        { icon: 'fa-calendar-alt', text: 'My Timetable', page: 'timetable' },
         { icon: 'fa-file-invoice-dollar', text: 'My Fees', page: 'fees' },
         { icon: 'fa-file-alt', text: 'My Results', page: 'exams' },
         { icon: 'fa-bullhorn', text: 'Notice Board', page: 'notices' },
         { icon: 'fa-envelope', text: 'Contact Teacher', page: 'contactTeacher' },
+        { icon: 'fa-book-reader', text: 'Library', page: 'library' },
         { icon: 'fa-user-circle', text: 'My Profile', page: 'profile' },
+    ],
+    Accountant: [
+        { icon: 'fa-chart-pie', text: 'Dashboard', page: 'accountantDashboard' },
+        { icon: 'fa-file-invoice-dollar', text: 'Fee Collection', page: 'fees' },
+        { icon: 'fa-money-check-alt', text: 'Salary Management', page: 'salaries' },
+        { icon: 'fa-receipt', text: 'Expense Tracking', page: 'expenses' },
+        { icon: 'fa-file-export', text: 'Financial Reports', page: 'financialReports' },
+        { icon: 'fa-user-circle', text: 'Profile', page: 'profile' },
+    ],
+    Librarian: [
+        { icon: 'fa-book-spells', text: 'Library Management', page: 'library' },
+        { icon: 'fa-user-circle', text: 'Profile', page: 'profile' },
     ]
 };
+
 
 // ===================================================================================
 // --- SIMULATED API SERVICE & DATABASE ---
@@ -46,6 +61,8 @@ let appDatabase = {};
 const embeddedDatabase = {
   "users": {
     "admin": { "password": "admin", "role": "Admin", "name": "Admin User", "email": "admin@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=A" },
+    "accountant@school.com": { "password": "accountant", "role": "Accountant", "name": "S.Sahil", "email": "accountant@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=FR" },
+    "librarian@school.com": { "password": "librarian", "role": "Librarian", "name": "Alvee", "email": "librarian@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=SI" },
     "davis@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t1"},
     "wilson@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t2"},
     "anderson@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t3"},
@@ -236,28 +253,28 @@ const embeddedDatabase = {
     { "id": "s_2233081257", "name": "Md. Samiuzzaman", "rollNo": "2233081257", "classId": "c4", "guardianName": "S. Zaman", "contact": "555-0131", "email": "md.samiuzzaman@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-07-01", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "A+", "profileImage": null }
   ],
 "teachers": [
-    { "id": "t1", "name": "Mr. Davis", "departmentId": "d1", "subject": "Math", "contact": "987-654-3210", "email": "davis@school.com", "address": "222 Teacher Rd", "joiningDate": "2018-07-15", "qualifications": "M.Sc. in Mathematics", "bloodGroup": "O+", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MD" },
-    { "id": "t2", "name": "Ms. Wilson", "departmentId": "d1", "subject": "Science", "contact": "987-654-3211", "email": "wilson@school.com", "address": "333 Faculty Ct", "joiningDate": "2019-02-11", "qualifications": "M.Sc. in Physics", "bloodGroup": "A+", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MW" },
-    { "id": "t3", "name": "Mr. Anderson", "departmentId": "d2", "subject": "History", "contact": "987-111-2223", "email": "anderson@school.com", "address": "444 History Ln", "joiningDate": "2020-08-20", "qualifications": "M.A. in History", "bloodGroup": "B-", "profileImage": null },
-    { "id": "t4", "name": "Ms. Garcia", "departmentId": "d5", "subject": "English", "contact": "987-222-3334", "email": "garcia@school.com", "address": "555 Literature Ave", "joiningDate": "2017-01-10", "qualifications": "M.A. in English Literature", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "t5", "name": "Mr. Martinez", "departmentId": "d3", "subject": "Physical Education", "contact": "987-333-4445", "email": "martinez@school.com", "address": "666 Gymnasium Blvd", "joiningDate": "2021-05-19", "qualifications": "B.P.Ed", "bloodGroup": "O-", "profileImage": null },
-    { "id": "t6", "name": "Ms. Lee", "departmentId": "d3", "subject": "Art", "contact": "987-444-5556", "email": "lee@school.com", "address": "777 Creativity Cres", "joiningDate": "2019-09-01", "qualifications": "M.F.A.", "bloodGroup": "A+", "profileImage": null },
-    { "id": "t7", "name": "Mr. Chen", "departmentId": "d3", "subject": "Music", "contact": "987-555-6667", "email": "chen@school.com", "address": "888 Harmony Way", "joiningDate": "2018-03-12", "qualifications": "M.Mus.", "bloodGroup": "B+", "profileImage": null },
-    { "id": "t8", "name": "Ms. Taylor", "departmentId": "d1", "subject": "Biology", "contact": "987-666-7778", "email": "taylor@school.com", "address": "999 Cell Division Dr", "joiningDate": "2022-07-28", "qualifications": "M.Sc. in Biology", "bloodGroup": "O+", "profileImage": null },
-    { "id": "t9", "name": "Mr. Moore", "departmentId": "d1", "subject": "Chemistry", "contact": "987-777-8889", "email": "moore@school.com", "address": "101 Element St", "joiningDate": "2016-11-30", "qualifications": "M.Sc. in Chemistry", "bloodGroup": "A-", "profileImage": null },
-    { "id": "t10", "name": "Ms. Clark", "departmentId": "d1", "subject": "Physics", "contact": "987-888-9990", "email": "clark@school.com", "address": "202 Quantum Quay", "joiningDate": "2017-06-15", "qualifications": "Ph.D. in Physics", "bloodGroup": "B+", "profileImage": null },
-    { "id": "t11", "name": "Mr. Wright", "departmentId": "d2", "subject": "Geography", "contact": "987-999-0001", "email": "wright@school.com", "address": "303 Atlas Alley", "joiningDate": "2020-01-25", "qualifications": "M.A. in Geography", "bloodGroup": "O+", "profileImage": null },
-    { "id": "t12", "name": "Ms. Evans", "departmentId": "d4", "subject": "Computer Science", "contact": "987-000-1112", "email": "evans@school.com", "address": "404 Binary Bypass", "joiningDate": "2021-08-01", "qualifications": "M.Tech in CS", "bloodGroup": "A+", "profileImage": null },
-    { "id": "t13", "name": "Mr. Harris", "departmentId": "d6", "subject": "Economics", "contact": "987-112-2233", "email": "harris@school.com", "address": "505 Market Mews", "joiningDate": "2019-07-21", "qualifications": "M.A. in Economics", "bloodGroup": "AB-", "profileImage": null },
-    { "id": "t14", "name": "Ms. Lewis", "departmentId": "d2", "subject": "Social Studies", "contact": "987-223-3344", "email": "lewis@school.com", "address": "606 Society Sq", "joiningDate": "2018-10-05", "qualifications": "M.A. in Sociology", "bloodGroup": "B-", "profileImage": null },
-    { "id": "t15", "name": "Mr. Walker", "departmentId": "d3", "subject": "Drama", "contact": "987-334-4455", "email": "walker@school.com", "address": "707 Stage Street", "joiningDate": "2022-02-18", "qualifications": "M.A. in Theatre Arts", "bloodGroup": "O-", "profileImage": null },
-    { "id": "t16", "name": "Ms. Hall", "departmentId": "d5", "subject": "French", "contact": "987-445-5566", "email": "hall@school.com", "address": "808 Paris Place", "joiningDate": "2017-04-12", "qualifications": "M.A. in French", "bloodGroup": "A+", "profileImage": null },
-    { "id": "t17", "name": "Mr. Allen", "departmentId": "d5", "subject": "Spanish", "contact": "987-556-6677", "email": "allen@school.com", "address": "909 Madrid Manor", "joiningDate": "2020-09-09", "qualifications": "M.A. in Spanish", "bloodGroup": "B+", "profileImage": null },
-    { "id": "t18", "name": "Ms. King", "departmentId": "d5", "subject": "German", "contact": "987-667-7788", "email": "king@school.com", "address": "121 Berlin Blvd", "joiningDate": "2021-01-14", "qualifications": "M.A. in German", "bloodGroup": "O+", "profileImage": null },
-    { "id": "t19", "name": "Mr. Scott", "departmentId": "d2", "subject": "Philosophy", "contact": "987-778-8899", "email": "scott@school.com", "address": "232 Thought Thicket", "joiningDate": "2018-06-29", "qualifications": "M.A. in Philosophy", "bloodGroup": "A-", "profileImage": null },
-    { "id": "t20", "name": "Ms. Green", "departmentId": "d1", "subject": "Environmental Sci.", "contact": "987-889-9900", "email": "green@school.com", "address": "343 Ecology Esplanade", "joiningDate": "2022-08-11", "qualifications": "M.Sc. in Environmental Science", "bloodGroup": "B+", "profileImage": null },
-    { "id": "t21", "name": "Mr. Baker", "departmentId": "d1", "subject": "Algebra", "contact": "987-990-0011", "email": "baker@school.com", "address": "454 Equation End", "joiningDate": "2019-03-03", "qualifications": "M.Sc. in Mathematics", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "t22", "name": "Ms. Adams", "departmentId": "d5", "subject": "Literature", "contact": "987-001-1122", "email": "adams@school.com", "address": "565 Novella Nook", "joiningDate": "2017-10-10", "qualifications": "Ph.D. in Literature", "bloodGroup": "O+", "profileImage": null }
+    { "id": "t1", "name": "Mr. Davis", "departmentId": "d1", "subject": "Math", "contact": "987-654-3210", "email": "davis@school.com", "address": "222 Teacher Rd", "joiningDate": "2018-07-15", "qualifications": "M.Sc. in Mathematics", "bloodGroup": "O+", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MD", "baseSalary": 50000 },
+    { "id": "t2", "name": "Ms. Wilson", "departmentId": "d1", "subject": "Science", "contact": "987-654-3211", "email": "wilson@school.com", "address": "333 Faculty Ct", "joiningDate": "2019-02-11", "qualifications": "M.Sc. in Physics", "bloodGroup": "A+", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MW", "baseSalary": 52000 },
+    { "id": "t3", "name": "Mr. Anderson", "departmentId": "d2", "subject": "History", "contact": "987-111-2223", "email": "anderson@school.com", "address": "444 History Ln", "joiningDate": "2020-08-20", "qualifications": "M.A. in History", "bloodGroup": "B-", "profileImage": null, "baseSalary": 48000 },
+    { "id": "t4", "name": "Ms. Garcia", "departmentId": "d5", "subject": "English", "contact": "987-222-3334", "email": "garcia@school.com", "address": "555 Literature Ave", "joiningDate": "2017-01-10", "qualifications": "M.A. in English Literature", "bloodGroup": "AB+", "profileImage": null, "baseSalary": 55000 },
+    { "id": "t5", "name": "Mr. Martinez", "departmentId": "d3", "subject": "Physical Education", "contact": "987-333-4445", "email": "martinez@school.com", "address": "666 Gymnasium Blvd", "joiningDate": "2021-05-19", "qualifications": "B.P.Ed", "bloodGroup": "O-", "profileImage": null, "baseSalary": 45000 },
+    { "id": "t6", "name": "Ms. Lee", "departmentId": "d3", "subject": "Art", "contact": "987-444-5556", "email": "lee@school.com", "address": "777 Creativity Cres", "joiningDate": "2019-09-01", "qualifications": "M.F.A.", "bloodGroup": "A+", "profileImage": null, "baseSalary": 47000 },
+    { "id": "t7", "name": "Mr. Chen", "departmentId": "d3", "subject": "Music", "contact": "987-555-6667", "email": "chen@school.com", "address": "888 Harmony Way", "joiningDate": "2018-03-12", "qualifications": "M.Mus.", "bloodGroup": "B+", "profileImage": null, "baseSalary": 47500 },
+    { "id": "t8", "name": "Ms. Taylor", "departmentId": "d1", "subject": "Biology", "contact": "987-666-7778", "email": "taylor@school.com", "address": "999 Cell Division Dr", "joiningDate": "2022-07-28", "qualifications": "M.Sc. in Biology", "bloodGroup": "O+", "profileImage": null, "baseSalary": 51000 },
+    { "id": "t9", "name": "Mr. Moore", "departmentId": "d1", "subject": "Chemistry", "contact": "987-777-8889", "email": "moore@school.com", "address": "101 Element St", "joiningDate": "2016-11-30", "qualifications": "M.Sc. in Chemistry", "bloodGroup": "A-", "profileImage": null, "baseSalary": 56000 },
+    { "id": "t10", "name": "Ms. Clark", "departmentId": "d1", "subject": "Physics", "contact": "987-888-9990", "email": "clark@school.com", "address": "202 Quantum Quay", "joiningDate": "2017-06-15", "qualifications": "Ph.D. in Physics", "bloodGroup": "B+", "profileImage": null, "baseSalary": 60000 },
+    { "id": "t11", "name": "Mr. Wright", "departmentId": "d2", "subject": "Geography", "contact": "987-999-0001", "email": "wright@school.com", "address": "303 Atlas Alley", "joiningDate": "2020-01-25", "qualifications": "M.A. in Geography", "bloodGroup": "O+", "profileImage": null, "baseSalary": 49000 },
+    { "id": "t12", "name": "Ms. Evans", "departmentId": "d4", "subject": "Computer Science", "contact": "987-000-1112", "email": "evans@school.com", "address": "404 Binary Bypass", "joiningDate": "2021-08-01", "qualifications": "M.Tech in CS", "bloodGroup": "A+", "profileImage": null, "baseSalary": 58000 },
+    { "id": "t13", "name": "Mr. Harris", "departmentId": "d6", "subject": "Economics", "contact": "987-112-2233", "email": "harris@school.com", "address": "505 Market Mews", "joiningDate": "2019-07-21", "qualifications": "M.A. in Economics", "bloodGroup": "AB-", "profileImage": null, "baseSalary": 53000 },
+    { "id": "t14", "name": "Ms. Lewis", "departmentId": "d2", "subject": "Social Studies", "contact": "987-223-3344", "email": "lewis@school.com", "address": "606 Society Sq", "joiningDate": "2018-10-05", "qualifications": "M.A. in Sociology", "bloodGroup": "B-", "profileImage": null, "baseSalary": 48500 },
+    { "id": "t15", "name": "Mr. Walker", "departmentId": "d3", "subject": "Drama", "contact": "987-334-4455", "email": "walker@school.com", "address": "707 Stage Street", "joiningDate": "2022-02-18", "qualifications": "M.A. in Theatre Arts", "bloodGroup": "O-", "profileImage": null, "baseSalary": 46000 },
+    { "id": "t16", "name": "Ms. Hall", "departmentId": "d5", "subject": "French", "contact": "987-445-5566", "email": "hall@school.com", "address": "808 Paris Place", "joiningDate": "2017-04-12", "qualifications": "M.A. in French", "bloodGroup": "A+", "profileImage": null, "baseSalary": 54000 },
+    { "id": "t17", "name": "Mr. Allen", "departmentId": "d5", "subject": "Spanish", "contact": "987-556-6677", "email": "allen@school.com", "address": "909 Madrid Manor", "joiningDate": "2020-09-09", "qualifications": "M.A. in Spanish", "bloodGroup": "B+", "profileImage": null, "baseSalary": 53500 },
+    { "id": "t18", "name": "Ms. King", "departmentId": "d5", "subject": "German", "contact": "987-667-7788", "email": "king@school.com", "address": "121 Berlin Blvd", "joiningDate": "2021-01-14", "qualifications": "M.A. in German", "bloodGroup": "O+", "profileImage": null, "baseSalary": 54500 },
+    { "id": "t19", "name": "Mr. Scott", "departmentId": "d2", "subject": "Philosophy", "contact": "987-778-8899", "email": "scott@school.com", "address": "232 Thought Thicket", "joiningDate": "2018-06-29", "qualifications": "M.A. in Philosophy", "bloodGroup": "A-", "profileImage": null, "baseSalary": 49500 },
+    { "id": "t20", "name": "Ms. Green", "departmentId": "d1", "subject": "Environmental Sci.", "contact": "987-889-9900", "email": "green@school.com", "address": "343 Ecology Esplanade", "joiningDate": "2022-08-11", "qualifications": "M.Sc. in Environmental Science", "bloodGroup": "B+", "profileImage": null, "baseSalary": 51500 },
+    { "id": "t21", "name": "Mr. Baker", "departmentId": "d1", "subject": "Algebra", "contact": "987-990-0011", "email": "baker@school.com", "address": "454 Equation End", "joiningDate": "2019-03-03", "qualifications": "M.Sc. in Mathematics", "bloodGroup": "AB+", "profileImage": null, "baseSalary": 50500 },
+    { "id": "t22", "name": "Ms. Adams", "departmentId": "d5", "subject": "Literature", "contact": "987-001-1122", "email": "adams@school.com", "address": "565 Novella Nook", "joiningDate": "2017-10-10", "qualifications": "Ph.D. in Literature", "bloodGroup": "O+", "profileImage": null, "baseSalary": 59000 }
   ],
   "classes": [
     { "id": "c1", "name": "Class 1", "teacherId": "t2", "academicYear": "2025-2026", "roomNumber": "101" },
@@ -291,42 +308,52 @@ const embeddedDatabase = {
     { "attendanceId": "att4", "studentId": "s_2233081040", "classId": "c4", "date": "2025-07-28", "status": "Present" }
   ],
   "fees": [
-    { "id": "f1", "studentId": "s1", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f2", "studentId": "s2", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10" },
-    { "id": "f3", "studentId": "s1", "feeType": "Exam Fee", "amount": 500, "status": "Paid", "dueDate": "2025-09-01" },
-    { "id": "f4", "studentId": "s3", "feeType": "Tuition Fee", "amount": 4500, "status": "Unpaid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081040", "studentId": "s_2233081040", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081244", "studentId": "s_2233081244", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081263", "studentId": "s_2233081263", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081267", "studentId": "s_2233081267", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081311", "studentId": "s_2233081311", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081251", "studentId": "s_2233081251", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081204", "studentId": "s_2233081204", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081205", "studentId": "s_2233081205", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081223", "studentId": "s_2233081223", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081222", "studentId": "s_2233081222", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081237", "studentId": "s_2233081237", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081255", "studentId": "s_2233081255", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081266", "studentId": "s_2233081266", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081220", "studentId": "s_2233081220", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081228", "studentId": "s_2233081228", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081271", "studentId": "s_2233081271", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081550", "studentId": "s_2233081550", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081556", "studentId": "s_2233081556", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081569", "studentId": "s_2233081569", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081531", "studentId": "s_2233081531", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081545", "studentId": "s_2233081545", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081582", "studentId": "s_2233081582", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081053", "studentId": "s_2233081053", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081272", "studentId": "s_2233081272", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081265", "studentId": "s_2233081265", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081260", "studentId": "s_2233081260", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081268", "studentId": "s_2233081268", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081269", "studentId": "s_2233081269", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2231081042", "studentId": "s_2231081042", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081246", "studentId": "s_2233081246", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_2233081257", "studentId": "s_2233081257", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10" },
-    { "id": "f_fine_s2", "studentId": "s2", "feeType": "Library Fine", "amount": 25, "status": "Unpaid", "dueDate": "2025-08-15" }
+    { "id": "f1", "studentId": "s1", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-20" },
+    { "id": "f2", "studentId": "s2", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
+    { "id": "f3", "studentId": "s1", "feeType": "Exam Fee", "amount": 500, "status": "Paid", "dueDate": "2025-09-01", "paidDate": "2025-07-20" },
+    { "id": "f4", "studentId": "s3", "feeType": "Tuition Fee", "amount": 4500, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
+    { "id": "f_2233081040", "studentId": "s_2233081040", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
+    { "id": "f_2233081244", "studentId": "s_2233081244", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-22" },
+    { "id": "f_2233081263", "studentId": "s_2233081263", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-23" },
+    { "id": "f_2233081267", "studentId": "s_2233081267", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-24" },
+    { "id": "f_2233081311", "studentId": "s_2233081311", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-25" },
+    { "id": "f_2233081251", "studentId": "s_2233081251", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-26" },
+    { "id": "f_2233081204", "studentId": "s_2233081204", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-27" },
+    { "id": "f_2233081205", "studentId": "s_2233081205", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-28" },
+    { "id": "f_2233081223", "studentId": "s_2233081223", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-29" },
+    { "id": "f_2233081222", "studentId": "s_2233081222", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-15" },
+    { "id": "f_2233081237", "studentId": "s_2233081237", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-16" },
+    { "id": "f_2233081255", "studentId": "s_2233081255", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-17" },
+    { "id": "f_2233081266", "studentId": "s_2233081266", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-18" },
+    { "id": "f_2233081220", "studentId": "s_2233081220", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-19" },
+    { "id": "f_2233081228", "studentId": "s_2233081228", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
+    { "id": "f_2233081271", "studentId": "s_2233081271", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-01" },
+    { "id": "f_2233081550", "studentId": "s_2233081550", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-02" },
+    { "id": "f_2233081556", "studentId": "s_2233081556", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-03" },
+    { "id": "f_2233081569", "studentId": "s_2233081569", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-04" },
+    { "id": "f_2233081531", "studentId": "s_2233081531", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-05" },
+    { "id": "f_2233081545", "studentId": "s_2233081545", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-06" },
+    { "id": "f_2233081582", "studentId": "s_2233081582", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-07" },
+    { "id": "f_2233081053", "studentId": "s_2233081053", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-08" },
+    { "id": "f_2233081272", "studentId": "s_2233081272", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-09" },
+    { "id": "f_2233081265", "studentId": "s_2233081265", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-10" },
+    { "id": "f_2233081260", "studentId": "s_2233081260", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-11" },
+    { "id": "f_2233081268", "studentId": "s_2233081268", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-12" },
+    { "id": "f_2233081269", "studentId": "s_2233081269", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-13" },
+    { "id": "f_2231081042", "studentId": "s_2231081042", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-14" },
+    { "id": "f_2233081246", "studentId": "s_2233081246", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-20" },
+    { "id": "f_2233081257", "studentId": "s_2233081257", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
+    { "id": "f_fine_s2", "studentId": "s2", "feeType": "Library Fine", "amount": 25, "status": "Unpaid", "dueDate": "2025-08-15", "paidDate": null }
+  ],
+  "salaries": [
+    { "id": "sal1", "teacherId": "t1", "baseSalary": 50000, "bonus": 2000, "deductions": 1500, "netPay": 50500, "month": "2025-07", "status": "Paid", "paidDate": "2025-07-28" },
+    { "id": "sal2", "teacherId": "t2", "baseSalary": 52000, "bonus": 0, "deductions": 1800, "netPay": 50200, "month": "2025-07", "status": "Paid", "paidDate": "2025-07-28" },
+    { "id": "sal3", "teacherId": "t3", "baseSalary": 48000, "bonus": 0, "deductions": 1500, "netPay": 46500, "month": "2025-07", "status": "Pending", "paidDate": null }
+  ],
+  "expenses": [
+      { "id": "exp1", "category": "Utilities", "amount": 25000, "date": "2025-07-15", "description": "Monthly Electricity and Water Bill" },
+      { "id": "exp2", "category": "Supplies", "amount": 12000, "date": "2025-07-20", "description": "Stationery and Lab Supplies" },
+      { "id": "exp3", "category": "Maintenance", "amount": 8000, "date": "2025-07-25", "description": "Campus ground maintenance" }
   ],
   "exams": [
     { "id": "ex1", "name": "Class Test I", "classId": "c1", "subjectId": "sub2", "teacherId": "t2", "date": "2025-08-15", "maxMarks": 25 },
@@ -351,20 +378,22 @@ const embeddedDatabase = {
       { "bookId": "b6", "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "publicationYear": 1925, "isbn": "978-0-7432-7356-5", "genre": "Fiction", "totalCopies": 8, "availableCopies": 8 }
     ],
     "transactions": [
-      { "transactionId": "lt1", "bookId": "b1", "studentId": "s3", "issueDate": "2025-07-15", "dueDate": "2025-07-29", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt2", "bookId": "b2", "studentId": "s1", "issueDate": "2025-07-10", "dueDate": "2025-07-24", "returnDate": "2025-07-22", "status": "Returned" },
-      { "transactionId": "lt3", "bookId": "b1", "studentId": "s2", "issueDate": "2025-07-01", "dueDate": "2025-07-15", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt4", "bookId": "b5", "studentId": "s_2233081040", "issueDate": "2025-07-25", "dueDate": "2025-08-08", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt5", "bookId": "b1", "studentId": "s5", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" }
+      { "transactionId": "lt1", "bookId": "b1", "memberId": "s3", "issueDate": "2025-07-15", "dueDate": "2025-07-29", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt2", "bookId": "b2", "memberId": "s1", "issueDate": "2025-07-10", "dueDate": "2025-07-24", "returnDate": "2025-07-22", "status": "Returned" },
+      { "transactionId": "lt3", "bookId": "b1", "memberId": "s2", "issueDate": "2025-07-01", "dueDate": "2025-07-15", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt4", "bookId": "b5", "memberId": "s_2233081040", "issueDate": "2025-07-25", "dueDate": "2025-08-08", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt5", "bookId": "b1", "memberId": "s5", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" }
     ],
     "reservations": [
-      { "reservationId": "resv1", "bookId": "b1", "studentId": "s4", "requestDate": "2025-07-28", "status": "Pending" }
+      { "reservationId": "resv1", "bookId": "b1", "memberId": "s4", "requestDate": "2025-07-28", "status": "Pending" }
     ],
     "acquisitions": [
-  {"acquisitionId": "acq1","bookId": "b6","title": "Introduction to AI", "author": "Stuart Russell","acquiredDate": "2025-07-15", "price": 4200, "supplier": "Academic Books Ltd." },
-  {"acquisitionId": "acq2", "bookId": "b7", "title": "Data Structures in C",  "author": "Mark Allen Weiss", "acquiredDate": "2025-07-10","price": 3500, "supplier": "Campus Textbooks"},
-  {"acquisitionId": "acq3", "bookId": "b8", "title": "World History: A Modern Perspective","author": "John Merriman", "acquiredDate": "2025-06-25","price": 3800, "supplier": "Global Distributors"}
-     ]
+      {"acquisitionId": "acq1","title": "Introduction to AI", "author": "Stuart Russell","requestedBy": "t12", "requestDate": "2025-07-15", "status": "Approved", "price": 4200, "supplier": "Academic Books Ltd." }
+    ],
+    "readingLists": [
+      { "id": "rl1", "name": "Physics Fundamentals", "classId": "c1", "teacherId": "t2", "bookIds": ["b2"] },
+      { "id": "rl2", "name": "Classic American Literature", "classId": "c4", "teacherId": "t4", "bookIds": ["b3", "b5", "b6"] }
+    ]
   },
   "transport": {
     "vehicles": [
@@ -383,27 +412,15 @@ const embeddedDatabase = {
       { "assignmentId": "ta3", "studentId": "s3", "vehicleId": "v2", "routeId": "r2" },
       { "assignmentId": "ta4", "studentId": "s_2233081040", "vehicleId": "v1", "routeId": "r1" },
       { "assignmentId": "ta5", "studentId": "s4", "vehicleId": "v3", "routeId": "r3" },
-
-      
     ]
-  },
-    "readingLists": [ {"listId": "rl1", "title": "Computer Science Essentials", "courseId": "cs101", "createdBy": "t1","books": ["b1", "b2", "b3"] },
-  {
-    "listId": "rl2", "title": "Modern Literature", "courseId": "lit202", "createdBy": "t2", "books": ["b4", "b5"]
-  }   ]
+  }
 };
 
 // You can assign the embeddedDatabase to your appDatabase variable
 appDatabase = embeddedDatabase;
 
-// Example of accessing data
-console.log("A student's name:", appDatabase.students.find(s => s.id === 's1').name);
-console.log("A teacher's name:", appDatabase.teachers.find(t => t.id === 't1').name);
-console.log("A book title:", appDatabase.library.books.find(b => b.bookId === 'b1').title);
-
-
 const apiService = (() => {
-    const DB_KEY = 'sms_database_modern';
+    const DB_KEY = 'sms_database_pro';
     const init = async () => {
         const savedDb = localStorage.getItem(DB_KEY);
         if (savedDb) {
@@ -420,25 +437,39 @@ const apiService = (() => {
         }
     };
     const save = () => localStorage.setItem(DB_KEY, JSON.stringify(appDatabase));
+    
     const get = (collection, subCollection = null) => new Promise(resolve => setTimeout(() => {
         if (subCollection) {
             resolve(JSON.parse(JSON.stringify(appDatabase[collection] ? (appDatabase[collection][subCollection] || []) : [])));
         } else {
             resolve(JSON.parse(JSON.stringify(appDatabase[collection] || [])));
         }
-    }, 250));
+    }, 150));
+
     const create = (collection, data, subCollection = null) => new Promise(resolve => setTimeout(() => {
-        const idKey = subCollection === 'books' ? 'bookId' : subCollection === 'transactions' ? 'transactionId' : 'id';
+        let idKey = 'id';
+        if (collection === 'library') {
+            if (subCollection === 'books') idKey = 'bookId';
+            else if (subCollection === 'transactions') idKey = 'transactionId';
+            else if (subCollection === 'reservations') idKey = 'reservationId';
+            else if (subCollection === 'acquisitions') idKey = 'acquisitionId';
+        }
+        
         const prefix = collection.slice(0,1) + (subCollection ? subCollection.slice(0,1) : '');
         const newItem = { ...data, [idKey]: `${prefix}${Date.now()}` };
+        
         if (subCollection) {
+            if (!appDatabase[collection]) appDatabase[collection] = {};
+            if (!appDatabase[collection][subCollection]) appDatabase[collection][subCollection] = [];
             appDatabase[collection][subCollection].push(newItem);
         } else {
+            if (!appDatabase[collection]) appDatabase[collection] = [];
             appDatabase[collection].push(newItem);
         }
         save();
         resolve(newItem);
     }, 100));
+
     const update = (collection, id, data, subCollection = null, idKey = 'id') => new Promise(resolve => setTimeout(() => {
         const collectionToUpdate = subCollection ? appDatabase[collection][subCollection] : appDatabase[collection];
         const index = collectionToUpdate.findIndex(item => item[idKey] === id);
@@ -448,6 +479,7 @@ const apiService = (() => {
             resolve(collectionToUpdate[index]);
         }
     }, 100));
+
     const remove = (collection, id, subCollection = null, idKey = 'id') => new Promise(resolve => setTimeout(() => {
         if(subCollection) {
             appDatabase[collection][subCollection] = appDatabase[collection][subCollection].filter(item => item[idKey] !== id);
@@ -457,6 +489,7 @@ const apiService = (() => {
         save();
         resolve({ success: true });
     }, 100));
+    
     const getAttendance = (date, classId) => new Promise(resolve => {
         const records = appDatabase.attendance.filter(att => att.date === date && att.classId === classId);
         const attendanceMap = records.reduce((acc, record) => {
@@ -465,6 +498,7 @@ const apiService = (() => {
         }, {});
         resolve(attendanceMap);
     });
+
     const saveAttendance = (date, classId, records) => new Promise(resolve => {
         appDatabase.attendance = appDatabase.attendance.filter(att => att.date !== date || att.classId !== classId);
         for (const studentId in records) {
@@ -480,10 +514,12 @@ const apiService = (() => {
         save();
         resolve({ success: true });
     });
+
     const getResultsForExam = (examId) => new Promise(resolve => {
         const results = appDatabase.results.filter(r => r.examId === examId);
         resolve(results);
     });
+
     const saveResults = (examId, resultsData) => new Promise(resolve => {
         resultsData.forEach(res => {
             const existingResultIndex = appDatabase.results.findIndex(r => r.examId === examId && r.studentId === res.studentId);
@@ -497,11 +533,10 @@ const apiService = (() => {
         resolve({ success: true });
     });
      
-       const reset = async () => {
+    const reset = async () => {
         localStorage.removeItem(DB_KEY);
-        await init(); // Re-initialize with embedded data
+        await init();
     };
-
 
     return { init, save, get, create, update, remove, getAttendance, saveAttendance, getResultsForExam, saveResults, reset };
 })();
@@ -514,7 +549,7 @@ const store = {
     _data: {},
     _maps: {},
     async initialize() {
-         const collections = ['users', 'departments', 'subjects', 'students', 'teachers', 'classes', 'timetable', 'notices', 'attendance', 'fees', 'exams', 'results', 'library', 'transport', 'readingLists'];
+        const collections = ['users', 'departments', 'subjects', 'students', 'teachers', 'classes', 'timetable', 'notices', 'attendance', 'fees', 'exams', 'results', 'library', 'transport', 'salaries', 'expenses'];
         const promises = collections.map(async (key) => {
             this._data[key] = await apiService.get(key);
         });
@@ -537,9 +572,15 @@ const store = {
         this._maps.subjects = new Map(this.get('subjects').map(s => [s.id, s]));
         this._maps.departments = new Map(this.get('departments').map(d => [d.id, d]));
         this._maps.books = new Map(this.get('library', 'books').map(b => [b.bookId, b]));
+        this._maps.members = new Map([...this._maps.students, ...this._maps.teachers]);
     },
-    async refresh(collection) {
-        this._data[collection] = await apiService.get(collection);
+    async refresh(collection, subCollection = null) {
+        if (subCollection) {
+            if (!this._data[collection]) this._data[collection] = {};
+            this._data[collection][subCollection] = await apiService.get(collection, subCollection);
+        } else {
+            this._data[collection] = await apiService.get(collection);
+        }
         this.buildMaps(); // Rebuild maps that might depend on this collection
     }
 };
@@ -558,7 +599,10 @@ const ui = {
     navMenu: document.getElementById('nav-menu'),
     userInfo: document.getElementById('user-info'),
     userNameDisplay: document.getElementById('user-name-display'),
+    userRoleDisplay: document.getElementById('user-role-display'),
     sidebar: document.getElementById('sidebar'),
+    sidebarOverlay: document.getElementById('sidebar-overlay'),
+    mobileMenuBtn: document.getElementById('mobile-menu-btn'),
     modal: document.getElementById('form-modal'),
     modalTitle: document.getElementById('modal-title'),
     modalBody: document.getElementById('modal-body'),
@@ -580,7 +624,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await apiService.init();
     await store.initialize();
 
-    const savedUser = sessionStorage.getItem('sms_user_modern');
+    const savedUser = sessionStorage.getItem('sms_user_pro');
     if (savedUser) {
         currentUser = JSON.parse(savedUser);
         initializeApp();
@@ -598,7 +642,15 @@ function setupGlobalEventListeners() {
     ui.closeModalButton.addEventListener('click', () => closeAnimatedModal(ui.modal));
     ui.confirmNoBtn.addEventListener('click', () => closeAnimatedModal(ui.confirmModal));
     ui.resetDataBtn.addEventListener('click', handleResetData);
+    ui.mobileMenuBtn.addEventListener('click', toggleSidebar);
+    ui.sidebarOverlay.addEventListener('click', toggleSidebar);
 }
+
+function toggleSidebar() {
+    ui.sidebar.classList.toggle('sidebar-open');
+    ui.sidebarOverlay.classList.toggle('hidden');
+}
+
 
 async function handleLogin(e) {
     e.preventDefault();
@@ -606,7 +658,7 @@ async function handleLogin(e) {
     const password = e.target.password.value;
     ui.loginMessage.textContent = '';
 
-    const users = await apiService.get('users');
+    const users = appDatabase.users;
     const userAccount = users[username.toLowerCase()];
 
     if (userAccount && userAccount.password === password) {
@@ -615,21 +667,30 @@ async function handleLogin(e) {
             role: userAccount.role,
         };
 
-        // Fetch detailed profile info
-        if (userAccount.role === 'Admin') {
-            currentUser.id = 'admin';
+        if (['Admin', 'Accountant', 'Librarian'].includes(userAccount.role)) {
+            currentUser.id = username.toLowerCase();
             currentUser.name = userAccount.name;
             currentUser.email = userAccount.email;
             currentUser.profileImage = userAccount.profileImage;
         } else if (userAccount.role === 'Student') {
             const studentData = store.get('students').find(s => s.id === userAccount.studentId);
-            currentUser = { ...currentUser, ...studentData };
+            if (studentData) {
+                currentUser = { ...currentUser, ...studentData };
+            } else {
+                ui.loginMessage.textContent = 'Student profile not found.';
+                return;
+            }
         } else if (userAccount.role === 'Teacher') {
             const teacherData = store.get('teachers').find(t => t.id === userAccount.teacherId);
-            currentUser = { ...currentUser, ...teacherData };
+            if (teacherData) {
+                currentUser = { ...currentUser, ...teacherData };
+            } else {
+                ui.loginMessage.textContent = 'Teacher profile not found.';
+                return;
+            }
         }
         
-        sessionStorage.setItem('sms_user_modern', JSON.stringify(currentUser));
+        sessionStorage.setItem('sms_user_pro', JSON.stringify(currentUser));
         initializeApp();
 
     } else {
@@ -638,29 +699,26 @@ async function handleLogin(e) {
 }
 
 function handleLogout() {
-    // Instead of logging out immediately, first show the confirmation modal
     showConfirmationModal(
-        "Are you sure you want to log out?", // This is the message the user will see
+        "Are you sure you want to log out?",
         () => {
-            // This part only runs if the user clicks "Yes"
             currentUser = null;
-            sessionStorage.removeItem('sms_user_modern');
-            ui.app.classList.add('hidden');
-            ui.loginPage.style.display = 'block';
-            window.location.reload(); // To clear all state
+            sessionStorage.removeItem('sms_user_pro');
+            window.location.reload(); 
         }
     );
 }
 
 function handleResetData() {
     showConfirmationModal(
-        'Are you sure you want to reset all data? This will restore the application to its original state and log you out. This action cannot be undone.',
+        'Are you sure you want to reset all data?',
         async () => {
             await apiService.reset();
             showToast('Application data has been reset.', 'info');
+            sessionStorage.removeItem('sms_user_pro');
             setTimeout(() => {
-                handleLogout();
-            }, 1500); 
+                window.location.reload();
+            }, 1500);
         }
     );
 }
@@ -671,70 +729,83 @@ function initializeApp() {
     ui.app.classList.remove('hidden');
     
     setupUIForRole();
-    navigateTo('dashboard');
+    
+    const defaultPage = navConfig[currentUser.role][0].page;
+    navigateTo(defaultPage);
 }
 
 function setupUIForRole() {
     if (!currentUser) return;
-   ui.headerUserAvatar.src = currentUser.profileImage || generateInitialsAvatar(currentUser.name);
+    ui.headerUserAvatar.src = currentUser.profileImage || generateInitialsAvatar(currentUser.name);
+    ui.userNameDisplay.textContent = currentUser.name;
+    ui.userRoleDisplay.textContent = currentUser.role;
 
     const menuItems = navConfig[currentUser.role];
     ui.navMenu.innerHTML = menuItems.map(item => `
-        <a href="#" class="sidebar-link p-2 rounded-lg flex items-center gap-3" data-page="${item.page}">
-            <i class="fas ${item.icon} w-5 text-center"></i>
-            <span>${item.text}</span>
+        <a href="#" class="sidebar-link p-3 my-1 rounded-lg flex items-center gap-4 text-slate-300" data-page="${item.page}">
+            <i class="fas ${item.icon} w-6 text-center text-lg"></i>
+            <span class="font-medium">${item.text}</span>
         </a>
     `).join('');
 
     document.querySelectorAll('.sidebar-link').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelectorAll('.sidebar-link').forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
             navigateTo(item.dataset.page);
+            if (window.innerWidth < 1024) {
+                toggleSidebar();
+            }
         });
     });
-    document.querySelector('.sidebar-link[data-page="dashboard"]').classList.add('active');
 }
 
 function navigateTo(page) {
+    document.querySelectorAll('.sidebar-link').forEach(i => i.classList.remove('active'));
+    const activeLink = document.querySelector(`.sidebar-link[data-page="${page}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
     const pageText = navConfig[currentUser.role].find(item => item.page === page)?.text || 'Page';
     ui.pageTitle.textContent = pageText;
     
     const pageRenderers = {
-        'dashboard': renderDashboard, 'students': renderStudentsPage,
-        'teachers': renderTeachersPage, 'classes': renderClassesPage,
-        'attendance': renderAttendancePage, 'fees': renderFeesPage,
-        'exams': renderExamsPage, 'notices': renderNoticesPage,
-        'profile': renderProfilePage, 'departments': renderDepartmentsPage,
-        'library': renderLibraryPage, 'transport': renderTransportPage,
-        'contactTeacher': renderContactTeacherPage, 'timetable': renderTimetablePage,
+        'dashboard': renderDashboard,
+        'students': renderStudentsPage,
+        'teachers': renderTeachersPage,
+        'classes': renderClassesPage,
+        'attendance': renderAttendancePage,
+        'fees': renderFeesPage,
+        'exams': renderExamsPage,
+        'notices': renderNoticesPage,
+        'profile': renderProfilePage,
+        'departments': renderDepartmentsPage,
+        'library': renderLibraryPage,
+        'transport': renderTransportPage,
+        'contactTeacher': renderContactTeacherPage,
+        'timetable': renderTimetablePage,
+        'accountantDashboard': renderAccountantDashboard,
+        'salaries': renderSalaryPage,
+        'expenses': renderExpensesPage,
+        'financialReports': renderFinancialReports,
     };
 
-    const renderFunc = pageRenderers[page] || (() => { ui.contentArea.innerHTML = '<p>Page not found.</p>'; });
-
-   
+    const renderFunc = pageRenderers[page] || (() => { ui.contentArea.innerHTML = `<div class="animate-fade-in"><p>Page not found.</p></div>`; });
     
-    // Show skeleton loader
-    if (['students', 'teachers', 'classes', 'departments', 'fees'].includes(page)) {
+    if (['students', 'teachers', 'classes', 'departments', 'fees', 'salaries', 'expenses'].includes(page)) {
         ui.contentArea.innerHTML = getSkeletonLoaderHTML('table');
-    } else if (page === 'dashboard') {
+    } else if (page.toLowerCase().includes('dashboard')) {
          ui.contentArea.innerHTML = getSkeletonLoaderHTML('dashboard');
     } else {
         ui.contentArea.innerHTML = `<div class="flex justify-center items-center h-full"><i class="fas fa-spinner fa-spin fa-3x"></i></div>`;
     }
 
-    // Render the actual content after a short delay
     setTimeout(renderFunc, 150);
 }
 
 // ===================================================================================
 // --- PAGE RENDERERS ---
 // ===================================================================================
-// All `render...Page` functions from your provided script go here.
-// I have included them below, unchanged, as they rely on the functions I've reconstructed.
+
 async function renderDashboard() {
-    // Data fetching (assuming store.get and store.getMap are efficient)
     const students = store.get('students');
     const teachers = store.get('teachers');
     const fees = store.get('fees');
@@ -744,123 +815,48 @@ async function renderDashboard() {
     const timetable = store.get('timetable');
     const classesMap = store.getMap('classes');
     const subjectsMap = store.getMap('subjects');
-
-    // Helper functions for card creation (ensure these are defined globally or passed in)
-    // For demonstration, I'm including them conceptually here.
-    function createDashboardCard({ title, value, icon, color }) {
-        const colorMap = {
-            indigo: 'from-indigo-600 to-indigo-800',
-            yellow: 'from-yellow-500 to-yellow-700',
-            blue: 'from-blue-600 to-blue-800',
-            green: 'from-green-600 to-green-800',
-        };
-        const gradientClass = colorMap[color] || 'from-gray-600 to-gray-800';
-
-        return `
-            <div class="dashboard-card bg-gradient-to-br ${gradientClass} p-6 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl relative overflow-hidden">
-                <div class="absolute inset-0 bg-black opacity-10 pointer-events-none rounded-xl"></div>
-                <div class="flex items-center justify-between mb-4 relative z-10">
-                    <div>
-                        <p class="text-sm font-medium text-white text-opacity-80">${title}</p>
-                        <p class="text-3xl font-bold text-white mt-1">${value}</p>
-                    </div>
-                    <div class="text-white text-4xl opacity-70">
-                        <i class="fas ${icon}"></i>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    function createUpcomingExamCard(exam, subjectName) {
-        const examDate = new Date(exam.date);
-        const formattedDate = examDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
-        const formattedTime = examDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-        return `
-            <div class="bg-slate-700/50 p-4 rounded-lg flex items-center space-x-4 shadow-md transition-transform duration-200 hover:translate-x-1">
-                <div class="flex-shrink-0 text-center bg-blue-900/50 text-blue-300 rounded-md p-2">
-                    <p class="text-xs font-semibold">${formattedDate}</p>
-                    <p class="text-sm">${formattedTime}</p>
-                </div>
-                <div>
-                    <p class="font-bold text-white">${subjectName} - ${exam.type}</p>
-                    <p class="text-sm text-slate-300">Class: ${classesMap.get(exam.classId)?.name || 'N/A'}</p>
-                </div>
-            </div>
-        `;
-    }
+    const teachersMap = store.getMap('teachers');
 
     // STUDENT DASHBOARD
     if (currentUser.role === 'Student') {
         const pendingFeesCount = fees.filter(f => f.studentId === currentUser.id && f.status === 'Unpaid').length;
         const upcomingExams = exams.filter(e => e.classId === currentUser.classId && new Date(e.date) >= new Date()).sort((a, b) => new Date(a.date) - new Date(b.date));
         
-                // --- NEW: Library Alert Logic ---
-        const myLibraryTx = store.get('library', 'transactions').filter(t => t.studentId === currentUser.id && t.status === 'Issued');
-        const myLibraryFines = store.get('fees').filter(f => f.studentId === currentUser.id && f.feeType === 'Library Fine' && f.status === 'Unpaid');
-        const booksDueSoon = myLibraryTx.filter(t => {
-            const dueDate = new Date(t.dueDate);
-            // Reset today's date for accurate comparison
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const threeDaysFromNow = new Date(new Date().setDate(new Date().getDate() + 3));
-            return dueDate <= threeDaysFromNow && dueDate >= today;
-        });
+        const myLibraryTx = store.get('library', 'transactions').filter(t => t.memberId === currentUser.id && t.status === 'Issued');
         const overdueBooksCount = myLibraryTx.filter(t => new Date(t.dueDate) < new Date()).length;
-        // --- END: Library Alert Logic ---
-
 
         const studentStatCards = [
             { title: 'Upcoming Exams', value: upcomingExams.length, icon: 'fa-file-alt', color: 'indigo' },
             { title: 'Pending Fees', value: pendingFeesCount, icon: 'fa-file-invoice-dollar', color: 'yellow' },
-             { title: 'Overdue Books', value: overdueBooksCount, icon: 'fa-exclamation-triangle', color: 'gray' },
+            { title: 'Overdue Books', value: overdueBooksCount, icon: 'fa-exclamation-triangle', color: 'red' },
         ];
 
         ui.contentArea.innerHTML = `
-             <div class="mb-6">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Welcome back, <span class="text-blue-400">${currentUser.name}!</span></h2>
-                <p class="text-slate-400 mt-2">Here's your personalized summary for today.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">${studentStatCards.map(createDashboardCard).join('')}</div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Recent Notices</h3>
-                    <div class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
-                        ${allNotices.length > 0 ? allNotices.slice(0, 4).map(n => `
-                            <div class="border-l-4 border-blue-500 pl-4 py-2 bg-slate-700/30 rounded-md transition-transform duration-200 hover:translate-x-1">
-                                <p class="font-bold text-white">${n.title} <span class="text-xs font-normal text-slate-500">(${new Date(n.date).toLocaleDateString()})</span></p>
-                                <p class="text-sm text-slate-400 mt-1">${n.content.substring(0, 80)}...</p>
-                            </div>`).join('') : '<p class="text-slate-500 italic">No recent notices to display.</p>'}
-                    </div>
+            <div class="animate-fade-in">
+                <div class="mb-6">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">Welcome back, <span class="text-blue-400">${currentUser.name.split(' ')[0]}!</span></h2>
+                    <p class="text-slate-400 mt-2">Here's your personalized summary for today.</p>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Upcoming Exams</h3>
-                    <div class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
-                        ${upcomingExams.length > 0 ? upcomingExams.slice(0, 4).map(e => createUpcomingExamCard(e, subjectsMap.get(e.subjectId)?.name || 'N/A')).join('') : '<p class="text-slate-500 italic">No upcoming exams scheduled.</p>'}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">${studentStatCards.map(createDashboardCard).join('')}</div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Recent Notices</h3>
+                        <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+                            ${allNotices.length > 0 ? allNotices.slice(0, 4).map(n => `
+                                <div class="border-l-4 border-blue-500 pl-4 py-2 bg-slate-700/30 rounded-md transition-transform duration-200 hover:translate-x-1">
+                                    <p class="font-bold text-white">${n.title} <span class="text-xs font-normal text-slate-500">(${new Date(n.date).toLocaleDateString()})</span></p>
+                                    <p class="text-sm text-slate-400 mt-1">${n.content.substring(0, 80)}...</p>
+                                </div>`).join('') : '<p class="text-slate-500 italic">No recent notices to display.</p>'}
+                        </div>
                     </div>
-                </div>
-                <!-- NEW: Library Alerts Card -->
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Library Alerts</h3>
-                    <div class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
-                        ${myLibraryFines.length > 0 ? myLibraryFines.map(f => `
-                            <div class="border-l-4 border-red-500 pl-4 py-2 bg-red-900/30 rounded-md">
-                                <p class="font-bold text-white">Overdue Fine: BDT ${f.amount}</p>
-                                <p class="text-sm text-red-300">Please pay your library fine promptly.</p>
-                            </div>`).join('') : ''}
-                        ${booksDueSoon.length > 0 ? booksDueSoon.map(t => `
-                            <div class="border-l-4 border-yellow-500 pl-4 py-2 bg-yellow-900/30 rounded-md">
-                                <p class="font-bold text-white">Book Due Soon: ${store.getMap('books').get(t.bookId)?.title}</p>
-                                <p class="text-sm text-yellow-300">Return by: ${t.dueDate}</p>
-                            </div>`).join('') : ''}
-                        ${myLibraryFines.length === 0 && booksDueSoon.length === 0 && overdueBooksCount === 0 ? '<p class="text-slate-500 italic">No urgent library alerts. You are all set!</p>' : ''}
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Upcoming Exams</h3>
+                        <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+                            ${upcomingExams.length > 0 ? upcomingExams.slice(0, 4).map(e => createUpcomingExamCard(e, subjectsMap.get(e.subjectId)?.name || 'N/A')).join('') : '<p class="text-slate-500 italic">No upcoming exams scheduled.</p>'}
+                        </div>
                     </div>
                 </div>
             </div>`;
-
-
-
     // TEACHER DASHBOARD
     } else if (currentUser.role === 'Teacher') {
         const myClassIdsAsTeacher = store.get('classes').filter(c => c.teacherId === currentUser.id).map(c => c.id);
@@ -884,41 +880,41 @@ async function renderDashboard() {
         ];
 
         ui.contentArea.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${statCards.map(createDashboardCard).join('')}</div>
-            <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Today's Timetable (<span class="text-blue-400">${today}</span>)</h3>
-                    <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
-                        ${todaysClasses.length > 0 ? todaysClasses.map(c => `
-                            <div class="flex items-center gap-4 p-3 rounded-lg bg-slate-700/50 transition-transform duration-200 hover:scale-[1.01]">
-                                <div class="text-center font-semibold bg-blue-900/50 text-blue-300 rounded-lg px-3 py-1 min-w-[70px]">
-                                    <p>${c.startTime}</p>
+            <div class="animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${statCards.map(createDashboardCard).join('')}</div>
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Today's Timetable (<span class="text-blue-400">${today}</span>)</h3>
+                        <div class="space-y-3 max-h-80 overflow-y-auto custom-scrollbar">
+                            ${todaysClasses.length > 0 ? todaysClasses.map(c => `
+                                <div class="flex items-center gap-4 p-3 rounded-lg bg-slate-700/50 transition-transform duration-200 hover:scale-[1.01]">
+                                    <div class="text-center font-semibold bg-blue-900/50 text-blue-300 rounded-lg px-3 py-1 min-w-[70px]">
+                                        <p>${c.startTime}</p>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">${subjectsMap.get(c.subjectId)?.name || 'N/A'}</p>
+                                        <p class="text-sm text-slate-400">Class: ${classesMap.get(c.classId)?.name || 'N/A'}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p class="font-bold text-white">${subjectsMap.get(c.subjectId)?.name || 'N/A'}</p>
-                                    <p class="text-sm text-slate-400">Class: ${classesMap.get(c.classId)?.name || 'N/A'}</p>
-                                </div>
-                            </div>
-                        `).join('') : `<p class="text-slate-500 italic">You have no classes scheduled for today.</p>`}
+                            `).join('') : `<p class="text-slate-500 italic">You have no classes scheduled for today.</p>`}
+                        </div>
                     </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Quick Communication</h3>
-                    <div class="space-y-3">
-                        <button id="custom-message-btn" class="w-full text-left p-4 rounded-lg bg-blue-900/30 hover:bg-blue-900/60 transition duration-300 transform hover:scale-[1.02] shadow-md">
-                            <p class="font-bold text-blue-200"><i class="fas fa-paper-plane mr-3 text-lg"></i>Send Custom Message</p>
-                            <p class="text-sm text-blue-300 mt-1">Reach out to your classes or the Admin swiftly.</p>
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Quick Communication</h3>
+                        <p class="text-slate-400 mb-4">Send notices or messages to your classes or the admin.</p>
+                        <button id="quick-message-btn" class="w-full text-left p-4 rounded-lg bg-blue-900/30 hover:bg-blue-900/60 transition duration-300 transform hover:scale-[1.02] shadow-md">
+                            <p class="font-bold text-blue-200"><i class="fas fa-paper-plane mr-3 text-lg"></i>Send a Message</p>
                         </button>
                     </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Student Distribution</h3>
-                    ${myStudents.length > 0 ? `<canvas id="genderChart"></canvas>` : `<p class="text-slate-500 italic">No student data to display.</p>`}
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Student Distribution</h3>
+                        ${myStudents.length > 0 ? `<canvas id="genderChart"></canvas>` : `<p class="text-slate-500 italic">No student data to display.</p>`}
+                    </div>
                 </div>
             </div>
         `;
 
-        document.getElementById('custom-message-btn').onclick = openAdvancedMessageModal;
+        document.getElementById('quick-message-btn').onclick = openAdvancedMessageModal;
         if(myStudents.length > 0) {
             renderDashboardCharts(null, myStudents);
         }
@@ -926,37 +922,39 @@ async function renderDashboard() {
     } else {
         const statCards = [
             { title: 'Total Students', value: students.length, icon: 'fa-user-graduate', color: 'blue' },
-            { title: 'Total Teachers', value: teachers.length, icon: 'fa-chalkboard-teacher', color: 'green' },
-            { title: 'Fees Due', value: fees.filter(f => f.status === 'Unpaid').length, icon: 'fa-file-invoice-dollar', color: 'yellow' },
-            { title: 'Books Available', value: books.reduce((acc, book) => acc + book.availableCopies, 0), icon: 'fa-book', color: 'indigo' },
+            { title: 'Total Staff', value: teachers.length + 2, icon: 'fa-users-cog', color: 'green' }, // +2 for accountant, librarian
+            { title: 'Total Fees Due', value: `BDT ${fees.filter(f => f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0).toLocaleString()}`, icon: 'fa-file-invoice-dollar', color: 'yellow' },
+            { title: 'Books on Loan', value: store.get('library', 'transactions').filter(t => t.status === 'Issued').length, icon: 'fa-book', color: 'indigo' },
         ];
 
         const upcomingExams = exams.filter(e => new Date(e.date) >= new Date()).sort((a, b) => new Date(a.date) - new Date(b.date));
 
         ui.contentArea.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${statCards.map(createDashboardCard).join('')}</div>
-            <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Fee Collection Overview</h3>
-                    <canvas id="feesChart"></canvas>
+            <div class="animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${statCards.map(createDashboardCard).join('')}</div>
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Fee Collection Overview</h3>
+                        <canvas id="feesChart"></canvas>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Student Distribution</h3>
+                        <canvas id="genderChart"></canvas>
+                    </div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Student Distribution</h3>
-                    <canvas id="genderChart"></canvas>
-                </div>
-            </div>
-            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Quick Communication</h3>
-                    <p class="text-slate-400 mb-4">Send a message directly to specific classes, teachers, or the entire school.</p>
-                    <button id="admin-send-message-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
-                        <i class="fas fa-paper-plane mr-2 text-lg"></i> Send a Message / Notice
-                    </button>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white">Upcoming Events & Exams</h3>
-                    <div class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
-                        ${upcomingExams.length > 0 ? upcomingExams.slice(0, 5).map(e => createUpcomingExamCard(e, subjectsMap.get(e.subjectId)?.name || 'N/A')).join('') : '<p class="text-slate-500 italic">No upcoming events or exams.</p>'}
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Quick Communication</h3>
+                        <p class="text-slate-400 mb-4">Send a message directly to specific classes, teachers, or the entire school.</p>
+                        <button id="admin-send-message-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-transform transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-paper-plane mr-2 text-lg"></i> Send a Message / Notice
+                        </button>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Upcoming Events & Exams</h3>
+                        <div class="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
+                            ${upcomingExams.length > 0 ? upcomingExams.slice(0, 5).map(e => createUpcomingExamCard(e, subjectsMap.get(e.subjectId)?.name || 'N/A')).join('') : '<p class="text-slate-500 italic">No upcoming events or exams.</p>'}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -966,6 +964,7 @@ async function renderDashboard() {
         renderDashboardCharts(fees, students);
     }
 }
+
 async function renderStudentsPage() {
     const classes = store.get('classes');
     const timetable = store.get('timetable');
@@ -978,7 +977,7 @@ async function renderStudentsPage() {
         const allMyClassIds = [...new Set([...myClassIdsAsTeacher, ...myClassIdsAsSubjectTeacher])];
         studentDataFilter = (student) => allMyClassIds.includes(student.classId);
         configOverrides = {
-            hideAddButton: false, 
+            hideAddButton: true, 
             hideActions: false, 
         };
     } else if (currentUser.role === 'Student') {
@@ -1000,18 +999,16 @@ async function renderStudentsPage() {
         collectionName: 'students',
         dataFilter: studentDataFilter,
         search: true,
-        searchPlaceholder: 'Search by name...',
-        searchKeys: ['name'],
-        classFilter: true,
+        searchPlaceholder: 'Search by name or roll no...',
+        searchKeys: ['name', 'rollNo'],
+        classFilter: currentUser.role !== 'Student',
         classFilterOptions: classFilterOptions,
         columns: [
             { label: 'Name', key: 'name', sortable: true },
             { label: 'Roll No', key: 'rollNo', sortable: true },
             { label: 'Class', render: item => classMap.get(item.classId)?.name || 'N/A', sortable: true, sortKey: 'classId' },
             { label: 'Guardian', key: 'guardianName' },
-            { label: 'Email', key: 'email' },
-            { name: 'bloodGroup', label: 'Blood Group', key:'bloodGroup' }
-
+            { label: 'Contact', key: 'contact' },
         ],
         formFields: [
             { name: 'name', label: 'Full Name', type: 'text', required: true },
@@ -1028,19 +1025,16 @@ async function renderStudentsPage() {
 
     renderGenericListPage({ ...baseConfig, ...configOverrides });
 }
+
 async function renderTeachersPage() {
     const departments = store.get('departments');
     const departmentMap = store.getMap('departments');
     renderGenericListPage({
         title: 'Teacher', collectionName: 'teachers',
-        
         columns: [
             { label: 'Name', key: 'name', sortable: true }, { label: 'Primary Subject', key: 'subject', sortable: true },
             { label: 'Department', render: (item) => departmentMap.get(item.departmentId)?.name || 'N/A', key: 'departmentId', sortable: true },
-            { label: 'Contact', key: 'contact' }, 
-            { label: 'Email', key: 'email' },
-            { name: 'bloodGroup', label: 'Blood Group', key:'bloodGroup' }
-
+            { label: 'Contact', key: 'contact' }, { label: 'Email', key: 'email' },
         ],
         formFields: [
             { name: 'name', label: 'Full Name', type: 'text', required: true },
@@ -1050,10 +1044,12 @@ async function renderTeachersPage() {
             { name: 'contact', label: 'Contact', type: 'tel', required: true },
             { name: 'address', label: 'Address', type: 'textarea' },
             { name: 'qualifications', label: 'Qualifications', type: 'text' },
+            { name: 'baseSalary', label: 'Base Salary (BDT)', type: 'number' },
         ],
         searchKeys: ['name', 'subject', 'email']
     });
 }
+
 async function renderDepartmentsPage() {
     renderGenericListPage({
         title: 'Department', collectionName: 'departments',
@@ -1062,6 +1058,7 @@ async function renderDepartmentsPage() {
         searchKeys: ['name']
     });
 }
+
 async function renderClassesPage() {
     const teachers = store.get('teachers');
     const teacherMap = store.getMap('teachers');
@@ -1072,15 +1069,12 @@ async function renderClassesPage() {
             { label: 'Class Teacher', render: (item) => teacherMap.get(item.teacherId)?.name || 'N/A', key: 'teacherId', sortable: true },
             { label: 'Academic Year', key: 'academicYear', sortable: true },
             { label: 'Room No.', key: 'roomNumber' },
-            { label: 'EMAIL', render: (item) => teacherMap.get(item.teacherId)?.email || 'N/A' }
-
         ],
         formFields: [
             { name: 'name', label: 'Class Name', type: 'text', required: true },
             { name: 'teacherId', label: 'Class Teacher', type: 'select', options: teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join(''), required: true },
             { name: 'academicYear', label: 'Academic Year', type: 'text', placeholder: 'e.g., 2025-2026' },
-            { name: 'email', label: 'Email', type: 'email', required: true },
-           { name: 'roomNumber', label: 'Room Number', type: 'text' },
+            { name: 'roomNumber', label: 'Room Number', type: 'text' },
         ],
         searchKeys: ['name', 'academicYear', 'roomNumber']
     });
@@ -1149,8 +1143,8 @@ async function renderTimetablePage() {
         });
 
         return `
-            <div class="overflow-x-auto">
-                <table class="min-w-full border-collapse timetable-grid">
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="min-w-full border-collapse">
                     <thead>
                         <tr class="bg-slate-700">
                             <th class="p-3 border border-slate-600">Time / Day</th>
@@ -1169,22 +1163,22 @@ async function renderTimetablePage() {
                                     if (entry) {
                                         const subject = subjectsMap.get(entry.subjectId)?.name || 'N/A';
                                         const teacher = teachersMap.get(entry.teacherId)?.name || 'N/A';
-                                        return `<td class="p-3 border border-slate-600 align-middle relative group">
+                                        return `<td class="p-3 border border-slate-600 align-middle relative group transition-colors hover:bg-slate-700/40">
                                                     <p class="font-bold">${subject}</p>
                                                     <p class="text-sm text-slate-400">${teacher}</p>
                                                     ${canEdit ? `
                                                     <div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
-                                                        <button class="edit-entry-btn text-blue-500 p-1" data-entry-id="${entry.id}" title="Edit"><i class="fas fa-edit"></i></button>
-                                                        <button class="delete-entry-btn text-red-500 p-1" data-entry-id="${entry.id}" title="Delete"><i class="fas fa-trash"></i></button>
+                                                        <button class="edit-entry-btn text-blue-400 hover:text-blue-300 p-1" data-entry-id="${entry.id}" title="Edit"><i class="fas fa-edit"></i></button>
+                                                        <button class="delete-entry-btn text-red-400 hover:text-red-300 p-1" data-entry-id="${entry.id}" title="Delete"><i class="fas fa-trash"></i></button>
                                                     </div>` : ''}
                                                 </td>`;
                                     }
-                                    return `<td class="p-3 border border-slate-600 align-middle relative group">
+                                    return `<td class="p-3 border border-slate-600 align-middle relative group transition-colors hover:bg-slate-700/40">
                                                 ${canEdit ? `
-                                                <button class="add-entry-btn opacity-0 group-hover:opacity-100 transition-opacity text-2xl text-slate-400 hover:text-green-500"
+                                                <button class="add-entry-btn opacity-0 group-hover:opacity-100 transition-opacity text-2xl text-slate-400 hover:text-green-400"
                                                         data-class-id="${classData.id}" data-day="${day}" data-period="${period}" title="Add Entry">
                                                     <i class="fas fa-plus-circle"></i>
-                                                </button>` : ''}
+                                                </button>` : '—'}
                                             </td>`;
                                 }).join('')}
                             </tr>
@@ -1196,12 +1190,12 @@ async function renderTimetablePage() {
     };
 
     ui.contentArea.innerHTML = `
-        <div class="space-y-8">
+        <div class="space-y-8 animate-fade-in">
             ${relevantClasses.map(c => {
                 const isClassTeacher = currentUser.role === 'Teacher' && currentUser.id === c.teacherId;
                 const canEdit = currentUser.role === 'Admin' || isClassTeacher;
                 return `
-                <div class="bg-slate-800 p-6 rounded-xl shadow-md">
+                <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700">
                     <h3 class="text-xl font-semibold mb-4">${c.name} - Weekly Timetable</h3>
                     ${getTimetableHTMLForClass(c, canEdit)}
                 </div>`;
@@ -1244,23 +1238,24 @@ async function renderTimetablePage() {
     });
 }
 async function renderFeesPage() {
-    const students = store.get('students');
     const studentMap = store.getMap('students');
     const formatCurrency = (value) => `BDT ${Number(value || 0).toLocaleString()}`;
+    const students = store.get('students');
     
     let config = {
-        title: 'Fee', collectionName: 'fees',
+        title: 'Fee Record',
+        collectionName: 'fees',
         columns: [
             { label: 'Student', render: (item) => studentMap.get(item.studentId)?.name || 'N/A', key: 'studentId', sortable: true },
             { label: 'Fee Type', key: 'feeType', sortable: true },
             { label: 'Amount', key: 'amount', render: (item) => formatCurrency(item.amount), sortable: true },
-            { label: 'Status', key: 'status', sortable: true, render: (item) => `<span class="status-badge ${item.status === 'Paid' ? 'status-paid' : 'status-unpaid'}">${item.status}</span>` },
+            { label: 'Status', key: 'status', sortable: true, render: (item) => `<span class="status-badge ${item.status.toLowerCase() === 'paid' ? 'status-paid' : 'status-unpaid'}">${item.status}</span>` },
             { label: 'Due Date', key: 'dueDate', sortable: true },
         ],
         formFields: [
             { name: 'studentId', label: 'Student', type: 'select', options: students.map(s => `<option value="${s.id}">${s.name} (Roll: ${s.rollNo})</option>`).join(''), required: true },
-            { name: 'feeType', label: 'Fee Type', type: 'text', placeholder: 'e.g., Tuition, Exam Fee', required: true },
-            { name: 'amount', label: 'Amount', type: 'number', required: true },
+            { name: 'feeType', label: 'Fee Type', type: 'text', placeholder: 'e.g., Tuition Fee, Exam Fee', required: true },
+            { name: 'amount', label: 'Amount (BDT)', type: 'number', required: true },
             { name: 'dueDate', label: 'Due Date', type: 'date', required: true },
             { name: 'status', label: 'Status', type: 'select', options: '<option value="Unpaid">Unpaid</option><option value="Paid">Paid</option>', required: true },
         ],
@@ -1274,6 +1269,35 @@ async function renderFeesPage() {
     } else if (currentUser.role === 'Teacher') {
         config.hideAddButton = true;
         config.hideActions = true;
+    } else if (currentUser.role === 'Accountant' || currentUser.role === 'Admin') {
+        config.hideAddButton = true; 
+        config.columns.push({ 
+            label: 'Action', 
+            render: (item) => item.status === 'Unpaid' ? `<button class="text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-lg mark-paid-btn" data-id="${item.id}">Mark as Paid</button>` : `Paid on ${item.paidDate || ''}`
+        });
+        
+        config.customHeader = `
+            <button id="generate-fees-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Generate Monthly Fees</button>
+            <button id="add-fee-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Add Single Fee Record</button>
+        `;
+        config.customListeners = () => {
+            document.getElementById('add-fee-btn').onclick = () => openFormModal(`Add New ${config.title}`, config.formFields, async (formData) => {
+                await apiService.create(config.collectionName, formData);
+                await store.refresh(config.collectionName);
+                showToast(`${config.title} added successfully!`, 'success');
+                renderFeesPage();
+            });
+            document.getElementById('generate-fees-btn').onclick = () => showToast('This would trigger a backend process to generate monthly fees for all students.', 'info');
+            document.querySelectorAll('.mark-paid-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    const feeId = btn.dataset.id;
+                    await apiService.update('fees', feeId, { status: 'Paid', paidDate: new Date().toISOString().slice(0, 10) });
+                    await store.refresh('fees');
+                    showToast('Fee marked as paid!', 'success');
+                    renderFeesPage();
+                }
+            });
+        };
     }
     
     renderGenericListPage(config);
@@ -1291,15 +1315,17 @@ async function renderAttendancePage() {
     }
 
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800 p-6 rounded-xl shadow-md">
+        <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700 animate-fade-in">
             <h3 class="text-xl font-semibold mb-4">Manage Attendance</h3>
             ${currentUser.role !== 'Student' ? `
-            <div class="flex flex-wrap items-center gap-4 mb-4">
-                <input type="date" id="attendance-date" value="${new Date().toISOString().slice(0, 10)}" class="border p-2 rounded-lg bg-transparent border-slate-600 focus:ring-2 focus:ring-blue-500">
-                <select id="attendance-class" class="border p-2 rounded-lg bg-slate-700 border-slate-600 focus:ring-2 focus:ring-blue-500">${viewableClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select>
-                <button id="load-attendance-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition">Load</button>
+            <div class="flex flex-wrap items-center gap-4 mb-6 p-4 bg-slate-800 rounded-lg">
+                <input type="date" id="attendance-date" value="${new Date().toISOString().slice(0, 10)}" class="border p-2 rounded-lg bg-slate-700 border-slate-600 focus:ring-2 focus:ring-blue-500">
+                <select id="attendance-class" class="border p-2 rounded-lg bg-slate-700 border-slate-600 focus:ring-2 focus:ring-blue-500 flex-grow">${viewableClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select>
+                <button id="load-attendance-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-transform hover:scale-105">Load Attendance</button>
             </div>` : ''}
-            <div id="attendance-sheet"></div>
+            <div id="attendance-sheet">
+                <p class="text-center text-slate-400">Please select a date and class to load the attendance sheet.</p>
+            </div>
         </div>
     `;
     
@@ -1311,7 +1337,7 @@ async function renderAttendancePage() {
             const sheetContainer = document.getElementById('attendance-sheet');
             
             if (!date || !classId) {
-                sheetContainer.innerHTML = `<p class="text-red-500">Please select both date and class.</p>`;
+                sheetContainer.innerHTML = `<p class="text-red-400">Please select both date and class.</p>`;
                 return;
             }
             
@@ -1322,16 +1348,16 @@ async function renderAttendancePage() {
             
             sheetContainer.innerHTML = `
                 <div class="overflow-x-auto mt-4">
-                    <table class="min-w-full bg-transparent"><thead class="bg-slate-700"><tr>
+                    <table class="min-w-full"><thead class="bg-slate-700"><tr>
                         <th class="py-3 px-4 text-left font-semibold">Student Name</th>
                         <th class="py-3 px-4 text-left font-semibold">Roll No</th>
                         <th class="py-3 px-4 text-left font-semibold">Status</th>
-                    </tr></thead><tbody class="text-slate-300">
+                    </tr></thead><tbody class="divide-y divide-slate-700">
                     ${students.map(s => `
-                        <tr class="border-b border-slate-700">
-                            <td class="px-4 py-2">${s.name}</td>
-                            <td class="px-4 py-2">${s.rollNo}</td>
-                            <td class="px-4 py-2">
+                        <tr class="hover:bg-slate-700/30">
+                            <td class="px-4 py-3">${s.name}</td>
+                            <td class="px-4 py-3">${s.rollNo}</td>
+                            <td class="px-4 py-3">
                                 <select class="attendance-status border p-1 rounded-lg w-full bg-slate-700 border-slate-600" data-studentid="${s.id}">
                                     <option value="Present" ${attendanceMap[s.id] === 'Present' ? 'selected' : ''}>Present</option>
                                     <option value="Absent" ${attendanceMap[s.id] === 'Absent' ? 'selected' : ''}>Absent</option>
@@ -1341,7 +1367,7 @@ async function renderAttendancePage() {
                         </tr>
                     `).join('')}
                     </tbody></table>
-                    <button id="save-attendance-btn" class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition">Save Attendance</button>
+                    <button id="save-attendance-btn" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-transform hover:scale-105">Save Attendance</button>
                 </div>
             `;
             
@@ -1381,12 +1407,12 @@ async function renderExamsPage() {
     };
 
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md animate-fade-in">
             <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
                 <h3 class="text-xl font-semibold">Exams & Results</h3>
                 ${currentUser.role === 'Teacher' ? `
                     <div class="w-full md:w-auto md:flex-1 max-w-sm">
-                        <input type="text" id="exam-search-input" placeholder="Search by subject or class..." class="border p-2 rounded-lg w-full bg-transparent border-slate-600 focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="exam-search-input" placeholder="Search by subject or class..." class="p-2 rounded-lg w-full bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">
                     </div>
                 ` : ''}
                 ${currentUser.role === 'Admin' || currentUser.role === 'Teacher' ? `<button id="add-exam-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Create Exam Schedule</button>` : ''}
@@ -1431,16 +1457,16 @@ async function renderExamsPage() {
                     <h4 class="text-lg font-bold mb-3 p-3 bg-slate-700/50 rounded-lg">${groupName}</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         ${examGroups[groupName].map(exam => `
-                            <div class="p-4 border border-slate-700 rounded-lg flex flex-col justify-between">
+                            <div class="p-4 bg-slate-800 border border-slate-700 rounded-lg flex flex-col justify-between">
                                 <div>
                                     <p class="font-bold text-base">${classesMap.get(exam.classId)?.name || ''} - ${subjectsMap.get(exam.subjectId)?.name || ''}</p>
                                     <p class="text-sm text-slate-400">Date: ${exam.date} | Max Marks: ${exam.maxMarks}</p>
                                     <p class="text-sm text-slate-400">By: ${teachersMap.get(exam.teacherId)?.name || 'N/A'}</p>
-                                    ${currentUser.role === 'Student' ? `<p class="mt-2 text-lg">Your Score: <span class="font-bold">${getResultForStudent(exam.id, currentUser.id)} / ${exam.maxMarks}</span></p>` : ''}
+                                    ${currentUser.role === 'Student' ? `<p class="mt-2 text-lg">Your Score: <span class="font-bold text-blue-300">${getResultForStudent(exam.id, currentUser.id)} / ${exam.maxMarks}</span></p>` : ''}
                                 </div>
                                 <div class="mt-3 flex gap-2">
-                                    ${currentUser.role === 'Teacher' ? `<button class="manage-results-btn text-sm bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded-lg" data-exam-id="${exam.id}">Manage Results</button>` : ''}
-                                    ${currentUser.role === 'Admin' ? `<button class="delete-exam-btn text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded-lg" data-id="${exam.id}"><i class="fas fa-trash"></i></button>` : ''}
+                                    ${currentUser.role === 'Teacher' ? `<button class="manage-results-btn text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-lg" data-exam-id="${exam.id}">Manage Results</button>` : ''}
+                                    ${currentUser.role === 'Admin' ? `<button class="delete-exam-btn text-sm bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-lg" data-id="${exam.id}"><i class="fas fa-trash"></i></button>` : ''}
                                 </div>
                             </div>
                         `).join('')}
@@ -1461,21 +1487,21 @@ async function renderExamsPage() {
         const modalHtml = `
             <div id="results-modal" class="modal show">
                 <div class="modal-content !max-w-3xl">
-                    <span id="close-results-modal" class="close-button">×</span>
-                    <h2 class="text-xl font-bold mb-4">Manage Results for ${exam.name} (${subjectsMap.get(exam.subjectId)?.name})</h2>
-                    <div class="max-h-[60vh] overflow-y-auto">
+                    <span id="close-results-modal" class="close-button">&times;</span>
+                    <h2 class="text-xl font-bold mb-4">Manage Results: ${exam.name} (${subjectsMap.get(exam.subjectId)?.name})</h2>
+                    <div class="max-h-[60vh] overflow-y-auto custom-scrollbar">
                         <table class="min-w-full">
-                            <thead><tr class="bg-slate-700">
+                            <thead class="sticky top-0 bg-slate-700"><tr>
                                 <th class="p-2 text-left">Student</th><th class="p-2 text-left">Roll No</th><th class="p-2 text-left">Marks (out of ${exam.maxMarks})</th>
                             </tr></thead>
-                            <tbody>
+                            <tbody class="divide-y divide-slate-700">
                             ${examStudents.map(s => {
                                 const result = examResults.find(r => r.studentId === s.id);
                                 return `
-                                <tr class="border-b border-slate-700">
+                                <tr class="hover:bg-slate-700/30">
                                     <td class="p-2">${s.name}</td>
                                     <td class="p-2">${s.rollNo}</td>
-                                    <td class="p-2"><input type="number" class="w-24 p-1 border rounded bg-transparent border-slate-600" data-studentid="${s.id}" value="${result?.marks || ''}" max="${exam.maxMarks}"></td>
+                                    <td class="p-2"><input type="number" class="w-24 p-1 border rounded bg-slate-800 border-slate-600" data-studentid="${s.id}" value="${result?.marks || ''}" max="${exam.maxMarks}"></td>
                                 </tr>`;
                             }).join('')}
                             </tbody>
@@ -1554,8 +1580,8 @@ async function renderExamsPage() {
 }
 async function renderNoticesPage() {
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800 p-6 rounded-lg shadow-md">
-            <div class="flex justify-between items-center mb-4">
+        <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700 animate-fade-in">
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-3">
                 <h3 class="text-xl font-semibold">Notice Board</h3>
                 ${currentUser.role === 'Admin' || currentUser.role === 'Teacher' ? `<button id="add-new-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Add New Notice</button>` : ''}
             </div>
@@ -1579,11 +1605,14 @@ async function renderNoticesPage() {
             if (currentUser.role === 'Student') {
                 return n.target === 'All' || n.target === 'Student' || n.target === `class_${currentUser.classId}`;
             }
+            if (currentUser.role === 'Accountant' || currentUser.role === 'Librarian'){
+                 return n.target === 'All' || n.target === 'Staff';
+            }
             return false;
         }).sort((a, b) => new Date(b.date) - new Date(a.date));
 
         if (relevantNotices.length === 0) {
-            noticeListContainer.innerHTML = '<p>No notices found.</p>';
+            noticeListContainer.innerHTML = '<p class="text-center text-slate-400 py-8">No notices found.</p>';
             return;
         }
 
@@ -1600,7 +1629,7 @@ async function renderNoticesPage() {
             } else if (item.target === 'admin') { audienceText = `To: Admin`; borderColor = 'border-slate-500'; }
             else { audienceText = `To: You`; borderColor = 'border-teal-500'; }
             
-            const authorName = teachersMap.get(item.authorId)?.name || 'School System';
+            const authorName = teachersMap.get(item.authorId)?.name || store.get('students').find(s=>s.id === item.authorId)?.name || 'School System';
             return createNoticeCard(item, authorName, audienceText, borderColor);
         }).join('');
         
@@ -1619,7 +1648,7 @@ async function renderNoticesPage() {
     
     if (currentUser.role === 'Admin' || currentUser.role === 'Teacher') {
         document.getElementById('add-new-btn').onclick = () => {
-            openFormModal('Add New Notice', [
+            openFormModal('Send New Notice', [
                 { name: 'title', label: 'Title', type: 'text', required: true },
                 { name: 'content', label: 'Content', type: 'textarea', required: true },
                 { 
@@ -1630,14 +1659,14 @@ async function renderNoticesPage() {
                         <option value="All">All (Students & Staff)</option>
                         <option value="Student">All Students Only</option>
                         <option value="Teacher">All Teachers Only</option>
-                        <option value="Staff">Staff Only (Teachers & Admins)</option> 
+                        <option value="Staff">All Staff (Teachers, Admin, etc.)</option> 
                     `,
                     required: true 
                 },
             ], async (formData) => {
                 const noticeData = { ...formData, authorId: currentUser.id || 'admin', date: new Date().toISOString().slice(0, 10) };
                 await apiService.create('notices', noticeData);
-                showToast('Notice added successfully.', 'success');
+                showToast('Notice posted successfully.', 'success');
                 renderList();
             });
         };
@@ -1645,46 +1674,57 @@ async function renderNoticesPage() {
 
     renderList();
 }
-/////////////////////////////////////////Library page Function
 async function renderLibraryPage() {
-    // --- DATA FETCHING AND PREPARATION ---
     await Promise.all([
-        store.refresh('library'),
-        store.refresh('fees'),
-        store.refresh('students'),
-        store.refresh('teachers'),
-        store.refresh('readingLists') // Ensure reading lists are loaded
+        store.refresh('library', 'books'),
+        store.refresh('library', 'transactions'),
+        store.refresh('library', 'reservations'),
+        store.refresh('library', 'readingLists'),
+        store.refresh('fees')
     ]);
 
-    const libraryData = store.get('library');
-    const studentMap = store.getMap('students');
-    const teacherMap = store.getMap('teachers');
-    const memberMap = new Map([...studentMap, ...teacherMap]);
-    const bookMap = new Map(libraryData.books.map(b => [b.bookId, b]));
+    const libraryData = {
+        books: store.get('library', 'books'),
+        transactions: store.get('library', 'transactions'),
+        reservations: store.get('library', 'reservations'),
+        readingLists: store.get('library', 'readingLists'),
+        acquisitions: store.get('library', 'acquisitions')
+    };
+
+    const memberMap = store.getMap('members');
+    const bookMap = store.getMap('books');
     const FINE_PER_DAY = 5;
 
-    // --- HELPER FUNCTIONS ---
-    const formatDate = (isoDate) => new Date(isoDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    const formatDate = (isoDate) => isoDate ? new Date(isoDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
     const calculateOverdueDays = (dueDate) => {
         const due = new Date(dueDate);
-        const today = new Date("2025-07-29T16:29:00");
+        const today = new Date();
         today.setHours(0, 0, 0, 0);
         due.setHours(0, 0, 0, 0);
         if (today <= due) return 0;
         return Math.ceil((today - due) / (1000 * 60 * 60 * 24));
     };
 
-    // --- CORE LOGIC FUNCTIONS ---
     const handleReturn = async (transactionId) => {
         const transaction = libraryData.transactions.find(t => t.transactionId === transactionId);
         if (!transaction) return;
 
         const overdueDays = calculateOverdueDays(transaction.dueDate);
+        const completeReturn = async (transaction) => {
+            await apiService.update('library', transaction.transactionId, { status: 'Returned', returnDate: new Date().toISOString().slice(0, 10) }, 'transactions', 'transactionId');
+            const book = bookMap.get(transaction.bookId);
+            if (book) {
+                await apiService.update('library', book.bookId, { availableCopies: book.availableCopies + 1 }, 'books', 'bookId');
+            }
+            showToast('Book returned successfully!', 'success');
+            renderLibraryPage();
+        };
+
         if (overdueDays > 0) {
             const fineAmount = overdueDays * FINE_PER_DAY;
             showConfirmationModal(`This book is ${overdueDays} days overdue. A fine of BDT ${fineAmount} will be added. Proceed?`, async () => {
                 await apiService.create('fees', {
-                    studentId: transaction.studentId,
+                    studentId: transaction.memberId,
                     feeType: 'Library Fine',
                     amount: fineAmount,
                     status: 'Unpaid',
@@ -1697,131 +1737,80 @@ async function renderLibraryPage() {
             await completeReturn(transaction);
         }
     };
-
-    const completeReturn = async (transaction) => {
-        await apiService.update('library', transaction.transactionId, { status: 'Returned', returnDate: new Date().toISOString().slice(0, 10) }, 'transactions', 'transactionId');
-        const book = bookMap.get(transaction.bookId);
-        if (book) {
-            await apiService.update('library', book.bookId, { availableCopies: book.availableCopies + 1 }, 'books', 'bookId');
-        }
-        showToast('Book returned successfully!', 'success');
-        renderLibraryPage();
-    };
-
-    const handleRequest = async (bookId) => {
-        const newReservation = { bookId: bookId, studentId: currentUser.id, requestDate: new Date().toISOString().slice(0, 10), status: 'Pending' };
-        await apiService.create('library', newReservation, 'reservations');
-        showToast('Book requested! You will be notified when it is available.', 'success');
-        renderLibraryPage();
-    };
-
-    const cancelRequest = async (reservationId) => {
-        showConfirmationModal('Are you sure you want to cancel this book request?', async () => {
-            await apiService.remove('library', reservationId, 'reservations', 'reservationId');
-            showToast('Your book request has been cancelled.', 'success');
-            renderLibraryPage();
-        });
-    };
-
+    
     // --- UI RENDERING ---
     const renderTabs = () => {
         let tabs = [];
-        if (currentUser.role === 'Admin') {
+        if (currentUser.role === 'Admin' || currentUser.role === 'Librarian') {
             tabs = [
-                { id: 'admin-dashboard', label: 'Dashboard', icon: 'fa-chart-line' },
+                { id: 'lib-dashboard', label: 'Dashboard', icon: 'fa-chart-line' },
                 { id: 'catalog', label: 'Book Catalog', icon: 'fa-book' },
                 { id: 'transactions', label: 'Transactions', icon: 'fa-exchange-alt' },
                 { id: 'reservations', label: 'Reservations', icon: 'fa-clock' },
                 { id: 'members', label: 'Members', icon: 'fa-users' },
+                { id: 'reading-lists-admin', label: 'Reading Lists', icon: 'fa-list-ol' },
                 { id: 'reports', label: 'Reports', icon: 'fa-file-export' },
             ];
-        } else if (currentUser.role === 'Student' || currentUser.role === 'Teacher') {
+        } else { // Student or Teacher
             tabs = [
                 { id: 'catalog', label: 'Search Books', icon: 'fa-search' },
                 { id: 'my-books', label: 'My Books & History', icon: 'fa-book-reader' },
+                { id: 'reading-lists-member', label: 'Reading Lists', icon: 'fa-list-ol' },
             ];
-            // Add a special tab for teachers
-            if (currentUser.role === 'Teacher') {
-                tabs.push({ id: 'reading-lists', label: 'Reading Lists', icon: 'fa-list-ol' });
-            }
-            // And add a special tab for students
-            if (currentUser.role === 'Student') {
-                tabs.push({ id: 'student-reading-lists', label: 'Reading Lists', icon: 'fa-list-ol' });
-            }
         }
 
         return `
-            <div class="flex flex-wrap border-b border-slate-700 mb-6">
+            <div class="flex flex-wrap border-b border-slate-700 mb-6 -mx-4 px-4 custom-scrollbar overflow-x-auto">
                 ${tabs.map((tab, index) => `
-                    <button class="tab-link py-3 px-4 flex items-center gap-2 font-semibold border-b-2 transition-colors duration-300 ${index === 0 ? 'active text-blue-400 border-blue-400' : 'text-slate-400 border-transparent hover:text-white'}" data-tab="${tab.id}">
+                    <button class="tab-link flex-shrink-0 py-3 px-4 flex items-center gap-2 font-semibold border-b-2 transition-colors duration-300 ${index === 0 ? 'active text-blue-400 border-blue-400' : 'text-slate-400 border-transparent hover:text-white'}" data-tab="${tab.id}">
                         <i class="fas ${tab.icon}"></i> ${tab.label}
                     </button>
                 `).join('')}
             </div>
-            ${tabs.map((tab, index) => `<div id="${tab.id}" class="tab-content ${index > 0 ? 'hidden' : ''}"></div>`).join('')}
+            ${tabs.map((tab, index) => `<div id="${tab.id}" class="tab-content ${index > 0 ? 'hidden' : ''} animate-fade-in"></div>`).join('')}
         `;
     };
 
-    ui.contentArea.innerHTML = `<div class="bg-slate-900 p-4 sm:p-6 rounded-lg shadow-lg animate-fade-in">${renderTabs()}</div>`;
+    ui.contentArea.innerHTML = `<div class="bg-slate-800/50 p-4 sm:p-6 rounded-xl border border-slate-700 animate-fade-in">${renderTabs()}</div>`;
 
     // --- TAB-SPECIFIC RENDERERS ---
 
-    const renderAdminDashboard = () => {
-        const container = document.getElementById('admin-dashboard');
+    const renderLibrarianDashboard = () => {
+        const container = document.getElementById('lib-dashboard');
         const totalBooks = libraryData.books.reduce((sum, book) => sum + book.totalCopies, 0);
         const booksOnLoan = libraryData.transactions.filter(t => t.status === 'Issued').length;
         const overdueBooks = libraryData.transactions.filter(t => t.status === 'Issued' && calculateOverdueDays(t.dueDate) > 0).length;
         const totalMembers = memberMap.size;
-        const genreCounts = libraryData.transactions.reduce((acc, t) => {
-            const book = bookMap.get(t.bookId);
-            if (book && book.genre) { acc[book.genre] = (acc[book.genre] || 0) + 1; }
-            return acc;
-        }, {});
+        
+        const cardData = [
+            { title: 'Total Books', value: totalBooks, icon: 'fa-book-journal-whills', color: 'blue' },
+            { title: 'Books on Loan', value: booksOnLoan, icon: 'fa-people-arrows', color: 'green' },
+            { title: 'Overdue Books', value: overdueBooks, icon: 'fa-exclamation-triangle', color: 'red' },
+            { title: 'Total Members', value: totalMembers, icon: 'fa-users', color: 'purple' },
+        ];
+        
         container.innerHTML = `
             <h3 class="text-2xl font-bold mb-6 text-white">Library Dashboard</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div class="bg-slate-800 p-4 rounded-lg text-center"><div class="text-3xl font-bold text-blue-400">${totalBooks}</div><div class="text-slate-400">Total Books</div></div>
-                <div class="bg-slate-800 p-4 rounded-lg text-center"><div class="text-3xl font-bold text-green-400">${booksOnLoan}</div><div class="text-slate-400">Books on Loan</div></div>
-                <div class="bg-slate-800 p-4 rounded-lg text-center"><div class="text-3xl font-bold text-red-400">${overdueBooks}</div><div class="text-slate-400">Overdue Books</div></div>
-                <div class="bg-slate-800 p-4 rounded-lg text-center"><div class="text-3xl font-bold text-purple-400">${totalMembers}</div><div class="text-slate-400">Total Members</div></div>
+                ${cardData.map(createDashboardCard).join('')}
             </div>
-            <div>
-                <h4 class="text-xl font-semibold mb-4 text-white">Popular Genres</h4>
-                <div class="bg-slate-800 p-4 rounded-lg"><div class="relative h-64 md:h-72 mx-auto max-w-xs">${Object.keys(genreCounts).length > 0 ? `<canvas id="genreChart"></canvas>`: `<p class="text-center text-slate-500">No transaction data to generate genre chart.</p>`}</div></div>
-            </div>`;
-        if (Object.keys(genreCounts).length > 0) {
-            new Chart(document.getElementById('genreChart').getContext('2d'), { type: 'doughnut', data: { labels: Object.keys(genreCounts), datasets: [{ data: Object.values(genreCounts), backgroundColor: ['#3b82f6', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1'], borderColor: '#1e293b', hoverOffset: 8 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 12 } } } } } });
-        }
+            <!-- More components can be added here, like charts -->
+        `;
     };
 
     const renderCatalog = (containerId) => {
         const container = document.getElementById(containerId);
         container.innerHTML = `
             <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-                <input type="text" id="book-search" placeholder="Search by title, author, genre, or ISBN..." class="w-full md:w-1/2 p-2 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white">
-                <div class="flex items-center gap-2">
-                    ${currentUser.role === 'Admin' ? `<button id="add-book-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus"></i> Add New Book</button>` : ''}
-                    ${currentUser.role === 'Teacher' ? `<button id="request-acquisition-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus"></i> Request Acquisition</button>` : ''}
-                </div>
+                <input type="text" id="book-search" placeholder="Search by title, author, or genre..." class="w-full md:w-1/2 p-2 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white">
+                ${currentUser.role === 'Admin' || currentUser.role === 'Librarian' ? `<button id="add-book-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus"></i> Add New Book</button>` : ''}
             </div>
-            <div id="catalog-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>`;
+            <div id="catalog-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>`;
 
         if (document.getElementById('add-book-btn')) {
             document.getElementById('add-book-btn').onclick = () => openBookForm();
         }
-        if (document.getElementById('request-acquisition-btn')) {
-            document.getElementById('request-acquisition-btn').onclick = () => {
-                openFormModal('Request a New Book for Acquisition', [
-                    { name: 'title', label: 'Book Title', type: 'text', required: true },
-                    { name: 'author', label: 'Author', type: 'text', required: true },
-                    { name: 'reason', label: 'Reason for Request (e.g., for course XYZ)', type: 'textarea', required: true },
-                ], async (formData) => {
-                    const acquisitionRequest = { ...formData, requesterId: currentUser.id, requesterName: currentUser.name, requestDate: new Date().toISOString().slice(0, 10), status: 'Pending' };
-                    await apiService.create('library', acquisitionRequest, 'acquisitions');
-                    showToast('Acquisition request submitted successfully!', 'success');
-                });
-            };
-        }
+
         const openBookForm = (book = {}) => {
             const isEditing = !!book.bookId;
             openFormModal(isEditing ? 'Edit Book' : 'Add New Book', [
@@ -1840,225 +1829,120 @@ async function renderLibraryPage() {
         };
         const renderBookList = (books) => {
             const listContainer = document.getElementById('catalog-list');
-            if (books.length === 0) { listContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-slate-500">No books found matching your criteria.</p></div>`; return; }
+            if (books.length === 0) { listContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-slate-500">No books found.</p></div>`; return; }
             listContainer.innerHTML = books.map(book => {
-                const isRequestedByCurrentUser = libraryData.reservations.some(r => r.bookId === book.bookId && r.studentId === currentUser.id && r.status === 'Pending');
+                const isRequestedByCurrentUser = libraryData.reservations.some(r => r.bookId === book.bookId && r.memberId === currentUser.id && r.status === 'Pending');
                 return `
                 <div class="p-4 border border-slate-700 rounded-lg flex flex-col bg-slate-800/50 hover:border-blue-500 transition-all duration-300 shadow-md">
                     <h4 class="font-bold text-lg text-white">${book.title}</h4>
                     <p class="text-slate-400 text-sm">by ${book.author}</p>
-                    <p class="text-xs text-slate-500 mt-1">Genre: ${book.genre} | Published: ${book.publicationYear}</p>
+                    <p class="text-xs text-slate-500 mt-1">Genre: ${book.genre} | Pub: ${book.publicationYear}</p>
                     <div class="flex-grow my-3"><span class="px-2 py-1 text-xs font-semibold rounded-full ${book.availableCopies > 0 ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}">${book.availableCopies > 0 ? `${book.availableCopies} of ${book.totalCopies} Available` : 'Unavailable'}</span></div>
                     <div class="mt-auto pt-3 border-t border-slate-700/50 flex flex-col gap-2">
-                        <div class="flex gap-2">
-                            ${(currentUser.role === 'Student' || currentUser.role === 'Teacher') ? (book.availableCopies <= 0 ? (isRequestedByCurrentUser ? `<button class="w-full bg-yellow-600 text-white font-bold py-2 px-3 rounded-lg cursor-not-allowed text-sm" disabled><i class="fas fa-clock mr-2"></i>Pending Request</button>` : `<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg request-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-hand-paper mr-2"></i>Request to Borrow</button>`) : '') : ''}
-                            ${currentUser.role === 'Admin' ? `<button class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg edit-book-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-edit mr-2"></i>Edit</button>` : ''}
-                        </div>
-                        ${currentUser.role === 'Teacher' ? `<button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-3 rounded-lg add-to-list-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-plus mr-2"></i>Add to List</button>` : ''}
+                        ${(currentUser.role !== 'Admin' && currentUser.role !== 'Librarian') ? (book.availableCopies <= 0 ? (isRequestedByCurrentUser ? `<button class="w-full bg-yellow-600 text-white font-bold py-2 px-3 rounded-lg cursor-not-allowed text-sm" disabled><i class="fas fa-clock mr-2"></i>Requested</button>` : `<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg request-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-hand-paper mr-2"></i>Request</button>`) : '') : ''}
+                        ${currentUser.role === 'Admin' || currentUser.role === 'Librarian' ? `<button class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg edit-book-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-edit mr-2"></i>Edit</button>` : ''}
                     </div>
                 </div>`;
             }).join('');
-            document.querySelectorAll('.request-btn').forEach(btn => btn.onclick = () => handleRequest(btn.dataset.bookid));
+            document.querySelectorAll('.request-btn').forEach(btn => btn.onclick = async () => {
+                await apiService.create('library', { bookId: btn.dataset.bookid, memberId: currentUser.id, requestDate: new Date().toISOString().slice(0, 10), status: 'Pending' }, 'reservations');
+                showToast('Book requested! You will be notified when available.', 'success');
+                renderLibraryPage();
+            });
             document.querySelectorAll('.edit-book-btn').forEach(btn => { btn.onclick = () => { const bookToEdit = libraryData.books.find(b => b.bookId === btn.dataset.bookid); if (bookToEdit) openBookForm(bookToEdit); } });
-            document.querySelectorAll('.add-to-list-btn').forEach(btn => btn.onclick = () => handleAddToList(btn.dataset.bookid));
         };
         document.getElementById('book-search').oninput = (e) => {
-            const term = e.target.value.toLowerCase().replace(/-/g, '');
-            const filteredBooks = libraryData.books.filter(b => b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term) || b.genre.toLowerCase().includes(term) || (b.isbn && b.isbn.replace(/-/g, '').includes(term)));
+            const term = e.target.value.toLowerCase();
+            const filteredBooks = libraryData.books.filter(b => b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term) || b.genre.toLowerCase().includes(term));
             renderBookList(filteredBooks);
         };
         renderBookList(libraryData.books);
     };
-
-    const renderMyBooks = () => {
-        const container = document.getElementById('my-books');
-        const myTransactions = libraryData.transactions.filter(t => t.studentId === currentUser.id);
-        const issuedBooks = myTransactions.filter(t => t.status === 'Issued');
-        const historyBooks = myTransactions.filter(t => t.status === 'Returned');
-        const myReservations = libraryData.reservations.filter(r => r.studentId === currentUser.id && r.status === 'Pending');
-        const myFines = store.get('fees').filter(f => f.studentId === currentUser.id && f.feeType === 'Library Fine' && f.status === 'Unpaid');
-        container.innerHTML = `
-            <div class="space-y-8">
-                <div>
-                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-book-open mr-2 text-blue-400"></i>Books I Have Borrowed</h4>
-                    <div class="space-y-3">${issuedBooks.length > 0 ? issuedBooks.map(t => { const book = bookMap.get(t.bookId); const overdueDays = calculateOverdueDays(t.dueDate); return `<div class="p-4 rounded-lg ${overdueDays > 0 ? 'bg-red-900/40 border border-red-700' : 'bg-slate-800/70'} flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> <span class="text-slate-400">by ${book?.author || 'N/A'}</span></div><div class="text-right ${overdueDays > 0 ? 'text-red-400 font-bold' : 'text-slate-300'}">Due: ${formatDate(t.dueDate)} ${overdueDays > 0 ? `(${overdueDays} days overdue)` : ''}</div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have not borrowed any books.</p>'}</div>
-                </div>
-                <div>
-                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-clock mr-2 text-yellow-400"></i>My Pending Book Requests</h4>
-                    <div class="space-y-3">${myReservations.length > 0 ? myReservations.map(r => { const book = bookMap.get(r.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> <span class="text-slate-400">by ${book?.author || 'N/A'}</span></div><div class="flex items-center gap-4"><span class="status-badge status-pending">Pending</span><button class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-lg text-sm cancel-request-btn" data-resid="${r.reservationId}">Cancel</button></div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have no pending book requests.</p>'}</div>
-                </div>
-                 <div>
-                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-history mr-2 text-gray-400"></i>My Borrowing History</h4>
-                    <div class="space-y-3">${historyBooks.length > 0 ? historyBooks.map(t => { const book = bookMap.get(t.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> <span class="text-slate-400">by ${book?.author || 'N/A'}</span></div><div class="text-slate-400">Returned: ${formatDate(t.returnDate)}</div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">No borrowing history yet.</p>'}</div>
-                </div>
-                <div>
-                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-exclamation-triangle mr-2 text-red-500"></i>My Library Fines</h4>
-                    <div class="space-y-3">${myFines.length > 0 ? myFines.map(f => `<div class="p-4 rounded-lg bg-red-900/50 border border-red-800 flex flex-wrap justify-between items-center gap-4"><div>Fine for late return. Amount: <span class="font-bold text-white">BDT ${f.amount}</span></div><button class="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-lg" onclick="alert('Integration with a payment gateway is required.')">Pay Now</button></div>`).join('') : '<p class="text-slate-500 italic px-4">You have no outstanding library fines. Great job!</p>'}</div>
-                </div>
-            </div>`;
-        document.querySelectorAll('.cancel-request-btn').forEach(btn => btn.onclick = () => cancelRequest(btn.dataset.resid));
-    };
-
+    
     const renderTransactions = () => {
         const container = document.getElementById('transactions');
         container.innerHTML = `
             <div class="flex justify-end mb-4"><button id="issue-book-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus-circle"></i> Issue Book</button></div>
-            <div class="overflow-x-auto bg-slate-800 rounded-lg"><table class="min-w-full text-sm text-left"><thead class="bg-slate-700 text-slate-300 uppercase"><tr><th class="p-3">Book</th><th class="p-3">Member</th><th class="p-3">Issue Date</th><th class="p-3">Due Date</th><th class="p-3">Status</th><th class="p-3 text-right">Actions</th></tr></thead><tbody class="text-slate-300">${libraryData.transactions.sort((a,b) => new Date(b.issueDate) - new Date(a.issueDate)).map(t => { const overdueDays = calculateOverdueDays(t.dueDate); const member = memberMap.get(t.studentId); return `<tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold">${bookMap.get(t.bookId)?.title || 'N/A'}</td><td class="p-3">${member?.name || 'N/A'}</td><td class="p-3">${formatDate(t.issueDate)}</td><td class="p-3 ${t.status === 'Issued' && overdueDays > 0 ? 'text-red-400 font-bold' : ''}">${formatDate(t.dueDate)}</td><td class="p-3"><span class="status-badge status-${t.status.toLowerCase()}">${t.status}</span></td><td class="p-3 text-right">${t.status === 'Issued' ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded return-btn text-xs" data-id="${t.transactionId}">Mark Returned</button>` : `<span class="text-slate-500 text-xs">Returned on ${t.returnDate ? formatDate(t.returnDate) : ''}</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+            <div class="overflow-x-auto bg-slate-800 rounded-lg"><table class="min-w-full text-sm text-left"><thead class="bg-slate-700 text-slate-300 uppercase"><tr><th class="p-3">Book</th><th class="p-3">Member</th><th class="p-3">Issue Date</th><th class="p-3">Due Date</th><th class="p-3">Status</th><th class="p-3 text-right">Actions</th></tr></thead><tbody class="text-slate-300">${libraryData.transactions.sort((a,b) => new Date(b.issueDate) - new Date(a.issueDate)).map(t => { const overdueDays = calculateOverdueDays(t.dueDate); const member = memberMap.get(t.memberId); return `<tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold">${bookMap.get(t.bookId)?.title || 'N/A'}</td><td class="p-3">${member?.name || 'N/A'}</td><td class="p-3">${formatDate(t.issueDate)}</td><td class="p-3 ${t.status === 'Issued' && overdueDays > 0 ? 'text-red-400 font-bold' : ''}">${formatDate(t.dueDate)}</td><td class="p-3"><span class="status-badge status-${t.status.toLowerCase()}">${t.status}</span></td><td class="p-3 text-right">${t.status === 'Issued' ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded return-btn text-xs" data-id="${t.transactionId}">Mark Returned</button>` : `<span class="text-slate-500 text-xs">Returned on ${formatDate(t.returnDate)}</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
         document.getElementById('issue-book-btn').onclick = () => {
-            const availableBooks = libraryData.books.filter(b => b.availableCopies > 0); const allMembers = [ ...store.get('students').map(s => ({ ...s, role: 'Student' })), ...store.get('teachers').map(t => ({...t, role: 'Teacher'})) ];
-            const issueBookSubmit = async (formData) => {
+            const availableBooks = libraryData.books.filter(b => b.availableCopies > 0); const allMembers = [ ...store.get('students'), ...store.get('teachers') ];
+            openFormModal('Issue a Book', [ { name: 'bookId', label: 'Book', type: 'select', options: availableBooks.map(b => `<option value="${b.bookId}">${b.title} (${b.author})</option>`).join(''), required: true }, { name: 'memberId', label: 'Member (Student or Teacher)', type: 'select', options: allMembers.map(s => `<option value="${s.id}">${s.name} (${s.email})</option>`).join(''), required: true }, { name: 'dueDate', label: 'Due Date', type: 'date', required: true } ], async (formData) => {
                 await apiService.create('library', { ...formData, issueDate: new Date().toISOString().slice(0, 10), status: 'Issued', returnDate: null }, 'transactions');
                 const book = bookMap.get(formData.bookId); await apiService.update('library', book.bookId, { availableCopies: book.availableCopies - 1 }, 'books', 'bookId');
                 showToast('Book issued successfully', 'success'); renderLibraryPage();
-            };
-            const formFields = [ { name: 'bookId', label: 'Book', type: 'select', options: availableBooks.map(b => `<option value="${b.bookId}">${b.title} (${b.author})</option>`).join(''), required: true }, { name: 'studentId', label: 'Member (Student or Teacher)', type: 'select', options: allMembers.map(s => `<option value="${s.id}" data-role="${s.role}">${s.name} (${s.role})</option>`).join(''), required: true }, { name: 'dueDate', label: 'Due Date', type: 'date', required: true } ];
-            openFormModal('Issue a Book', formFields, issueBookSubmit);
-            const memberSelect = document.getElementById('studentId'); const dueDateInput = document.getElementById('dueDate');
-            const updateDueDate = () => { if (!memberSelect || !dueDateInput) return; const selectedOption = memberSelect.options[memberSelect.selectedIndex]; const memberRole = selectedOption.dataset.role; let defaultDueDate = new Date(); const loanDays = (memberRole === 'Teacher') ? 28 : 14; defaultDueDate.setDate(defaultDueDate.getDate() + loanDays); dueDateInput.value = defaultDueDate.toISOString().slice(0, 10); };
-            memberSelect.onchange = updateDueDate; updateDueDate();
+            });
         };
         document.querySelectorAll('.return-btn').forEach(btn => btn.onclick = () => handleReturn(btn.dataset.id));
     };
 
-    const renderReservations = () => {
-        const container = document.getElementById('reservations');
-        const pendingReservations = libraryData.reservations.filter(r => r.status === 'Pending');
+    const renderMyBooks = () => {
+        const container = document.getElementById('my-books');
+        const myTransactions = libraryData.transactions.filter(t => t.memberId === currentUser.id);
+        const issuedBooks = myTransactions.filter(t => t.status === 'Issued');
+        const historyBooks = myTransactions.filter(t => t.status === 'Returned');
+        const myReservations = libraryData.reservations.filter(r => r.memberId === currentUser.id && r.status === 'Pending');
         container.innerHTML = `
-            <h3 class="text-xl font-semibold mb-4 text-white">Pending Book Requests</h3><div class="space-y-3">${pendingReservations.length > 0 ? pendingReservations.map(r => { const book = bookMap.get(r.bookId); const student = studentMap.get(r.studentId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> requested by <span class="font-semibold text-blue-300">${student?.name || 'N/A'}</span></div><div>${book?.availableCopies > 0 ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded issue-from-request-btn" data-resid="${r.reservationId}" data-bookid="${r.bookId}" data-studentid="${r.studentId}">Approve & Issue</button>` : `<span class="text-yellow-400 font-semibold">Book Unavailable</span>`}</div></div>`; }).join('') : '<p class="text-slate-500 italic">There are no pending book requests.</p>'}</div>`;
-        document.querySelectorAll('.issue-from-request-btn').forEach(btn => btn.onclick = async (e) => {
-            const { resid, bookid, studentid } = e.currentTarget.dataset;
-            await apiService.create('library', { bookId: bookid, studentId: studentid, status: 'Issued', issueDate: new Date().toISOString().slice(0, 10), dueDate: new Date(new Date().setDate(new Date().getDate() + 14)).toISOString().slice(0, 10) }, 'transactions');
-            await apiService.update('library', resid, { status: 'Fulfilled' }, 'reservations', 'reservationId');
-            const book = bookMap.get(bookid); await apiService.update('library', bookid, { availableCopies: book.availableCopies - 1 }, 'books', 'bookId');
-            showToast(`Book issued and student notified!`, 'success'); renderLibraryPage();
-        });
+            <div class="space-y-8">
+                 <div>
+                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-book-open mr-2 text-blue-400"></i>Books I Have</h4>
+                    <div class="space-y-3">${issuedBooks.length > 0 ? issuedBooks.map(t => { const book = bookMap.get(t.bookId); const overdueDays = calculateOverdueDays(t.dueDate); return `<div class="p-4 rounded-lg ${overdueDays > 0 ? 'bg-red-900/40 border border-red-700' : 'bg-slate-800/70'} flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> <span class="text-slate-400">by ${book?.author || 'N/A'}</span></div><div class="text-right ${overdueDays > 0 ? 'text-red-400 font-bold' : 'text-slate-300'}">Due: ${formatDate(t.dueDate)} ${overdueDays > 0 ? `(${overdueDays} days overdue)` : ''}</div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have not borrowed any books.</p>'}</div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-clock mr-2 text-yellow-400"></i>My Pending Requests</h4>
+                    <div class="space-y-3">${myReservations.length > 0 ? myReservations.map(r => { const book = bookMap.get(r.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span></div><span class="status-badge status-pending">Pending</span></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have no pending book requests.</p>'}</div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-history mr-2 text-gray-400"></i>Borrowing History</h4>
+                    <div class="space-y-3">${historyBooks.length > 0 ? historyBooks.map(t => { const book = bookMap.get(t.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span></div><div class="text-slate-400">Returned: ${formatDate(t.returnDate)}</div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">No borrowing history yet.</p>'}</div>
+                </div>
+            </div>`;
     };
     
-    const renderMemberManagement = () => {
-        const container = document.getElementById('members'); const allMembers = store.get('students').map(s => ({...s, type: 'Student'})).concat(store.get('teachers').map(t => ({...t, type: 'Teacher'})));
-        container.innerHTML = `<input type="text" id="member-search" placeholder="Search by name or email..." class="w-full md:w-1/2 p-2 mb-4 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white"><div id="member-list" class="space-y-3"></div>`;
-        const renderMemberList = (members) => {
-            document.getElementById('member-list').innerHTML = members.map(member => {
-                const transactions = libraryData.transactions.filter(t => t.studentId === member.id); const fines = store.get('fees').filter(f => f.studentId === member.id && f.feeType === 'Library Fine' && f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0);
-                return `<div class="p-4 rounded-lg bg-slate-800/70"><div class="flex justify-between items-start"><div><p class="font-bold text-white">${member.name}</p><p class="text-sm text-slate-400">${member.email}</p><p class="text-xs px-2 py-0.5 mt-1 inline-block rounded-full bg-purple-500/20 text-purple-300">${member.type}</p></div><div class="text-right"><p class="text-sm text-slate-300">Borrowed: ${transactions.length}</p>${fines > 0 ? `<p class="text-sm font-bold text-red-400">Fine: BDT ${fines}</p>` : ''}</div></div></div>`;
-            }).join('');
-        };
-        document.getElementById('member-search').oninput = (e) => { const term = e.target.value.toLowerCase(); const filteredMembers = allMembers.filter(m => m.name.toLowerCase().includes(term) || (m.email && m.email.toLowerCase().includes(term))); renderMemberList(filteredMembers); };
-        renderMemberList(allMembers);
-    };
+    const renderMemberReadingLists = () => {
+        const container = document.getElementById('reading-lists-member');
+        let memberLists = [];
+        if(currentUser.role === 'Student'){
+            memberLists = libraryData.readingLists.filter(list => list.classId === currentUser.classId);
+        } else if (currentUser.role === 'Teacher'){
+            memberLists = libraryData.readingLists.filter(list => list.teacherId === currentUser.id);
+        }
 
-    const renderReports = () => {
-        const container = document.getElementById('reports');
-        container.innerHTML = `<h3 class="text-xl font-semibold mb-4 text-white">Generate & Export Reports</h3><div class="space-y-6"><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Inventory Reports</h4><button id="export-inventory-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg">Export Full Inventory (.csv)</button></div><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Financial Reports</h4><button id="export-fines-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">Export Unpaid Fines (.csv)</button></div><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Transaction Log</h4><div class="flex items-center gap-4"><input type="date" id="report-start-date" class="p-2 rounded-lg bg-slate-700 border-slate-600 text-white"><span class="text-slate-400">to</span><input type="date" id="report-end-date" class="p-2 rounded-lg bg-slate-700 border-slate-600 text-white"><button id="export-transactions-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Export Transactions</button></div></div></div>`;
-        document.getElementById('export-inventory-btn').onclick = () => { const headers = ['Book ID', 'Title', 'Author', 'Genre', 'Publication_Year', 'ISBN', 'Total_Copies', 'Available_Copies']; const rows = libraryData.books.map(b => [b.bookId, `"${b.title.replace(/"/g, '""')}"`, `"${b.author.replace(/"/g, '""')}"`, b.genre, b.publicationYear, b.isbn, b.totalCopies, b.availableCopies]); exportToCsv('library_inventory.csv', headers, rows); };
-        document.getElementById('export-fines-btn').onclick = () => { const headers = ['Student_Name', 'Student_Email', 'Fee_Type', 'Amount', 'Due_Date']; const rows = store.get('fees').filter(f => f.feeType === 'Library Fine' && f.status === 'Unpaid').map(f => { const student = studentMap.get(f.studentId); return [student?.name, student?.email, f.feeType, f.amount, f.dueDate]; }); exportToCsv('unpaid_library_fines.csv', headers, rows); };
-        document.getElementById('export-transactions-btn').onclick = () => { const startDate = document.getElementById('report-start-date').value; const endDate = document.getElementById('report-end-date').value; if(!startDate || !endDate) { showToast('Please select a start and end date for the report.', 'error'); return; } const filteredTransactions = libraryData.transactions.filter(t => { const issueDate = new Date(t.issueDate); return issueDate >= new Date(startDate) && issueDate <= new Date(endDate); }); const headers = ['Transaction_ID', 'Book_Title', 'Student_Name', 'Issue_Date', 'Due_Date', 'Return_Date', 'Status']; const rows = filteredTransactions.map(t => { const book = bookMap.get(t.bookId); const student = studentMap.get(t.studentId); return [t.transactionId, book?.title, student?.name, t.issueDate, t.dueDate, t.returnDate || 'N/A', t.status]; }); exportToCsv(`transactions_${startDate}_to_${endDate}.csv`, headers, rows); };
-    };
-
-    // --- READING LISTS FUNCTIONS ---
-
-    const handleAddToList = async (bookId) => {
-        await store.refresh('readingLists');
-        const myLists = store.get('readingLists').filter(l => l.teacherId === currentUser.id);
-        if (myLists.length === 0) { showToast('Please create a reading list first from the "Reading Lists" tab.', 'info'); return; }
-        openFormModal('Add Book to Reading List', [{ name: 'listId', label: 'Select List', type: 'select', options: myLists.map(l => `<option value="${l.id}">${l.name}</option>`).join(''), required: true }, ], async (formData) => {
-            const list = myLists.find(l => l.id === formData.listId);
-            if (list && !list.bookIds.includes(bookId)) {
-                list.bookIds.push(bookId); await apiService.update('readingLists', list.id, { bookIds: list.bookIds });
-                showToast('Book added to list!', 'success'); if (document.getElementById('reading-lists')) renderReadingLists();
-            } else if (list) { showToast('This book is already in the selected list.', 'error'); }
-        });
-    };
-
-    const renderReadingLists = () => {
-        const container = document.getElementById('reading-lists');
-        if (!container) return;
-        const myReadingLists = store.get('readingLists').filter(l => l.teacherId === currentUser.id);
         container.innerHTML = `
-            <div class="flex justify-between items-center mb-4"><h3 class="text-xl font-semibold text-white">My Reading Lists</h3><button id="create-list-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Create New List</button></div>
-            <div class="space-y-4">${myReadingLists.length > 0 ? myReadingLists.map(list => `<div class="p-4 bg-slate-800 rounded-lg"><div class="flex justify-between items-center"><h4 class="text-lg font-bold text-white">${list.name}</h4><button class="text-red-500 delete-list-btn" data-listid="${list.id}"><i class="fas fa-trash"></i></button></div><ul class="mt-2 space-y-2 list-disc list-inside">${list.bookIds.map(bookId => { const book = bookMap.get(bookId); return book ? `<li class="text-slate-300 ml-4">${book.title} <span class="text-slate-500 text-sm">by ${book.author}</span></li>` : ''; }).join('')}</ul></div>`).join('') : '<p class="text-slate-500 italic">You have not created any reading lists.</p>'}</div>`;
-        
-        document.getElementById('create-list-btn').onclick = () => {
-            const myClassIdsAsTeacher = store.get('classes').filter(c => c.teacherId === currentUser.id).map(c => c.id);
-            const myClassIdsAsSubjectTeacher = store.get('timetable').filter(t => t.teacherId === currentUser.id).map(t => t.classId);
-            const allMyClassIds = [...new Set([...myClassIdsAsTeacher, ...myClassIdsAsSubjectTeacher])];
-            const myClasses = store.get('classes').filter(c => allMyClassIds.includes(c.id));
-            if (myClasses.length === 0) { showToast("You must be assigned to a class to create a reading list.", "error"); return; }
-            openFormModal('Create New Reading List', [
-                { name: 'name', label: 'List Name (e.g., "History 101 Required Reading")', type: 'text', required: true },
-                { name: 'classId', label: 'Assign to Class', type: 'select', options: myClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true },
-            ], async (formData) => {
-                await apiService.create('readingLists', { ...formData, teacherId: currentUser.id, bookIds: [] });
-                showToast('Reading list created!', 'success');
-                await store.refresh('readingLists');
-                renderReadingLists();
-            });
-        };
-        document.querySelectorAll('.delete-list-btn').forEach(btn => {
-            btn.onclick = () => showConfirmationModal('Are you sure you want to delete this list?', async () => {
-                await apiService.remove('readingLists', btn.dataset.listid);
-                await store.refresh('readingLists');
-                renderReadingLists();
-            });
-        });
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-white">Reading Lists</h3>
+                ${currentUser.role === 'Teacher' ? `<button id="create-list-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Create New List</button>`:''}
+            </div>
+            <div class="space-y-4">${memberLists.length > 0 ? memberLists.map(list => `<div class="p-4 bg-slate-800 rounded-lg"><h4 class="text-lg font-bold text-white">${list.name}</h4><ul class="mt-2 space-y-2 list-disc list-inside">${list.bookIds.map(bookId => { const book = bookMap.get(bookId); return book ? `<li class="text-slate-300 ml-4">${book.title}</li>` : ''; }).join('')}</ul></div>`).join('') : '<p class="text-slate-500 italic">No reading lists found for you.</p>'}</div>`;
+    
+        if(document.getElementById('create-list-btn')){
+            document.getElementById('create-list-btn').onclick = () => {
+                const myClasses = store.get('classes').filter(c => c.teacherId === currentUser.id);
+                openFormModal('Create Reading List', [
+                    { name: 'name', label: 'List Name', type: 'text', required: true },
+                    { name: 'classId', label: 'Assign to Class', type: 'select', options: myClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true }
+                ], async (formData) => {
+                    await apiService.create('library', { ...formData, teacherId: currentUser.id, bookIds: [] }, 'readingLists');
+                    showToast('Reading list created!', 'success');
+                    renderLibraryPage();
+                });
+            }
+        }
     };
 
-    const renderStudentReadingLists = () => {
-        const container = document.getElementById('student-reading-lists');
-        if (!container) return;
-        const allLists = store.get('readingLists');
-        const myClassLists = allLists.filter(list => list.classId === currentUser.classId);
-        container.innerHTML = `
-            <h3 class="text-2xl font-bold mb-6 text-white">Course Reading Lists</h3>
-            <div class="space-y-6">${myClassLists.length > 0 ? myClassLists.map(list => {
-                const teacher = teacherMap.get(list.teacherId);
-                return `
-                <div class="p-4 sm:p-6 bg-slate-800 rounded-lg shadow-md">
-                    <div class="border-b border-slate-700 pb-3 mb-3">
-                        <h4 class="text-xl font-bold text-white">${list.name}</h4><p class="text-sm text-slate-400">Curated by: ${teacher ? teacher.name : 'N/A'}</p>
-                    </div>
-                    <ul class="space-y-3">${list.bookIds.map(bookId => {
-                        const book = bookMap.get(bookId); if (!book) return '';
-                        return `<li class="text-slate-300 flex items-center gap-3"><i class="fas fa-book text-teal-400"></i><div><a href="#" class="font-semibold hover:underline view-book-in-catalog" data-book-title="${book.title}">${book.title}</a><span class="text-slate-500 text-sm block">by ${book.author}</span></div></li>`;
-                    }).join('')}</ul>
-                </div>`}).join('') : '<p class="text-slate-500 italic">Your teachers have not assigned any reading lists for your class yet.</p>'}
-            </div>`;
-        document.querySelectorAll('.view-book-in-catalog').forEach(link => {
-            link.onclick = (e) => {
-                e.preventDefault();
-                document.querySelector('.tab-link[data-tab="catalog"]').click();
-                const searchInput = document.getElementById('book-search');
-                searchInput.value = link.dataset.bookTitle;
-                searchInput.dispatchEvent(new Event('input'));
-            };
-        });
-    };
-
-    const exportToCsv = (filename, headers, rows) => {
-        let csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "\n" + rows.map(e => e.join(",")).join("\n");
-        const encodedUri = encodeURI(csvContent); const link = document.createElement("a");
-        link.setAttribute("href", encodedUri); link.setAttribute("download", filename);
-        document.body.appendChild(link); link.click(); document.body.removeChild(link);
-        showToast(`Report ${filename} downloaded.`, 'success');
-    };
 
     // --- INITIAL TAB ACTIVATION ---
-    if (currentUser.role === 'Admin') {
-        renderAdminDashboard();
+    if (currentUser.role === 'Admin' || currentUser.role === 'Librarian') {
+        renderLibrarianDashboard();
         renderCatalog('catalog');
         renderTransactions();
-        renderReservations();
-        renderMemberManagement();
-        renderReports();
-    } else if (currentUser.role === 'Student' || currentUser.role === 'Teacher') {
+        document.getElementById('reservations').innerHTML = '<p>Reservations management coming soon.</p>';
+        document.getElementById('members').innerHTML = '<p>Member management coming soon.</p>';
+        document.getElementById('reading-lists-admin').innerHTML = '<p>Admin view for reading lists coming soon.</p>';
+        document.getElementById('reports').innerHTML = '<p>Report generation coming soon.</p>';
+    } else {
         renderCatalog('catalog');
         renderMyBooks();
-        if (currentUser.role === 'Teacher') {
-            renderReadingLists();
-        }
-        if (currentUser.role === 'Student') {
-            renderStudentReadingLists();
-        }
+        renderMemberReadingLists();
     }
 
     // Tab switching logic
@@ -2071,12 +1955,6 @@ async function renderLibraryPage() {
         });
     });
 }
-
-///////////////////////////////////////////////////////////////////////////Transport 
-
-
-
-         /// Transport 
 async function renderTransportPage() {
     const transportData = store.get('transport');
     const studentMap = store.getMap('students');
@@ -2086,47 +1964,47 @@ async function renderTransportPage() {
     const vehicleMap = vehicles.reduce((map, vehicle) => ({ ...map, [vehicle.vehicleId]: vehicle.vehicleNumber }), {});
 
     ui.contentArea.innerHTML = `
-        <div class="space-y-6">
-            <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+        <div class="space-y-6 animate-fade-in">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md">
                 <h3 class="text-xl font-semibold mb-4">Student Assignments</h3>
-                <div class="overflow-x-auto max-h-72">
+                <div class="overflow-x-auto max-h-72 custom-scrollbar">
                     <table class="min-w-full text-sm">
-                        <thead class="bg-slate-700"><tr>
-                            <th class="p-2 text-left">Student</th><th class="p-2 text-left">Route</th><th class="p-2 text-left">Vehicle No.</th>
+                        <thead class="bg-slate-700 sticky top-0"><tr>
+                            <th class="p-3 text-left">Student</th><th class="p-3 text-left">Route</th><th class="p-3 text-left">Vehicle No.</th>
                         </tr></thead>
-                        <tbody class="text-slate-300">
+                        <tbody class="text-slate-300 divide-y divide-slate-700">
                         ${assignments.map(a => `
-                            <tr class="border-b border-slate-700">
-                                <td class="p-2">${studentMap.get(a.studentId)?.name || 'N/A'}</td>
-                                <td class="p-2">${routeMap[a.routeId] || 'N/A'}</td>
-                                <td class="p-2">${vehicleMap[a.vehicleId] || 'N/A'}</td>
+                            <tr class="hover:bg-slate-700/30">
+                                <td class="p-3">${studentMap.get(a.studentId)?.name || 'N/A'}</td>
+                                <td class="p-3">${routeMap[a.routeId] || 'N/A'}</td>
+                                <td class="p-3">${vehicleMap[a.vehicleId] || 'N/A'}</td>
                             </tr>`).join('')}
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md">
                     <h3 class="text-xl font-semibold mb-4">Bus Routes</h3>
-                    <div class="overflow-x-auto max-h-72">
+                    <div class="overflow-x-auto max-h-72 custom-scrollbar">
                         <table class="min-w-full text-sm">
-                            <thead class="bg-slate-700"><tr><th class="p-2 text-left">Route Name</th><th class="p-2 text-left">Stops</th></tr></thead>
-                            <tbody class="text-slate-300">
+                            <thead class="bg-slate-700 sticky top-0"><tr><th class="p-3 text-left">Route Name</th><th class="p-3 text-left">Stops</th></tr></thead>
+                            <tbody class="text-slate-300 divide-y divide-slate-700">
                             ${routes.map(r => `
-                                <tr class="border-b border-slate-700"><td class="p-2 align-top">${r.routeName}</td><td class="p-2">${r.stops.join(', ')}</td></tr>
+                                <tr class="hover:bg-slate-700/30"><td class="p-3 align-top">${r.routeName}</td><td class="p-3">${r.stops.join(', ')}</td></tr>
                             `).join('')}
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md">
                     <h3 class="text-xl font-semibold mb-4">Vehicles</h3>
-                    <div class="overflow-x-auto max-h-72">
+                    <div class="overflow-x-auto max-h-72 custom-scrollbar">
                         <table class="min-w-full text-sm">
-                            <thead class="bg-slate-700"><tr><th class="p-2 text-left">Vehicle No.</th><th class="p-2 text-left">Driver</th><th class="p-2 text-left">Capacity</th></tr></thead>
-                            <tbody class="text-slate-300">
+                            <thead class="bg-slate-700 sticky top-0"><tr><th class="p-3 text-left">Vehicle No.</th><th class="p-3 text-left">Driver</th><th class="p-3 text-left">Capacity</th></tr></thead>
+                            <tbody class="text-slate-300 divide-y divide-slate-700">
                             ${vehicles.map(v => `
-                                <tr class="border-b border-slate-700"><td class="p-2">${v.vehicleNumber}</td><td class="p-2">${v.driverName}</td><td class="p-2">${v.capacity}</td></tr>
+                                <tr class="hover:bg-slate-700/30"><td class="p-3">${v.vehicleNumber}</td><td class="p-3">${v.driverName}</td><td class="p-3">${v.capacity}</td></tr>
                             `).join('')}
                             </tbody>
                         </table>
@@ -2146,10 +2024,10 @@ async function renderContactTeacherPage() {
     const baseInputClasses = "shadow-sm appearance-none border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-700 text-slate-200 border-slate-600";
 
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800 p-6 rounded-lg shadow-md max-w-lg mx-auto">
+        <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700 max-w-lg mx-auto animate-fade-in">
             <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b pb-2 border-slate-700">Contact My Teacher</h3>
             ${classTeacher ? `
-                <p class="text-slate-200 mb-4">You can contact your class teacher, <strong>${classTeacher.name}</strong> (${classTeacher.email}).</p>
+                <p class="text-slate-300 mb-4">You can send a message to your class teacher, <strong>${classTeacher.name}</strong>, via the portal.</p>
                 <form id="contact-teacher-form" class="space-y-4">
                     <div>
                         <label for="message-subject" class="block text-slate-300 text-sm font-bold mb-2">Subject</label>
@@ -2181,7 +2059,7 @@ async function renderContactTeacherPage() {
             
             await apiService.create('notices', {
                 title: `Message from Student ${currentUser.name}: ${subject}`,
-                content: body + ` (Student Email: ${currentUser.email})`,
+                content: body + `\n\n(Student Email: ${currentUser.email})`,
                 date: new Date().toISOString().slice(0, 10),
                 target: classTeacher.id,
                 authorId: currentUser.id
@@ -2193,11 +2071,9 @@ async function renderContactTeacherPage() {
         });
     }
 }
-// =================== REPLACE THE ENTIRE renderProfilePage FUNCTION WITH THIS ===================
 async function renderProfilePage() {
     let profileData = { ...currentUser };
     
-    // Helper function to create consistent list items with icons
     const createDetailItem = (icon, label, value) => `
         <div class="flex items-start gap-4">
             <i class="fas ${icon} text-slate-400 text-lg w-5 text-center mt-1"></i>
@@ -2211,60 +2087,35 @@ async function renderProfilePage() {
     let contactInfoHtml = '';
     let roleSpecificInfoHtml = '';
 
-    // Populate data based on user role
     if (currentUser.role === 'Student') {
         const studentDetails = store.getMap('students').get(currentUser.id);
         if (studentDetails) profileData = { ...profileData, ...studentDetails };
         const myClass = store.getMap('classes').get(profileData.classId)?.name || 'N/A';
-        
-        contactInfoHtml = `
-            ${createDetailItem('fa-envelope', 'Email Address', profileData.email)}
-            ${createDetailItem('fa-phone', 'Guardian Contact', profileData.contact)}
-            ${createDetailItem('fa-map-marker-alt', 'Address', profileData.address)}
-        `;
-        roleSpecificInfoHtml = `
-            ${createDetailItem('fa-hashtag', 'Roll Number', profileData.rollNo)}
-            ${createDetailItem('fa-school', 'Class', myClass)}
-            ${createDetailItem('fa-user-shield', 'Guardian Name', profileData.guardianName)}
-            ${createDetailItem('fa-calendar-day', 'Date of Birth', profileData.dateOfBirth)}
-        `;
-
+        contactInfoHtml = `${createDetailItem('fa-envelope', 'Email Address', profileData.email)}${createDetailItem('fa-phone', 'Guardian Contact', profileData.contact)}${createDetailItem('fa-map-marker-alt', 'Address', profileData.address)}`;
+        roleSpecificInfoHtml = `${createDetailItem('fa-id-card', 'Roll Number', profileData.rollNo)}${createDetailItem('fa-school', 'Class', myClass)}${createDetailItem('fa-user-shield', 'Guardian Name', profileData.guardianName)}${createDetailItem('fa-calendar-day', 'Date of Birth', profileData.dateOfBirth)}`;
     } else if (currentUser.role === 'Teacher') {
         const teacherDetails = store.getMap('teachers').get(currentUser.id);
         if (teacherDetails) profileData = { ...profileData, ...teacherDetails };
         const myDept = store.getMap('departments').get(profileData.departmentId)?.name || 'N/A';
-        
-        contactInfoHtml = `
-            ${createDetailItem('fa-envelope', 'Email Address', profileData.email)}
-            ${createDetailItem('fa-phone', 'Contact Number', profileData.contact)}
-            ${createDetailItem('fa-map-marker-alt', 'Address', profileData.address)}
-        `;
-        roleSpecificInfoHtml = `
-            ${createDetailItem('fa-building', 'Department', myDept)}
-            ${createDetailItem('fa-book', 'Primary Subject', profileData.subject)}
-            ${createDetailItem('fa-graduation-cap', 'Qualifications', profileData.qualifications)}
-            ${createDetailItem('fa-calendar-plus', 'Joining Date', profileData.joiningDate)}
-        `;
-    } else { // Admin
-         contactInfoHtml = `
-            ${createDetailItem('fa-envelope', 'Email Address', profileData.email)}
-            ${createDetailItem('fa-user-cog', 'Role', 'System Administrator')}
-        `;
+        contactInfoHtml = `${createDetailItem('fa-envelope', 'Email Address', profileData.email)}${createDetailItem('fa-phone', 'Contact Number', profileData.contact)}${createDetailItem('fa-map-marker-alt', 'Address', profileData.address)}`;
+        roleSpecificInfoHtml = `${createDetailItem('fa-building', 'Department', myDept)}${createDetailItem('fa-book', 'Primary Subject', profileData.subject)}${createDetailItem('fa-graduation-cap', 'Qualifications', profileData.qualifications)}${createDetailItem('fa-calendar-plus', 'Joining Date', profileData.joiningDate)}`;
+    } else { // Admin, Accountant, Librarian
+         contactInfoHtml = `${createDetailItem('fa-envelope', 'Email Address', profileData.email)}${createDetailItem('fa-user-cog', 'Role', profileData.role)}`;
     }
 
     const profileHtml = `
-    <div class="max-w-4xl mx-auto space-y-6">
-        <!-- Profile Header Card -->
-        <div class="bg-slate-800 p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-center gap-6">
+    <div class="max-w-4xl mx-auto space-y-6 animate-fade-in">
+        <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-center gap-6">
             <div class="flex-shrink-0 text-center relative group">
-                    <img id="profile-img-preview" src="${profileData.profileImage || generateInitialsAvatar(profileData.name)}" alt="Profile Picture" class="w-28 h-28 rounded-full object-cover border-4 border-slate-700 shadow-lg">                <label for="profile-image-upload" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                <img id="profile-img-preview" src="${profileData.profileImage || generateInitialsAvatar(profileData.name)}" alt="Profile Picture" class="w-28 h-28 rounded-full object-cover border-4 border-slate-700 shadow-lg">
+                <label for="profile-image-upload" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
                     <i class="fas fa-camera text-2xl"></i>
                 </label>
                 <input type="file" id="profile-image-upload" accept="image/*" class="hidden">
             </div>
             <div class="flex-grow text-center sm:text-left">
                 <h3 class="text-3xl font-bold">${profileData.name}</h3>
-                <p class="text-slate-400 text-lg">${profileData.role}</p>
+                <p class="text-blue-400 text-lg">${profileData.role}</p>
             </div>
             <div class="flex-shrink-0 flex flex-col gap-2">
                 <button id="edit-profile-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
@@ -2275,32 +2126,21 @@ async function renderProfilePage() {
                 </button>
             </div>
         </div>
-
-        <!-- Profile Details Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Contact Information Card -->
-            <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+            <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-lg shadow-md">
                 <h4 class="text-xl font-semibold border-b border-slate-700 pb-3 mb-4">Contact & Personal Info</h4>
-                <div class="space-y-4">
-                    ${contactInfoHtml}
-                </div>
+                <div class="space-y-4">${contactInfoHtml}</div>
             </div>
-            <!-- Role-Specific Information Card -->
-            <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+            <div class="bg-slate-800/50 border border-slate-700 p-6 rounded-lg shadow-md">
                  <h4 class="text-xl font-semibold border-b border-slate-700 pb-3 mb-4">
                     ${currentUser.role === 'Student' ? 'Academic Details' : (currentUser.role === 'Teacher' ? 'Professional Details' : 'System Info')}
                  </h4>
-                <div class="space-y-4">
-                    ${roleSpecificInfoHtml}
-                </div>
+                <div class="space-y-4">${roleSpecificInfoHtml}</div>
             </div>
         </div>
     </div>`;
     ui.contentArea.innerHTML = profileHtml;
 
-    // --- EVENT LISTENERS ---
-
-    // Image upload listener
     document.getElementById('profile-image-upload').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -2310,17 +2150,15 @@ async function renderProfilePage() {
                 document.getElementById('profile-img-preview').src = imageData;
                 ui.headerUserAvatar.src = imageData;
                 currentUser.profileImage = imageData;
-                sessionStorage.setItem('sms_user_modern', JSON.stringify(currentUser));
+                sessionStorage.setItem('sms_user_pro', JSON.stringify(currentUser));
                 
-                let collection, id;
-                if (currentUser.role === 'Student') { collection = 'students'; id = currentUser.id; }
-                else if (currentUser.role === 'Teacher') { collection = 'teachers'; id = currentUser.id; }
-                else if (currentUser.role === 'Admin') {
-                    appDatabase.users['admin'].profileImage = imageData;
+                let collection = null, id = currentUser.id;
+                if (currentUser.role === 'Student') collection = 'students';
+                else if (currentUser.role === 'Teacher') collection = 'teachers';
+                else { // For Admin, Accountant, Librarian
+                    appDatabase.users[currentUser.username].profileImage = imageData;
                     await apiService.save();
                     await store.refresh('users');
-                    showToast('Profile image updated!', 'success');
-                    return;
                 }
                 if (collection) {
                     await apiService.update(collection, id, { profileImage: imageData });
@@ -2332,12 +2170,12 @@ async function renderProfilePage() {
         }
     });
 
-    // Edit Profile button listener
     const editBtn = document.getElementById('edit-profile-btn');
     if (editBtn) {
         editBtn.onclick = () => {
-            if (currentUser.role === 'Admin') {
-                showToast('Admin details cannot be edited here.', 'info');
+            const nonEditableRoles = ['Admin', 'Accountant', 'Librarian'];
+            if (nonEditableRoles.includes(currentUser.role)) {
+                showToast('This user role details cannot be edited from here.', 'info');
                 return;
             }
 
@@ -2347,122 +2185,227 @@ async function renderProfilePage() {
                 { name: 'contact', label: 'Contact Number', type: 'tel', required: true },
                 { name: 'address', label: 'Address', type: 'textarea' },
             ];
-
-            if (currentUser.role === 'Student') {
-                formFields.push(
-                    { name: 'guardianName', label: 'Guardian Name', type: 'text', required: true },
-                    { name: 'dateOfBirth', label: 'Date of Birth', type: 'date' }
-                );
-            } else if (currentUser.role === 'Teacher') {
-                formFields.push(
-                    { name: 'subject', label: 'Primary Subject', type: 'text', required: true },
-                    { name: 'qualifications', label: 'Qualifications', type: 'text' }
-                );
-            }
+            if (currentUser.role === 'Student') formFields.push({ name: 'guardianName', label: 'Guardian Name', type: 'text', required: true }, { name: 'dateOfBirth', label: 'Date of Birth', type: 'date' });
+            else if (currentUser.role === 'Teacher') formFields.push({ name: 'subject', label: 'Primary Subject', type: 'text', required: true }, { name: 'qualifications', label: 'Qualifications', type: 'text' });
             
             openFormModal('Edit Profile', formFields, async (formData) => {
                 const collection = currentUser.role === 'Student' ? 'students' : 'teachers';
                 await apiService.update(collection, currentUser.id, formData);
                 await store.refresh(collection);
-                
                 currentUser = {...currentUser, ...formData };
-                sessionStorage.setItem('sms_user_modern', JSON.stringify(currentUser));
-
+                sessionStorage.setItem('sms_user_pro', JSON.stringify(currentUser));
                 showToast('Profile updated successfully!', 'success');
                 renderProfilePage();
             }, profileData);
         };
     }
 
-    // Change Password button listener
     document.getElementById('change-password-btn').onclick = openChangePasswordModal;
 }
 
-ui.modalTitle.textContent = modalTitle;
-ui.modalBody.innerHTML = formHtml;
 
-document.getElementById('change-password-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const currentPassword = e.target.currentPassword.value;
-    const newPassword = e.target.newPassword.value;
-    const confirmPassword = e.target.confirmPassword.value;
+// ===================================================================================
+// --- ACCOUNTANT PANEL RENDERERS ---
+// ===================================================================================
+async function renderAccountantDashboard() {
+    await store.refresh('fees');
+    await store.refresh('salaries');
+    await store.refresh('expenses');
 
-    // --- Validation ---
-    if (newPassword.length < 4) {
-        showToast('New password must be at least 4 characters long.', 'error');
-        return;
+    const fees = store.get('fees');
+    const salaries = store.get('salaries');
+    const expenses = store.get('expenses');
+
+    const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+    const totalFeesCollected = fees.filter(f => f.status === 'Paid').reduce((sum, f) => sum + f.amount, 0);
+    const totalFeesDue = fees.filter(f => f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0);
+    const salariesPaidThisMonth = salaries.filter(s => s.month === currentMonth && s.status === 'Paid').reduce((sum, s) => sum + s.netPay, 0);
+    const expensesThisMonth = expenses.filter(e => e.date.startsWith(currentMonth)).reduce((sum, e) => sum + e.amount, 0);
+    
+    const formatCurrency = (value) => `BDT ${value.toLocaleString()}`;
+
+    const statCards = [
+        { title: 'Total Fees Collected', value: formatCurrency(totalFeesCollected), icon: 'fa-hand-holding-usd', color: 'green' },
+        { title: 'Outstanding Fees', value: formatCurrency(totalFeesDue), icon: 'fa-exclamation-circle', color: 'yellow' },
+        { title: 'Salaries Paid (This Month)', value: formatCurrency(salariesPaidThisMonth), icon: 'fa-money-check-alt', color: 'blue' },
+        { title: 'Expenses (This Month)', value: formatCurrency(expensesThisMonth), icon: 'fa-receipt', color: 'indigo' },
+    ];
+
+    ui.contentArea.innerHTML = `
+        <div class="animate-fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">${statCards.map(createDashboardCard).join('')}</div>
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Income vs. Expense (This Month)</h3>
+                    <canvas id="incomeExpenseChart"></canvas>
+                </div>
+                <div class="bg-slate-800/50 p-6 rounded-xl shadow-xl border border-slate-700">
+                     <h3 class="text-xl font-semibold mb-4 text-white">Quick Actions</h3>
+                     <div class="space-y-3">
+                        <button onclick="navigateTo('fees')" class="w-full text-left p-4 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition duration-300 transform hover:scale-[1.02] shadow-md">
+                           <p class="font-bold text-blue-300"><i class="fas fa-file-invoice-dollar mr-3"></i>Manage Fee Collection</p>
+                        </button>
+                         <button onclick="navigateTo('salaries')" class="w-full text-left p-4 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition duration-300 transform hover:scale-[1.02] shadow-md">
+                           <p class="font-bold text-green-300"><i class="fas fa-money-check-alt mr-3"></i>Process Salaries</p>
+                        </button>
+                         <button onclick="navigateTo('expenses')" class="w-full text-left p-4 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition duration-300 transform hover:scale-[1.02] shadow-md">
+                           <p class="font-bold text-yellow-300"><i class="fas fa-receipt mr-3"></i>Log an Expense</p>
+                        </button>
+                     </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const incomeExpenseCtx = document.getElementById('incomeExpenseChart')?.getContext('2d');
+    if(incomeExpenseCtx) {
+        const feesCollectedThisMonth = fees.filter(f => f.paidDate && f.paidDate.startsWith(currentMonth)).reduce((sum, f) => sum + f.amount, 0);
+        new Chart(incomeExpenseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Income (Fees)', 'Outcome (Salaries + Expenses)'],
+                datasets: [{
+                    label: 'Amount (BDT)',
+                    data: [feesCollectedThisMonth, salariesPaidThisMonth + expensesThisMonth],
+                    backgroundColor: ['rgba(34, 197, 94, 0.6)', 'rgba(239, 68, 68, 0.6)'],
+                    borderColor: ['#22c55e', '#ef4444'],
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: '#e2e8f0' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }, x: { ticks: { color: '#e2e8f0' }, grid: { display: false } } } }
+        });
     }
-    if (newPassword !== confirmPassword) {
-        showToast('New passwords do not match.', 'error');
-        return;
-    }
-    if (newPassword === currentPassword) {
-        showToast('New password cannot be the same as the old one.', 'error');
-        return;
-    }
-
-    // --- Check against stored password ---
-    const storedPassword = appDatabase.users[currentUser.username]?.password;
-    if (currentPassword !== storedPassword) {
-        showToast('Incorrect current password.', 'error');
-        return;
-    }
-
-    // --- Update the password ---
-    appDatabase.users[currentUser.username].password = newPassword;
-    await apiService.save(); // Persist the entire database with the change
-
-    showToast('Password updated successfully!', 'success');
-    closeAnimatedModal(ui.modal);
-});
-
-openAnimatedModal(ui.modal);
-
+}
+async function renderSalaryPage() {
+    const teacherMap = store.getMap('teachers');
+    const formatCurrency = (value) => `BDT ${Number(value || 0).toLocaleString()}`;
+    
+    const config = {
+        title: 'Salary',
+        collectionName: 'salaries',
+        columns: [
+            { label: 'Teacher', render: (item) => teacherMap.get(item.teacherId)?.name || 'N/A', key: 'teacherId', sortable: true },
+            { label: 'Month', key: 'month', sortable: true },
+            { label: 'Net Pay', render: (item) => formatCurrency(item.netPay), key: 'netPay', sortable: true },
+            { label: 'Status', render: (item) => `<span class="status-badge ${item.status === 'Paid' ? 'status-paid' : 'status-pending'}">${item.status}</span>`, key: 'status', sortable: true },
+            { label: 'Action', render: (item) => item.status === 'Pending' ? `<button class="text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-lg pay-salary-btn" data-id="${item.id}">Mark as Paid</button>` : `Paid on ${item.paidDate}` },
+        ],
+        customHeader: `<button id="process-salaries-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Process Current Month Salaries</button>`,
+        customListeners: () => {
+            document.getElementById('process-salaries-btn').onclick = async () => {
+                const teachers = store.get('teachers');
+                const currentMonth = new Date().toISOString().slice(0, 7);
+                const existingSalaries = store.get('salaries').filter(s => s.month === currentMonth);
+                
+                showConfirmationModal(`This will generate salary records for all teachers for ${currentMonth}. Proceed?`, async () => {
+                    for (const teacher of teachers) {
+                        if (!existingSalaries.some(s => s.teacherId === teacher.id)) {
+                             await apiService.create('salaries', {
+                                teacherId: teacher.id,
+                                baseSalary: teacher.baseSalary || 0,
+                                bonus: 0,
+                                deductions: 0,
+                                netPay: teacher.baseSalary || 0,
+                                month: currentMonth,
+                                status: 'Pending',
+                                paidDate: null
+                            });
+                        }
+                    }
+                    showToast('Salaries for the current month have been processed!', 'success');
+                    await store.refresh('salaries');
+                    renderSalaryPage();
+                });
+            };
+            document.querySelectorAll('.pay-salary-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    await apiService.update('salaries', btn.dataset.id, { status: 'Paid', paidDate: new Date().toISOString().slice(0,10) });
+                    await store.refresh('salaries');
+                    renderSalaryPage();
+                }
+            });
+        },
+        searchKeys: ['month']
+    };
+    renderGenericListPage(config);
+}
+async function renderExpensesPage() {
+    const formatCurrency = (value) => `BDT ${Number(value || 0).toLocaleString()}`;
+    const config = {
+        title: 'Expense',
+        collectionName: 'expenses',
+        columns: [
+            { label: 'Date', key: 'date', sortable: true },
+            { label: 'Category', key: 'category', sortable: true },
+            { label: 'Amount', render: (item) => formatCurrency(item.amount), key: 'amount', sortable: true },
+            { label: 'Description', key: 'description' },
+        ],
+        formFields: [
+            { name: 'date', label: 'Date', type: 'date', required: true },
+            { name: 'category', label: 'Category', type: 'text', required: true, placeholder: 'e.g., Utilities, Supplies' },
+            { name: 'amount', label: 'Amount (BDT)', type: 'number', required: true },
+            { name: 'description', label: 'Description', type: 'textarea' },
+        ],
+        searchKeys: ['category', 'description']
+    };
+    renderGenericListPage(config);
+}
+async function renderFinancialReports() {
+    ui.contentArea.innerHTML = `
+        <div class="animate-fade-in bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+            <h3 class="text-xl font-semibold mb-6">Financial Reports</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h4 class="font-semibold text-lg mb-2 text-slate-200">Fee Collection Report</h4>
+                    <p class="text-slate-400 mb-4">Export a detailed list of all paid and unpaid fees for a specific period.</p>
+                    <button onclick="exportToCsv('all_fees.csv', ['Student_Name', 'Fee_Type', 'Amount', 'Status', 'Due_Date'], store.get('fees').map(f => [store.getMap('students').get(f.studentId)?.name, f.feeType, f.amount, f.status, f.dueDate]))" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Export All Fees (.csv)</button>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h4 class="font-semibold text-lg mb-2 text-slate-200">Salary Payout Report</h4>
+                    <p class="text-slate-400 mb-4">Export a list of all salary payments made in a specific period.</p>
+                    <button onclick="exportToCsv('all_salaries.csv', ['Teacher_Name', 'Month', 'Net_Pay', 'Status', 'Paid_Date'], store.get('salaries').map(s => [store.getMap('teachers').get(s.teacherId)?.name, s.month, s.netPay, s.status, s.paidDate]))" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Export All Salaries (.csv)</button>
+                </div>
+                 <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h4 class="font-semibold text-lg mb-2 text-slate-200">Expense Report</h4>
+                    <p class="text-slate-400 mb-4">Export a full list of all logged school expenses.</p>
+                    <button onclick="exportToCsv('all_expenses.csv', ['Date', 'Category', 'Amount', 'Description'], store.get('expenses').map(e => [e.date, e.category, e.amount, e.description]))" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg">Export All Expenses (.csv)</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
 // ===================================================================================
 // --- REUSABLE UI COMPONENTS & HELPERS ---
 // ===================================================================================
 
 function generateInitialsAvatar(name) {
-    // Fallback for cases where a name might not be provided
-    if (!name) name = 'User';
-
-    // 1. Get the initials from the name
+    if (!name) name = 'U';
     const nameParts = name.trim().split(' ');
     let initials = nameParts[0].charAt(0);
     if (nameParts.length > 1) {
         initials += nameParts[nameParts.length - 1].charAt(0);
     }
     initials = initials.toUpperCase();
-
-    // 2. Define the static colors as requested
-    const backgroundColor = '#ffffff'; // White background
-    const textColor = '#000000';       // Black text
-
-    // 3. Create the SVG image string with a border to make the white circle visible
-    const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-            <circle cx="50" cy="50" r="48" fill="${backgroundColor}" stroke="#e2e8f0" stroke-width="2" />
-            <text x="50%" y="50%" text-anchor="middle" dy="0.35em" font-size="45" font-family="Arial, sans-serif" font-weight="bold" fill="${textColor}">
-                ${initials}
-            </text>
-        </svg>
-    `;
-
-    // 4. Encode the SVG to Base64 and return the data URI
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#3b82f6"/><text x="50%" y="50%" text-anchor="middle" dy="0.35em" font-size="45" font-family="Inter, sans-serif" font-weight="bold" fill="#fff">${initials}</text></svg>`;
     return `data:image/svg+xml;base64,${btoa(svg)}`;
 }
-
-
-
 function createDashboardCard({ title, value, icon, color }) {
+    const colorMap = {
+        indigo: 'from-indigo-500 to-indigo-700',
+        yellow: 'from-yellow-500 to-yellow-600',
+        blue: 'from-blue-500 to-blue-700',
+        green: 'from-green-500 to-green-700',
+        red: 'from-red-500 to-red-700',
+        purple: 'from-purple-500 to-purple-700',
+    };
     return `
-        <div class="bg-slate-800 p-6 rounded-xl shadow-lg flex items-center justify-between transition-transform transform hover:-translate-y-1">
-            <div>
-                <p class="text-slate-400">${title}</p>
-                <p class="text-3xl font-bold">${value}</p>
+        <div class="dashboard-card bg-gradient-to-br ${colorMap[color]} p-6 rounded-xl shadow-lg transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-4 -top-4 text-white text-6xl opacity-20 pointer-events-none"><i class="fas ${icon}"></i></div>
+            <div class="relative z-10">
+                <p class="text-sm font-medium text-white text-opacity-80">${title}</p>
+                <p class="text-3xl font-bold text-white mt-1">${value}</p>
             </div>
-            <i class="fas ${icon} fa-3x text-${color}-500 opacity-30"></i>
         </div>
     `;
 }
@@ -2484,8 +2427,8 @@ function createNoticeCard(notice, authorName, audienceText, borderColor) {
 }
 function createUpcomingExamCard(exam, subjectName) {
     return `
-        <div class="flex items-center gap-4">
-            <div class="text-center bg-red-900/50 text-red-300 rounded-lg px-3 py-1">
+        <div class="flex items-center gap-4 bg-slate-700/30 p-3 rounded-lg">
+            <div class="text-center bg-blue-900/50 text-blue-300 rounded-lg px-3 py-1">
                 <p class="font-bold text-lg">${new Date(exam.date).getDate()}</p>
                 <p class="text-xs font-medium">${new Date(exam.date).toLocaleString('default', { month: 'short' })}</p>
             </div>
@@ -2496,70 +2439,23 @@ function createUpcomingExamCard(exam, subjectName) {
         </div>
     `;
 }
-
-function checkForLibraryAlerts() {
-    if (!currentUser || currentUser.role === 'Admin') return; // Only for Students and Teachers
-
-    const myLibraryTx = store.get('library', 'transactions').filter(t => t.studentId === currentUser.id && t.status === 'Issued');
-    
-    // Check for books due in the next 3 days
-    myLibraryTx.forEach(t => {
-        const dueDate = new Date(t.dueDate);
-        const today = new Date();
-        const threeDaysFromNow = new Date(new Date().setDate(today.getDate() + 3));
-        
-        // Use setHours to compare dates only, ignoring time
-        dueDate.setHours(0,0,0,0);
-        today.setHours(0,0,0,0);
-        threeDaysFromNow.setHours(0,0,0,0);
-
-        if (dueDate <= threeDaysFromNow && dueDate >= today) {
-            const book = store.getMap('books').get(t.bookId);
-            if(book) {
-                 showToast(`Reminder: '${book.title}' is due on ${t.dueDate}.`, 'info');
-            }
-        }
-    });
-
-    // Check for overdue fines
-    const myFines = store.get('fees').filter(f => f.studentId === currentUser.id && f.feeType === 'Library Fine' && f.status === 'Unpaid');
-    if (myFines.length > 0) {
-        const totalFine = myFines.reduce((sum, f) => sum + f.amount, 0);
-        showToast(`You have BDT ${totalFine} in unpaid library fines.`, 'error');
-    }
-}
-
-function initializeApp() {
-    ui.loginPage.style.display = 'none';
-    ui.app.classList.remove('hidden');
-    
-    setupUIForRole();
-    navigateTo('dashboard');
-    
-    // Add this line below to trigger alerts on login
-    setTimeout(checkForLibraryAlerts, 1500); // Delay slightly to let the UI settle
-}
-
-
 function renderDashboardCharts(fees, students) {
     const gridColor = 'rgba(255, 255, 255, 0.1)';
-    const textColor = '#e2e8f0'; // slate-200
+    const textColor = '#e2e8f0'; 
     
     // Fees Chart (for Admin)
     const feesCtx = document.getElementById('feesChart')?.getContext('2d');
     if (feesCtx && fees) {
-        const paidFees = fees.filter(f => f.status === 'Paid').length;
-        const unpaidFees = fees.filter(f => f.status === 'Unpaid').length;
+        const paidAmount = fees.filter(f => f.status === 'Paid').reduce((sum, f) => sum + f.amount, 0);
+        const unpaidAmount = fees.filter(f => f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0);
         new Chart(feesCtx, {
             type: 'bar',
             data: {
                 labels: ['Paid', 'Unpaid'],
                 datasets: [{
-                    label: 'Fee Status',
-                    data: [paidFees, unpaidFees],
+                    label: 'Fee Amount (BDT)', data: [paidAmount, unpaidAmount],
                     backgroundColor: ['rgba(34, 197, 94, 0.6)', 'rgba(239, 68, 68, 0.6)'],
-                    borderColor: ['#22c55e', '#ef4444'],
-                    borderWidth: 1
+                    borderColor: ['#22c55e', '#ef4444'], borderWidth: 1
                 }]
             },
             options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: textColor }, grid: { color: gridColor } }, x: { ticks: { color: textColor }, grid: { display: false } } } }
@@ -2568,7 +2464,7 @@ function renderDashboardCharts(fees, students) {
 
     // Gender Chart (for Admin and Teacher)
     const genderCtx = document.getElementById('genderChart')?.getContext('2d');
-    if (genderCtx) {
+    if (genderCtx && students) {
         const maleCount = students.filter(s => s.gender === 'Male').length;
         const femaleCount = students.filter(s => s.gender === 'Female').length;
         new Chart(genderCtx, {
@@ -2584,112 +2480,47 @@ function renderDashboardCharts(fees, students) {
 async function openAdvancedMessageModal() {
     const classes = store.get('classes');
     const teachers = store.get('teachers');
-    const timetable = store.get('timetable');
 
-    const modalTitle = 'Quick Communication';
+    const modalTitle = 'Advanced Communication';
     const baseSelectClasses = "shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-slate-200 bg-slate-700 border-slate-600 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500";
-
-    let targetSelectionHtml = '';
-    if (currentUser.role === 'Admin') {
-        targetSelectionHtml = `
-            <div>
-                <label for="msg-target-type" class="block text-slate-300 text-sm font-bold mb-2">Send To</label>
-                <select id="msg-target-type" class="${baseSelectClasses}">
-                    <option value="">-- Select Target Type --</option>
-                    <option value="class">A Specific Class/Section</option>
-                    <option value="teacher">A Specific Teacher</option>
-                </select>
-            </div>
-            <div>
-                <label for="msg-target-id" class="block text-slate-300 text-sm font-bold mb-2">Select Name</label>
-                <select id="msg-target-id" name="target" required class="${baseSelectClasses}" disabled>
-                    <option value="">-- First Select Type --</option>
-                </select>
-            </div>
-        `;
-    } else if (currentUser.role === 'Teacher') {
-        const myClassIdsAsTeacher = classes.filter(c => c.teacherId === currentUser.id).map(c => c.id);
-        const myClassIdsAsSubjectTeacher = timetable.filter(t => t.teacherId === currentUser.id).map(t => t.classId);
-        const allMyClassIds = [...new Set([...myClassIdsAsTeacher, ...myClassIdsAsSubjectTeacher])];
-        const myClasses = classes.filter(c => allMyClassIds.includes(c.id));
-
-        targetSelectionHtml = `
-            <div>
-                <label for="msg-target-id" class="block text-slate-300 text-sm font-bold mb-2">Select Recipient</label>
-                <select id="msg-target-id" name="target" required class="${baseSelectClasses}">
-                    <option value="">-- Select --</option>
-                    <option value="admin">Admin</option>
-                    <optgroup label="My Classes">
-                        ${myClasses.map(c => `<option value="class_${c.id}">${c.name}</option>`).join('')}
-                    </optgroup>
-                </select>
-            </div>`;
-    }
-
-    const formHtml = `
-        <form id="advanced-message-form" class="space-y-4">
-            <div class="grid grid-cols-1 ${currentUser.role === 'Admin' ? 'md:grid-cols-2' : ''} gap-4">
-                ${targetSelectionHtml}
-            </div>
-            <div>
-                <label for="msg-title" class="block text-slate-300 text-sm font-bold mb-2">Message Title</label>
-                <input type="text" id="msg-title" name="title" required class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-slate-200 bg-slate-700 border-slate-600 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div>
-                <label for="msg-content" class="block text-slate-300 text-sm font-bold mb-2">Message Content</label>
-                <textarea id="msg-content" name="content" rows="4" required class="shadow-sm appearance-none border rounded-lg w-full py-2 px-3 text-slate-200 bg-slate-700 border-slate-600 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-            </div>
-            <div class="flex items-center justify-end pt-4 border-t border-slate-600">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">Send Message</button>
-            </div>
-        </form>
-    `;
-
-    ui.modalTitle.textContent = modalTitle;
-    ui.modalBody.innerHTML = formHtml;
-    openAnimatedModal(ui.modal);
-
-    if (currentUser.role === 'Admin') {
-        const targetTypeSelect = document.getElementById('msg-target-type');
-        const targetIdSelect = document.getElementById('msg-target-id');
-        targetTypeSelect.onchange = () => {
-            const selectedType = targetTypeSelect.value;
-            targetIdSelect.innerHTML = '';
-            targetIdSelect.disabled = true;
-            if (selectedType === 'class') {
-                targetIdSelect.innerHTML = `<option value="">-- Select a Class --</option>` + classes.map(c => `<option value="class_${c.id}">${c.name}</option>`).join('');
-                targetIdSelect.disabled = false;
-            } else if (selectedType === 'teacher') {
-                targetIdSelect.innerHTML = `<option value="">-- Select a Teacher --</option>` + teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-                targetIdSelect.disabled = false;
-            } else {
-                 targetIdSelect.innerHTML = '<option value="">-- First Select Type --</option>';
-            }
-        };
-    }
     
-    document.getElementById('advanced-message-form').onsubmit = async (e) => {
-        e.preventDefault();
-        const formData = Object.fromEntries(new FormData(e.target));
-        if (!formData.target) {
-            showToast('Please select a recipient for your message.', 'error');
-            return;
-        }
-        await apiService.create('notices', {
-            title: formData.title,
-            content: formData.content,
-            target: formData.target,
-            authorId: currentUser.id || 'admin',
-            date: new Date().toISOString().slice(0, 10)
-        });
-        showToast('Message sent successfully!', 'success');
+    let targetOptions = [];
+    if(currentUser.role === 'Admin') {
+        targetOptions = [
+            { value: 'All', label: 'Everyone (All Staff & Students)'},
+            { value: 'Staff', label: 'All Staff'},
+            { value: 'Teacher', label: 'All Teachers'},
+            { value: 'Student', label: 'All Students'},
+            ...classes.map(c => ({ value: `class_${c.id}`, label: `Class: ${c.name}` })),
+            ...teachers.map(t => ({ value: t.id, label: `Teacher: ${t.name}` }))
+        ];
+    } else if (currentUser.role === 'Teacher') {
+        const myClasses = classes.filter(c => c.teacherId === currentUser.id);
+        targetOptions = [
+            { value: 'admin', label: 'Admin'},
+            ...myClasses.map(c => ({ value: `class_${c.id}`, label: `My Class: ${c.name}` }))
+        ];
+    }
+
+    const formFields = [
+        { name: 'target', label: 'Recipient', type: 'select', required: true, options: targetOptions.map(o => `<option value="${o.value}">${o.label}</option>`).join('')},
+        { name: 'title', label: 'Title / Subject', type: 'text', required: true },
+        { name: 'content', label: 'Message Content', type: 'textarea', required: true },
+    ];
+
+    openFormModal(modalTitle, formFields, async (formData) => {
+        const noticeData = { ...formData, authorId: currentUser.id || 'admin', date: new Date().toISOString().slice(0, 10) };
+        await apiService.create('notices', noticeData);
         closeAnimatedModal(ui.modal);
-    };
+        showToast(`Notice posted on board.`, 'success');
+        showToast(`Simulating sending Emails...`, 'info');
+        showToast(`Simulating push notifications...`, 'info');
+    });
 }
 function getSkeletonLoaderHTML(type) {
     if (type === 'table') {
         return `
-            <div class="bg-slate-800 p-6 rounded-xl shadow-md">
+            <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700">
                 <div class="flex justify-between items-center mb-4">
                     <div class="skeleton h-8 w-1/3"></div>
                     <div class="skeleton h-10 w-32"></div>
@@ -2697,10 +2528,8 @@ function getSkeletonLoaderHTML(type) {
                 <div class="space-y-2">
                     ${Array(5).fill(0).map(() => `
                         <div class="skeleton-table-row">
-                            <div class="skeleton skeleton-table-cell"></div>
-                            <div class="skeleton skeleton-table-cell"></div>
-                            <div class="skeleton skeleton-table-cell"></div>
-                            <div class="skeleton skeleton-table-cell"></div>
+                            <div class="skeleton skeleton-table-cell"></div> <div class="skeleton skeleton-table-cell"></div>
+                            <div class="skeleton skeleton-table-cell"></div> <div class="skeleton skeleton-table-cell"></div>
                         </div>
                     `).join('')}
                 </div>
@@ -2713,28 +2542,38 @@ function getSkeletonLoaderHTML(type) {
                 <div class="skeleton skeleton-card"></div> <div class="skeleton skeleton-card"></div>
                 <div class="skeleton skeleton-card"></div> <div class="skeleton skeleton-card"></div>
             </div>
-             <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 skeleton h-64 rounded-xl"></div>
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="lg:col-span-1 skeleton h-64 rounded-xl"></div>
                 <div class="skeleton h-64 rounded-xl"></div>
             </div>
         `;
     }
     return '';
 }
+
 function openAnimatedModal(modalElement) {
     modalElement.style.display = 'flex';
     setTimeout(() => modalElement.classList.add('show'), 10);
 }
+
 function closeAnimatedModal(modalElement) {
     modalElement.classList.remove('show');
     modalElement.addEventListener('transitionend', () => {
         modalElement.style.display = 'none';
     }, { once: true });
 }
+
 function showConfirmationModal(text, onConfirm) {
     ui.confirmText.textContent = text;
+    
+    // Replace the button's event listener to avoid multiple triggers
+    const oldBtn = ui.confirmYesBtn;
+    const newBtn = oldBtn.cloneNode(true);
+    oldBtn.parentNode.replaceChild(newBtn, oldBtn);
+    ui.confirmYesBtn = newBtn; 
+
     ui.confirmYesBtn.onclick = () => {
-        onConfirm();
+        if (onConfirm) onConfirm();
         closeAnimatedModal(ui.confirmModal);
     };
     openAnimatedModal(ui.confirmModal);
@@ -2774,31 +2613,15 @@ function openChangePasswordModal() {
         const newPassword = e.target.newPassword.value;
         const confirmPassword = e.target.confirmPassword.value;
 
-        // --- Validation ---
-        if (newPassword.length < 4) {
-            showToast('New password must be at least 4 characters long.', 'error');
-            return;
-        }
-        if (newPassword !== confirmPassword) {
-            showToast('New passwords do not match.', 'error');
-            return;
-        }
-        if (newPassword === currentPassword) {
-            showToast('New password cannot be the same as the old one.', 'error');
-            return;
-        }
+        if (newPassword.length < 4) { showToast('New password must be at least 4 characters long.', 'error'); return; }
+        if (newPassword !== confirmPassword) { showToast('New passwords do not match.', 'error'); return; }
+        if (newPassword === currentPassword) { showToast('New password cannot be the same as the old one.', 'error'); return; }
 
-        // --- Check against stored password ---
-        // Note: We are directly accessing appDatabase here because user auth data isn't in the store.
         const storedPassword = appDatabase.users[currentUser.username]?.password;
-        if (currentPassword !== storedPassword) {
-            showToast('Incorrect current password.', 'error');
-            return;
-        }
+        if (currentPassword !== storedPassword) { showToast('Incorrect current password.', 'error'); return; }
 
-        // --- Update the password ---
         appDatabase.users[currentUser.username].password = newPassword;
-        await apiService.save(); // Persist the entire database with the change
+        await apiService.save(); 
 
         showToast('Password updated successfully!', 'success');
         closeAnimatedModal(ui.modal);
@@ -2806,10 +2629,6 @@ function openChangePasswordModal() {
 
     openAnimatedModal(ui.modal);
 }
-
-
-
-
 
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
@@ -2831,15 +2650,13 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// ===================================================================================
-// --- GENERIC LIST PAGE & FORM MODAL (RECONSTRUCTED) ---
-// ===================================================================================
 async function renderGenericListPage(config) {
-    const { title, collectionName, columns, formFields, searchKeys, hideAddButton, hideActions, dataFilter, classFilter, classFilterOptions } = config;
+    const { title, collectionName, columns, formFields, searchKeys, hideAddButton = false, hideActions = false, dataFilter, classFilter, classFilterOptions, customHeader, customListeners } = config;
     
-    let items = await store.get(collectionName);
+    await store.refresh(collectionName);
+    let items = store.get(collectionName);
     if (dataFilter) items = items.filter(dataFilter);
-    let originalItems = [...items]; // For filtering without re-fetching
+    let originalItems = [...items]; 
 
     const renderTable = (data) => {
         const tableContainer = document.getElementById('generic-list-container');
@@ -2851,19 +2668,19 @@ async function renderGenericListPage(config) {
         }
 
         tableContainer.innerHTML = `
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto custom-scrollbar">
                 <table class="min-w-full">
                     <thead class="bg-slate-700">
                         <tr>
                             ${columns.map(c => `<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">${c.label}</th>`).join('')}
-                            ${!hideActions ? `<th class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">Actions</th>` : ''}
+                            ${!hideActions && !columns.find(c => c.label === 'Action') ? `<th class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">Actions</th>` : ''}
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-700">
                         ${data.map(item => `
-                            <tr>
-                                ${columns.map(c => `<td class="px-4 py-4 whitespace-nowrap text-sm">${c.render ? c.render(item) : item[c.key] || 'N/A'}</td>`).join('')}
-                                ${!hideActions ? `
+                            <tr class="hover:bg-slate-700/30">
+                                ${columns.map(c => `<td class="px-4 py-4 whitespace-nowrap text-sm">${c.render ? c.render(item) : (item[c.key] || 'N/A')}</td>`).join('')}
+                                ${!hideActions && !columns.find(c => c.label === 'Action') ? `
                                     <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <button class="text-blue-400 hover:text-blue-300 edit-btn" data-id="${item.id}">Edit</button>
                                         <button class="text-red-400 hover:text-red-300 ml-4 delete-btn" data-id="${item.id}">Delete</button>
@@ -2882,7 +2699,6 @@ async function renderGenericListPage(config) {
             const item = originalItems.find(i => i.id === btn.dataset.id);
             openFormModal(`Edit ${title}`, formFields, async (formData) => {
                 await apiService.update(collectionName, item.id, formData);
-                await store.refresh(collectionName);
                 showToast(`${title} updated successfully!`, 'success');
                 renderGenericListPage(config);
             }, item);
@@ -2891,20 +2707,20 @@ async function renderGenericListPage(config) {
         document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = () => {
             showConfirmationModal(`Are you sure you want to delete this ${title.toLowerCase()}?`, async () => {
                 await apiService.remove(collectionName, btn.dataset.id);
-                await store.refresh(collectionName);
                 showToast(`${title} deleted successfully.`, 'success');
                 renderGenericListPage(config);
             });
         });
+         if(customListeners) customListeners();
     };
     
-    // Initial HTML structure
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800 p-6 rounded-lg shadow-md">
+        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md animate-fade-in">
             <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
                 <h3 class="text-xl font-semibold">${title} Management</h3>
-                <div class="flex gap-4 items-center">
-                    ${config.search ? `<input type="text" id="search-input" placeholder="${config.searchPlaceholder || `Search ${title}s...`}" class="p-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">` : ''}
+                <div class="flex flex-wrap gap-4 items-center">
+                     ${customHeader || ''}
+                    ${config.search ? `<input type="text" id="search-input" placeholder="${config.searchPlaceholder || `Search...`}" class="p-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">` : ''}
                     ${classFilter ? `<select id="class-filter" class="p-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">${classFilterOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}</select>` : ''}
                     ${!hideAddButton ? `<button id="add-new-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Add New ${title}</button>` : ''}
                 </div>
@@ -2915,13 +2731,11 @@ async function renderGenericListPage(config) {
 
     renderTable(items);
     
-    // Add event listener for the "Add New" button if it exists
     const addNewBtn = document.getElementById('add-new-btn');
     if (addNewBtn) {
         addNewBtn.onclick = () => {
             openFormModal(`Add New ${title}`, formFields, async (formData) => {
                 await apiService.create(collectionName, formData);
-                await store.refresh(collectionName);
                 showToast(`${title} added successfully!`, 'success');
                 renderGenericListPage(config);
             });
@@ -2936,7 +2750,7 @@ async function renderGenericListPage(config) {
         
         if (searchTerm && searchKeys.length > 0) {
             filteredItems = filteredItems.filter(item => 
-                searchKeys.some(key => item[key] && item[key].toLowerCase().includes(searchTerm))
+                searchKeys.some(key => item[key] && String(item[key]).toLowerCase().includes(searchTerm))
             );
         }
 
@@ -2971,12 +2785,11 @@ function openFormModal(title, formFields, onSubmit, initialData = {}) {
                 </div>
             `).join('')}
             <div class="pt-4 flex justify-end">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Save</button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Save Changes</button>
             </div>
         </form>
     `;
 
-    // Set initial values for select fields
     formFields.forEach(field => {
         if (field.type === 'select' && initialData[field.name]) {
             document.getElementById(field.name).value = initialData[field.name];
@@ -2992,3 +2805,28 @@ function openFormModal(title, formFields, onSubmit, initialData = {}) {
     
     openAnimatedModal(ui.modal);
 }
+
+function exportToCsv(filename, headers, rows) {
+    const sanitizeCell = (cell) => {
+        let strCell = String(cell === null || cell === undefined ? '' : cell);
+        if (strCell.includes(',')) {
+            strCell = `"${strCell.replace(/"/g, '""')}"`;
+        }
+        return strCell;
+    };
+
+    const sanitizedRows = rows.map(row => row.map(sanitizeCell));
+    let csvContent = "data:text/csv;charset=utf-8," 
+        + headers.join(",") + "\n" 
+        + sanitizedRows.map(e => e.join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent); 
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri); 
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast(`Report ${filename} downloaded.`, 'success');
+}
+        
