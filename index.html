@@ -3,162 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduSys Portal</title>
+    <title>EduSys Pro Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* bg-slate-900 */
+            color: #e2e8f0; /* bg-slate-200 */
         }
-        /* Animation for the icon */
+        
+        /* Main Animation for the login icon */
         @keyframes realistic-float {
             0%, 100% {
                 transform: translateY(0) scale(1);
-                filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+                filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
             }
             50% {
-                transform: translateY(-12px) scale(1.05);
-                filter: drop_shadow(0 20px 25px rgba(59, 130, 246, 0.3));
+                transform: translateY(-15px) scale(1.05);
+                filter: drop-shadow(0 25px 30px rgba(59, 130, 246, 0.3));
             }
         }
         .animate-realistic-float {
             animation: realistic-float 4s ease-in-out infinite;
         }
-        /* Basic styling for the app view */
+        
+        /* General App Styling */
         .app-content {
             background-color: #1e293b; /* bg-slate-800 */
         }
         .sidebar-link {
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         .sidebar-link:hover, .sidebar-link.active {
             background-color: #3b82f6; /* bg-blue-600 */
             color: white;
-            transform: translateX(4px);
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3);
         }
 
-        /* CSS for Modals, Toasts, Badges, and Skeletons */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        /* Responsive Sidebar Styles */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        @media (max-width: 1023px) {
+            #sidebar {
+                transform: translateX(-100%);
+                z-index: 40;
+            }
+            #sidebar.sidebar-open {
+                transform: translateX(0);
+            }
+            #sidebar-overlay {
+                transition: opacity 0.3s ease-in-out;
+            }
+        }
+
+        /* Components: Modals, Toasts, Badges, Skeletons */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease-in-out; }
         .modal.show { display: flex; opacity: 1; }
-        .modal-content { background-color: #1e293b; color: white; padding: 2rem; border-radius: 0.75rem; width: 90%; max-width: 50rem; position: relative; transform: scale(0.95); transition: transform 0.3s ease-in-out; }
-        .modal.show .modal-content { transform: scale(1); }
-        .close-button { color: #aaa; position: absolute; top: 1rem; right: 1.5rem; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-button:hover { color: #fff; }
-        #toast-container { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; }
-        .toast { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; opacity: 0; transform: translateX(100%); transition: all 0.4s ease-in-out; }
+        .modal-content { background-color: #1e293b; color: white; padding: 2rem; border-radius: 0.75rem; border: 1px solid #334155; width: 90%; max-width: 50rem; position: relative; transform: scale(0.95) translateY(20px); transition: transform 0.3s ease-in-out; }
+        .modal.show .modal-content { transform: scale(1) translateY(0); }
+        .close-button { color: #94a3b8; position: absolute; top: 1rem; right: 1.5rem; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.2s; }
+        .close-button:hover { color: #fff; transform: rotate(90deg); }
+        #toast-container { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 2000; display: flex; flex-direction: column; gap: 0.75rem; }
+        .toast { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; opacity: 0; transform: translateX(120%); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); }
         .toast.show { opacity: 1; transform: translateX(0); }
-        .toast.success { background-color: #22c55e; } .toast.error { background-color: #ef4444; } .toast.info { background-color: #3b82f6; }
-        .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-        .status-paid, .status-present, .status-returned { background-color: rgba(34, 197, 94, 0.2); color: #22c55e; }
-        .status-unpaid, .status-absent, .status-issued { background-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
-        .skeleton { background-color: #334155; border-radius: 0.5rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .toast.success { background: linear-gradient(135deg, #22c55e, #16a34a); } .toast.error { background: linear-gradient(135deg, #ef4444, #dc2626); } .toast.info { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .status-paid, .status-present, .status-returned, .status-active { background-color: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-unpaid, .status-absent, .status-issued, .status-pending { background-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .status-late, .status-due { background-color: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        
+        .skeleton { background-color: #334155; border-radius: 0.5rem; animation: pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
         .skeleton-card { height: 8rem; }
         .skeleton-table-row { display: flex; gap: 0.5rem; } .skeleton-table-cell { height: 2.5rem; flex-grow: 1; }
 
-        /* Custom Scrollbar for enhanced visuals */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
+        /* Custom Scrollbar for better visuals */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 10px; border: 2px solid #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #64748b; }
+        
+        /* Fade-in animation for content */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        
+        /* Tab styling */
+        .tab-link.active {
+            border-color: #3b82f6;
+            color: #60a5fa;
         }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b; /* slate-800 equivalent */
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #475569; /* slate-600 equivalent */
-            border-radius: 10px;
-            border: 2px solid #1e293b;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #64748b; /* slate-500 equivalent */
-        }
-        /* ===================================================================================
-   --- Responsive Adjustments ---
-   (এই কোডটি আপনার sami.html ফাইলের <style> ট্যাগের মধ্যে যোগ করুন)
-   =================================================================================== */
-
-/* ছোট স্ক্রিনের জন্য (যেমন মোবাইল ফোন) */
-@media (max-width: 768px) {
-    /* মূল লেআউট সামঞ্জস্য করুন */
-    .app-container {
-        flex-direction: column; /* ছোট স্ক্রিনে কলাম লেআউট */
-    }
-
-    /* সাইডবার (sidebar) ছোট স্ক্রিনে লুকানো থাকবে বা একটি টগল বোতাম দিয়ে খোলা যাবে */
-    .sidebar {
-        width: 100%; /* ফুল-উইডথ */
-        height: auto;
-        position: relative; /* স্ট্যাটিক পজিশন */
-        border-right: none;
-        border-bottom: 1px solid #334155; /* border-slate-700 */
-    }
-
-    /* সাইডবার লুকানোর জন্য একটি ক্লাস যোগ করতে পারেন এবং JavaScript ব্যবহার করে টগল করতে পারেন */
-    .sidebar.hidden-mobile {
-        display: none;
-    }
-
-    /* কন্টেন্ট এরিয়া (content-area) */
-    main {
-        margin-left: 0; /* সাইডবার যখন উপরে থাকবে তখন বাম মার্জিন সরিয়ে দিন */
-    }
-
-    .header {
-        padding: 1rem; /* ছোট স্ক্রিনে প্যাডিং কমানো */
-    }
-
-    /* কার্ড বা গ্রিড লেআউট ছোট স্ক্রিনে একক কলামে দেখানোর জন্য */
-    .dashboard-grid {
-        grid-template-columns: 1fr; /* ড্যাশবোর্ড কার্ড এক কলামে */
-        gap: 1rem; /* গ্যাপ কমানো */
-    }
-
-    /* টেবিলগুলির জন্য, যদি তারা overflow করে */
-    .table-responsive {
-        overflow-x: auto; /* অনুভূমিক স্ক্রোলিং যোগ করুন */
-        -webkit-overflow-scrolling: touch; /* iOS স্মুথ স্ক্রোলিং */
-    }
-
-    /* ফন্ট সাইজ বা প্যাডিং সামঞ্জস্য করুন */
-    h1, h2 {
-        font-size: 1.5rem; /* হেডারের ফন্ট সাইজ কমানো */
-    }
-    p, span, a {
-        font-size: 0.9rem; /* টেক্সট ফন্ট সাইজ কমানো */
-    }
-    .p-6 {
-        padding: 1rem; /* প্যাডিং কমানো */
-    }
-}
-
-/* অতিরিক্ত ছোট স্ক্রিনের জন্য (যেমন ছোট মোবাইল ফোন) */
-@media (max-width: 480px) {
-    .header .user-info {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-    .header .user-info img {
-        margin-top: 0.5rem;
-    }
-}
+        
     </style>
 </head>
 <body>
 
+    <!-- Login Page -->
     <div id="login-page">
-        <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="min-h-screen flex items-center justify-center p-4 bg-dots-pattern">
             <div class="w-full max-w-4xl">
-                <div class="bg-slate-800 shadow-2xl rounded-2xl flex flex-col lg:flex-row overflow-hidden">
+                <div class="bg-slate-800/80 backdrop-blur-sm border border-slate-700 shadow-2xl rounded-2xl flex flex-col lg:flex-row overflow-hidden">
+                    <!-- Left decorative part -->
                     <div class="w-full lg:w-1/2 bg-slate-800 p-8 sm:p-12 flex flex-col items-center justify-center text-center">
                         <div class="animate-realistic-float mb-6">
-                            <svg class="w-32 h-32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                             <svg class="w-32 h-32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient id="roofGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" style="stop-color:#3B82F6; stop-opacity:1" />
@@ -174,9 +128,10 @@
                                 <path d="M85 180 L85 130 Q 100 120 115 130 L115 180 Z" fill="#3B82F6" />
                             </svg>
                         </div>
-                        <h1 class="text-3xl font-bold text-white mb-2">EduSys Portal</h1>
-                        <p class="text-slate-400">Modern School Management</p>
+                        <h1 class="text-3xl font-extrabold text-white mb-2">EduSys Pro</h1>
+                        <p class="text-slate-400">The Future of School Management</p>
                     </div>
+                    <!-- Right form part -->
                     <div class="w-full lg:w-1/2 bg-slate-700 p-8 sm:p-12">
                         <h2 class="text-2xl font-bold text-white mb-6">Welcome Back</h2>
                         <form id="login-form" class="space-y-5">
@@ -208,62 +163,81 @@
         </div>
     </div>
 
+    <!-- Main Application UI -->
     <div id="app" class="hidden">
         <div class="flex h-screen bg-slate-900 text-white">
-            <aside id="sidebar" class="w-64 bg-slate-800 p-4 space-y-2 flex flex-col">
-                <h1 class="text-2xl font-bold mb-4">EduSys</h1>
-                <nav id="nav-menu" class="flex-grow">
-                    </nav>
-                <div class="pt-4 mt-auto">
-                    <button id="logout-button" class="w-full text-left p-2 rounded-lg sidebar-link flex items-center gap-3">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-slate-800 p-4 space-y-2 flex flex-col lg:static lg:translate-x-0">
+                <div class="flex items-center gap-3 mb-6">
+                   <svg class="w-10 h-10 text-blue-500" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3B82F6; stop-opacity:1" /><stop offset="100%" style="stop-color:#60A5FA; stop-opacity:1" /></linearGradient></defs><path d="M100 20 L10 90 L190 90 Z" fill="url(#logoGradient)" /><path d="M30 90 L30 180 L170 180 L170 90 Z" fill="#1E293B" /><path d="M85 180 L85 130 Q 100 120 115 130 L115 180 Z" fill="#3B82F6" /></svg>
+                   <h1 class="text-2xl font-extrabold">EduSys Pro</h1>
+                </div>
+
+                <nav id="nav-menu" class="flex-grow custom-scrollbar overflow-y-auto pr-2"></nav>
+                
+                <div class="pt-4 mt-auto border-t border-slate-700">
+                    <button id="logout-button" class="w-full text-left p-3 rounded-lg sidebar-link flex items-center gap-3 text-slate-300">
                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
                        <span>Logout</span>
                     </button>
-                    <button id="reset-data-btn" class="w-full text-left p-2 rounded-lg sidebar-link hover:bg-red-600 flex items-center gap-3 mt-2">
+                    <button id="reset-data-btn" class="w-full text-left p-3 rounded-lg sidebar-link hover:bg-red-600 flex items-center gap-3 mt-2 text-slate-300">
                        <i class="fas fa-sync-alt w-5 text-center"></i>
                        <span>Reset Data</span>
                    </button>
                 </div>
             </aside>
+            
+            <!-- Mobile Sidebar Overlay -->
+            <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-30 hidden lg:hidden"></div>
 
+            <!-- Main Content Area -->
             <main class="flex-1 flex flex-col">
-                <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center">
-                    <h2 id="page-title" class="text-xl font-semibold">Dashboard</h2>
-                    <div id="user-info" class="text-right flex items-center gap-3">
-                        <span id="user-name-display"></span>
-                        <img id="header-user-avatar" src="" alt="User" class="w-10 h-10 rounded-full object-cover">
+                <header class="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700 shadow-md p-4 flex justify-between items-center z-20">
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden text-2xl text-slate-300">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <h2 id="page-title" class="text-xl font-semibold hidden sm:block">Dashboard</h2>
+                    
+                    <div id="user-info" class="flex items-center gap-4">
+                        <div class="text-right">
+                           <span id="user-name-display" class="font-semibold text-slate-200"></span>
+                           <span id="user-role-display" class="block text-xs text-blue-400"></span>
+                        </div>
+                        <img id="header-user-avatar" src="" alt="User" class="w-12 h-12 rounded-full object-cover border-2 border-slate-600">
                     </div>
                 </header>
-                <div id="content-area" class="flex-1 p-6 overflow-y-auto app-content">
-                    </div>
+                <div id="content-area" class="flex-1 p-4 sm:p-6 overflow-y-auto app-content custom-scrollbar">
+                    <!-- Dynamic content will be rendered here -->
+                </div>
             </main>
         </div>
     </div>
 
+    <!-- Global Components -->
     <div id="toast-container"></div>
 
     <div id="form-modal" class="modal">
         <div class="modal-content">
-            <span id="close-modal-button" class="close-button">×</span>
-            <h2 id="modal-title" class="text-xl font-bold mb-4">Modal Title</h2>
-            <div id="modal-body">
-                </div>
+            <span id="close-modal-button" class="close-button">&times;</span>
+            <h2 id="modal-title" class="text-2xl font-bold mb-6 border-b border-slate-700 pb-3">Modal Title</h2>
+            <div id="modal-body"></div>
         </div>
     </div>
 
     <div id="confirm-modal" class="modal">
         <div class="modal-content !max-w-md">
-            <h2 class="text-lg font-bold mb-2">Confirm Action</h2>
-            <p id="confirm-text" class="mb-4">Are you sure?</p>
-            <div class="flex justify-end gap-3">
-                <button id="confirm-no-btn" class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500">No</button>
-                <button id="confirm-yes-btn" class="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">Yes</button>
+            <h2 class="text-xl font-bold mb-2">Confirm Action</h2>
+            <p id="confirm-text" class="text-slate-300 my-4">Are you sure?</p>
+            <div class="flex justify-end gap-4 mt-6">
+                <button id="confirm-no-btn" class="px-5 py-2 rounded-lg bg-slate-600 text-white hover:bg-slate-500 transition-colors">Cancel</button>
+                <button id="confirm-yes-btn" class="px-5 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors">Yes, Proceed</button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="script.js" defer></script>
 </body>
 </html>
