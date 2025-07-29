@@ -13,7 +13,10 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* bg-slate-900 */
+            margin: 0;
+            padding: 0;
         }
+
         /* Animation for the icon */
         @keyframes realistic-float {
             0%, 100% {
@@ -28,7 +31,8 @@
         .animate-realistic-float {
             animation: realistic-float 4s ease-in-out infinite;
         }
-        /* Basic styling for the app view */
+
+        /* Basic styling */
         .app-content {
             background-color: #1e293b; /* bg-slate-800 */
         }
@@ -36,12 +40,12 @@
             transition: all 0.2s ease-in-out;
         }
         .sidebar-link:hover, .sidebar-link.active {
-            background-color: #3b82f6; /* bg-blue-600 */
+            background-color: #3b82f6;
             color: white;
             transform: translateX(4px);
         }
 
-        /* CSS for Modals, Toasts, Badges, and Skeletons */
+        /* Modal, Toasts, Badges */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease-in-out; }
         .modal.show { display: flex; opacity: 1; }
         .modal-content { background-color: #1e293b; color: white; padding: 2rem; border-radius: 0.75rem; width: 90%; max-width: 50rem; position: relative; transform: scale(0.95); transition: transform 0.3s ease-in-out; }
@@ -51,7 +55,9 @@
         #toast-container { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; }
         .toast { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; opacity: 0; transform: translateX(100%); transition: all 0.4s ease-in-out; }
         .toast.show { opacity: 1; transform: translateX(0); }
-        .toast.success { background-color: #22c55e; } .toast.error { background-color: #ef4444; } .toast.info { background-color: #3b82f6; }
+        .toast.success { background-color: #22c55e; } 
+        .toast.error { background-color: #ef4444; } 
+        .toast.info { background-color: #3b82f6; }
         .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         .status-paid, .status-present, .status-returned { background-color: rgba(34, 197, 94, 0.2); color: #22c55e; }
         .status-unpaid, .status-absent, .status-issued { background-color: rgba(239, 68, 68, 0.2); color: #ef4444; }
@@ -60,104 +66,46 @@
         .skeleton-card { height: 8rem; }
         .skeleton-table-row { display: flex; gap: 0.5rem; } .skeleton-table-cell { height: 2.5rem; flex-grow: 1; }
 
-        /* Custom Scrollbar for enhanced visuals */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #475569; border-radius: 10px; border: 2px solid #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #64748b; }
+
+        /* ===========================
+           ✅ Responsive Design Fix
+        ============================ */
+        @media (max-width: 1024px) {
+            .flex { flex-direction: column; }
+            .w-64 { width: 100% !important; }
+            main { margin-left: 0 !important; width: 100% !important; }
+            .header { flex-direction: column; text-align: center; }
         }
 
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e293b; /* slate-800 equivalent */
-            border-radius: 10px;
+        @media (max-width: 768px) {
+            body { font-size: 15px; }
+            .sidebar { width: 100%; border-bottom: 1px solid #334155; border-right: none; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .p-6 { padding: 1rem; }
+            .header .user-info { flex-direction: column; align-items: flex-end; }
+            img { max-width: 100%; height: auto; }
         }
 
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #475569; /* slate-600 equivalent */
-            border-radius: 10px;
-            border: 2px solid #1e293b;
+        @media (max-width: 480px) {
+            h1, h2 { font-size: 1.3rem; }
+            p, span, a { font-size: 0.85rem; }
         }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #64748b; /* slate-500 equivalent */
-        }
-        /* ===================================================================================
-   --- Responsive Adjustments ---
-   (এই কোডটি আপনার sami.html ফাইলের <style> ট্যাগের মধ্যে যোগ করুন)
-   =================================================================================== */
-
-/* ছোট স্ক্রিনের জন্য (যেমন মোবাইল ফোন) */
-@media (max-width: 768px) {
-    /* মূল লেআউট সামঞ্জস্য করুন */
-    .app-container {
-        flex-direction: column; /* ছোট স্ক্রিনে কলাম লেআউট */
-    }
-
-    /* সাইডবার (sidebar) ছোট স্ক্রিনে লুকানো থাকবে বা একটি টগল বোতাম দিয়ে খোলা যাবে */
-    .sidebar {
-        width: 100%; /* ফুল-উইডথ */
-        height: auto;
-        position: relative; /* স্ট্যাটিক পজিশন */
-        border-right: none;
-        border-bottom: 1px solid #334155; /* border-slate-700 */
-    }
-
-    /* সাইডবার লুকানোর জন্য একটি ক্লাস যোগ করতে পারেন এবং JavaScript ব্যবহার করে টগল করতে পারেন */
-    .sidebar.hidden-mobile {
-        display: none;
-    }
-
-    /* কন্টেন্ট এরিয়া (content-area) */
-    main {
-        margin-left: 0; /* সাইডবার যখন উপরে থাকবে তখন বাম মার্জিন সরিয়ে দিন */
-    }
-
-    .header {
-        padding: 1rem; /* ছোট স্ক্রিনে প্যাডিং কমানো */
-    }
-
-    /* কার্ড বা গ্রিড লেআউট ছোট স্ক্রিনে একক কলামে দেখানোর জন্য */
-    .dashboard-grid {
-        grid-template-columns: 1fr; /* ড্যাশবোর্ড কার্ড এক কলামে */
-        gap: 1rem; /* গ্যাপ কমানো */
-    }
-
-    /* টেবিলগুলির জন্য, যদি তারা overflow করে */
-    .table-responsive {
-        overflow-x: auto; /* অনুভূমিক স্ক্রোলিং যোগ করুন */
-        -webkit-overflow-scrolling: touch; /* iOS স্মুথ স্ক্রোলিং */
-    }
-
-    /* ফন্ট সাইজ বা প্যাডিং সামঞ্জস্য করুন */
-    h1, h2 {
-        font-size: 1.5rem; /* হেডারের ফন্ট সাইজ কমানো */
-    }
-    p, span, a {
-        font-size: 0.9rem; /* টেক্সট ফন্ট সাইজ কমানো */
-    }
-    .p-6 {
-        padding: 1rem; /* প্যাডিং কমানো */
-    }
-}
-
-/* অতিরিক্ত ছোট স্ক্রিনের জন্য (যেমন ছোট মোবাইল ফোন) */
-@media (max-width: 480px) {
-    .header .user-info {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-    .header .user-info img {
-        margin-top: 0.5rem;
-    }
-}
     </style>
 </head>
 <body>
-
+    <!-- Login Page -->
     <div id="login-page">
         <div class="min-h-screen flex items-center justify-center p-4">
             <div class="w-full max-w-4xl">
                 <div class="bg-slate-800 shadow-2xl rounded-2xl flex flex-col lg:flex-row overflow-hidden">
                     <div class="w-full lg:w-1/2 bg-slate-800 p-8 sm:p-12 flex flex-col items-center justify-center text-center">
                         <div class="animate-realistic-float mb-6">
+                            <!-- SVG Logo -->
                             <svg class="w-32 h-32" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                     <linearGradient id="roofGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -208,12 +156,12 @@
         </div>
     </div>
 
+    <!-- App Page -->
     <div id="app" class="hidden">
         <div class="flex h-screen bg-slate-900 text-white">
             <aside id="sidebar" class="w-64 bg-slate-800 p-4 space-y-2 flex flex-col">
                 <h1 class="text-2xl font-bold mb-4">EduSys</h1>
-                <nav id="nav-menu" class="flex-grow">
-                    </nav>
+                <nav id="nav-menu" class="flex-grow"></nav>
                 <div class="pt-4 mt-auto">
                     <button id="logout-button" class="w-full text-left p-2 rounded-lg sidebar-link flex items-center gap-3">
                        <i class="fas fa-sign-out-alt w-5 text-center"></i>
@@ -227,27 +175,26 @@
             </aside>
 
             <main class="flex-1 flex flex-col">
-                <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center">
+                <header class="bg-slate-800 shadow-md p-4 flex justify-between items-center header">
                     <h2 id="page-title" class="text-xl font-semibold">Dashboard</h2>
                     <div id="user-info" class="text-right flex items-center gap-3">
                         <span id="user-name-display"></span>
                         <img id="header-user-avatar" src="" alt="User" class="w-10 h-10 rounded-full object-cover">
                     </div>
                 </header>
-                <div id="content-area" class="flex-1 p-6 overflow-y-auto app-content">
-                    </div>
+                <div id="content-area" class="flex-1 p-6 overflow-y-auto app-content custom-scrollbar"></div>
             </main>
         </div>
     </div>
 
     <div id="toast-container"></div>
 
+    <!-- Modals -->
     <div id="form-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal-button" class="close-button">×</span>
             <h2 id="modal-title" class="text-xl font-bold mb-4">Modal Title</h2>
-            <div id="modal-body">
-                </div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
@@ -262,8 +209,8 @@
         </div>
     </div>
 
+    <!-- JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="script.js" defer></script>
 </body>
 </html>
