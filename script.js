@@ -9,6 +9,8 @@ const navConfig = {
         { icon: 'fa-tachometer-alt', text: 'Dashboard', page: 'dashboard' },
         { icon: 'fa-user-graduate', text: 'Students', page: 'students' },
         { icon: 'fa-chalkboard-teacher', text: 'Teachers', page: 'teachers' },
+        {icon: 'fa-users',text: 'Staff & Colleagues',page: 'staff' },
+
         { icon: 'fa-building', text: 'Departments', page: 'departments' },
         { icon: 'fa-school', text: 'Classes', page: 'classes' },
         { icon: 'fa-calendar-alt', text: 'Timetable', page: 'timetable' },
@@ -60,9 +62,30 @@ let appDatabase = {};
 
 const embeddedDatabase = {
   "users": {
-    "admin": { "password": "admin", "role": "Admin", "name": "Admin User", "email": "admin@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=A" },
+    "alvee": { "password": "alvee", "role": "Admin", "name": "Alvee", "email": "alvee@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=A" },
+    "fatema": { "password": "fatema", "role": "Admin", "name": "Fatema", "email": "fatema@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=F" },
+    "sami": { "password": "sami", "role": "Admin", "name": "Sami", "email": "sami@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=S" },
     "accountant@school.com": { "password": "accountant", "role": "Accountant", "name": "S.Sahil", "email": "accountant@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=FR" },
     "librarian@school.com": { "password": "librarian", "role": "Librarian", "name": "Alvee", "email": "librarian@school.com", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=SI" },
+    "sales01@school.com": { "password": "password", "role": "Salesman", "name": "Mark Spencer", "email": "sales01@school.com", "contact": "012-345-6781", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MS" },
+    "sales02@school.com": { "password": "password", "role": "Salesman", "name": "Laura King", "email": "sales02@school.com", "contact": "012-345-6782" },
+    "sales03@school.com": { "password": "password", "role": "Salesman", "name": "Brian Wright", "email": "sales03@school.com", "contact": "012-345-6783" },
+    "sales04@school.com": { "password": "password", "role": "Salesman", "name": "Nancy Hill", "email": "sales04@school.com", "contact": "012-345-6784" },
+    "sales05@school.com": { "password": "password", "role": "Salesman", "name": "Scott Green", "email": "sales05@school.com", "contact": "012-345-6785" },
+    // --- NEW CLERK STAFF (5) ---
+    "clerk01@school.com": { "password": "password", "role": "Clerk", "name": "Jane Smith", "email": "clerk01@school.com", "contact": "019-876-5431" },
+    "clerk02@school.com": { "password": "password", "role": "Clerk", "name": "Peter Jones", "email": "clerk02@school.com", "contact": "019-876-5432" },
+    "clerk03@school.com": { "password": "password", "role": "Clerk", "name": "Donna Moore", "email": "clerk03@school.com", "contact": "019-876-5433" },
+    "clerk04@school.com": { "password": "password", "role": "Clerk", "name": "Kevin Taylor", "email": "clerk04@school.com", "contact": "019-876-5434" },
+    "clerk05@school.com": { "password": "password", "role": "Clerk", "name": "Sandra Brown", "email": "clerk05@school.com", "contact": "019-876-5435" },
+    "nanny01@school.com": { "password": "password", "role": "Nanny", "name": "Alex Star", "email": "nanny01@school.com", "contact": "019-876-5435" },
+    "nanny02@school.com": { "password": "password", "role": "Nanny", "name": "Joe Kerry", "email": "nanny02@school.com", "contact": "019-876-5435" },
+    "nanny03@school.com": { "password": "password", "role": "Nanny", "name": "Fancy Brown", "email": "nanny03@school.com", "contact": "019-876-5435" },
+    "nanny04@school.com": { "password": "password", "role": "Nanny", "name": "Sindra Pawl", "email": "nanny04@school.com", "contact": "019-876-5435" },
+    "nanny05@school.com": { "password": "password", "role": "Nanny", "name": "Alixa Jwson", "email": "nanny05@school.com", "contact": "019-876-5435" },
+    "nanny06@school.com": { "password": "password", "role": "Nanny", "name": "Babby Flox", "email": "nanny06@school.com", "contact": "019-876-5435" },
+    "nanny07@school.com": { "password": "password", "role": "Nanny", "name": "Jeson Harrington", "email": "nanny07@school.com", "contact": "019-876-5435" },
+    
     "davis@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t1"},
     "wilson@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t2"},
     "anderson@school.com": { "password": "teacher", "role": "Teacher", "teacherId": "t3"},
@@ -116,37 +139,36 @@ const embeddedDatabase = {
     "johnny@school.com": { "password": "student", "role": "Student", "studentId": "s31"},
     "ben@school.com": { "password": "student", "role": "Student", "studentId": "s32"},
     "ororo@school.com": { "password": "student", "role": "Student", "studentId": "s33"},
-    "tasnim.tanha@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081040"},
-    "ratul.hasan@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081244"},
-    "jubayer.ratul@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081263"},
-    "jamil.hamim@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081267"},
-    "arindom.turjo@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081311"},
-    "monayem.hossain@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081251"},
-    "prottoy.mankin@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081204"},
-    "jubayer.manik@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081205"},
-    "tahmidul.afrose@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081223"},
-    "tahsinul.imrose@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081222"},
-    "junidur.rahman@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081237"},
-    "mamun.shake@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081255"},
-    "raian.mahadi@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081266"},
-    "saiful.islam@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081220"},
-    "shourav.beswas@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081228"},
-    "meherub.badhon@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081271"},
-    "kanej.keya@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081550"},
-    "anika.ebnat@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081556"},
-    "farjana.bushra@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081569"},
-    "khushi.akter@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081531"},
-    "sanzida.sultana@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081545"},
-    "sanjida.ruma@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081582"},
-    "jannatul.mawya@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081053"},
-    "zonaed.hossain@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081272"},
-    "rokib.noyon@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081265"},
-    "abrar.projoy@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081260"},
-    "tuton.ghosh@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081268"},
-    "mohammad.hosen@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081269"},
-    "israt.shimu@school.com": { "password": "student", "role": "Student", "studentId": "s_2231081042"},
-    "md.junaid@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081246"},
-    "md.samiuzzaman@school.com": { "password": "student", "role": "Student", "studentId": "s_2233081257"}
+    "tasnim.tanha@school.com": { "password": "student", "role": "Student", "studentId": "s34"},
+    "ratul.hasan@school.com": { "password": "student", "role": "Student", "studentId": "s35"},
+    "jubayer.ratul@school.com": { "password": "student", "role": "Student", "studentId": "s36"},
+    "jamil.hamim@school.com": { "password": "student", "role": "Student", "studentId": "s37"},
+    "arindom.turjo@school.com": { "password": "student", "role": "Student", "studentId": "s38"},
+    "monayem.hossain@school.com": { "password": "student", "role": "Student", "studentId": "s39"},
+    "prottoy.mankin@school.com": { "password": "student", "role": "Student", "studentId": "s40"},
+    "tahmidul.afrose@school.com": { "password": "student", "role": "Student", "studentId": "s41"},
+    "tahsinul.imrose@school.com": { "password": "student", "role": "Student", "studentId": "s42"},
+    "junidur.rahman@school.com": { "password": "student", "role": "Student", "studentId": "s43"},
+    "mamun.shake@school.com": { "password": "student", "role": "Student", "studentId": "s44"},
+    "raian.mahadi@school.com": { "password": "student", "role": "Student", "studentId": "s45"},
+    "saiful.islam@school.com": { "password": "student", "role": "Student", "studentId": "s46"},
+    "shourav.beswas@school.com": { "password": "student", "role": "Student", "studentId": "s47"},
+    "meherub.badhon@school.com": { "password": "student", "role": "Student", "studentId": "s48"},
+    "fatema.zahara@school.com": { "password": "student", "role": "Student", "studentId": "s49"},
+    "anika.ebnat@school.com": { "password": "student", "role": "Student", "studentId": "s50"},
+    "farjana.bushra@school.com": { "password": "student", "role": "Student", "studentId": "s51"},
+    "khushi.akter@school.com": { "password": "student", "role": "Student", "studentId": "s52"},
+    "sanzida.sultana@school.com": { "password": "student", "role": "Student", "studentId": "s53"},
+    "sanjida.ruma@school.com": { "password": "student", "role": "Student", "studentId": "s54"},
+    "jannatul.mawya@school.com": { "password": "student", "role": "Student", "studentId": "s55"},
+    "zonaed.hossain@school.com": { "password": "student", "role": "Student", "studentId": "s56"},
+    "rokib.noyon@school.com": { "password": "student", "role": "Student", "studentId": "s57"},
+    "abrar.projoy@school.com": { "password": "student", "role": "Student", "studentId": "s58"},
+    "tuton.ghosh@school.com": { "password": "student", "role": "Student", "studentId": "s59"},
+    "mohammad.hosen@school.com": { "password": "student", "role": "Student", "studentId": "s60"},
+    "israt.shimu@school.com": { "password": "student", "role": "Student", "studentId": "s61"},
+    "md.junaid@school.com": { "password": "student", "role": "Student", "studentId": "s62"},
+    "md.samiuzzaman@school.com": { "password": "student", "role": "Student", "studentId": "s63"}
   },
   "departments": [
     { "id": "d1", "name": "Science & Mathematics" },
@@ -220,37 +242,36 @@ const embeddedDatabase = {
     { "id": "s31", "name": "Johnny Storm", "rollNo": "223308309", "classId": "c3", "guardianName": "Franklin Storm", "contact": "312-999-0001", "email": "johnny@school.com", "address": "Long Island, NY", "dateOfBirth": "1948-10-05", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "B+", "profileImage": null },
     { "id": "s32", "name": "Ben Grimm", "rollNo": "223308310", "classId": "c3", "guardianName": "Daniel Grimm", "contact": "312-000-1112", "email": "ben@school.com", "address": "Yancy Street, NY", "dateOfBirth": "1944-08-01", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "O-", "profileImage": null },
     { "id": "s33", "name": "Ororo Munroe", "rollNo": "223308311", "classId": "c3", "guardianName": "N'Dare Munroe", "contact": "312-111-2222", "email": "ororo@school.com", "address": "Cairo, Egypt", "dateOfBirth": "1951-11-01", "gender": "Female", "enrollmentDate": "2021-04-01", "bloodGroup": "A+", "profileImage": null },
-    { "id": "s_2233081040", "name": "Mst Tasnim Amina Tanha", "rollNo": "2233081040", "classId": "c4", "guardianName": "Amina Tanha", "contact": "555-0101", "email": "tasnim.tanha@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-01-01", "gender": "Female", "enrollmentDate": "2023-04-01", "bloodGroup": "B+", "profileImage": null },
-    { "id": "s_2233081244", "name": "Ratul Hasan", "rollNo": "2233081244", "classId": "c4", "guardianName": "Kabir Hasan", "contact": "555-0102", "email": "ratul.hasan@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-02-02", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O+", "profileImage": null },
-    { "id": "s_2233081263", "name": "Jubayer Ahmed Ratul", "rollNo": "2233081263", "classId": "c4", "guardianName": "Farid Ahmed", "contact": "555-0103", "email": "jubayer.ratul@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-03-03", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A+", "profileImage": null },
-    { "id": "s_2233081267", "name": "Jamil Sarkar Hamim", "rollNo": "2233081267", "classId": "c4", "guardianName": "Ali Sarkar", "contact": "555-0104", "email": "jamil.hamim@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-04-04", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "B-", "profileImage": null },
-    { "id": "s_2233081311", "name": "Arindom Chakrabarty Turjo", "rollNo": "2233081311", "classId": "c4", "guardianName": "G. Chakrabarty", "contact": "555-0105", "email": "arindom.turjo@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-05-05", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "s_2233081251", "name": "Monayem Hossain", "rollNo": "2233081251", "classId": "c4", "guardianName": "Nur Hossain", "contact": "555-0106", "email": "monayem.hossain@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-06-06", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O-", "profileImage": null },
-    { "id": "s_2233081204", "name": "Prottoy Mankin", "rollNo": "2233081204", "classId": "c4", "guardianName": "David Mankin", "contact": "555-0107", "email": "prottoy.mankin@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-07-07", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A-", "profileImage": null },
-    { "id": "s_2233081205", "name": "MD Jubayer hossain manik", "rollNo": "2233081205", "classId": "c4", "guardianName": "Alam Hossain", "contact": "555-0108", "email": "jubayer.manik@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-08-08", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "B+", "profileImage": null },
-    { "id": "s_2233081223", "name": "Tahmidul Islam Afrose", "rollNo": "2233081223", "classId": "c4", "guardianName": "Rafiqul Islam", "contact": "555-0109", "email": "tahmidul.afrose@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-09-09", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O+", "profileImage": null },
-    { "id": "s_2233081222", "name": "Tahsinul Islam Imrose", "rollNo": "2233081222", "classId": "c4", "guardianName": "Rafiqul Islam", "contact": "555-0110", "email": "tahsinul.imrose@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-10-10", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A+", "profileImage": null },
-    { "id": "s_2233081237", "name": "Junidur Rahman", "rollNo": "2233081237", "classId": "c4", "guardianName": "Habibur Rahman", "contact": "555-0111", "email": "junidur.rahman@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-11-11", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "B-", "profileImage": null },
-    { "id": "s_2233081255", "name": "Mamun Shake", "rollNo": "2233081255", "classId": "c4", "guardianName": "Abdullah Shake", "contact": "555-0112", "email": "mamun.shake@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-12-12", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "s_2233081266", "name": "Raian Mahadi", "rollNo": "2233081266", "classId": "c4", "guardianName": "Fahim Mahadi", "contact": "555-0113", "email": "raian.mahadi@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-01-13", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "O-", "profileImage": null },
-    { "id": "s_2233081220", "name": "Md Saiful Islam", "rollNo": "2233081220", "classId": "c4", "guardianName": "Sirajul Islam", "contact": "555-0114", "email": "saiful.islam@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-02-14", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "A-", "profileImage": null },
-    { "id": "s_2233081228", "name": "Shourav Beswas", "rollNo": "2233081228", "classId": "c4", "guardianName": "B. Beswas", "contact": "555-0115", "email": "shourav.beswas@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-03-15", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "B+", "profileImage": null },
-    { "id": "s_2233081271", "name": "Meherub Hassan Badhon", "rollNo": "2233081271", "classId": "c4", "guardianName": "Anwar Hassan", "contact": "555-0116", "email": "meherub.badhon@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-04-16", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "O+", "profileImage": null },
-    { "id": "s_2233081550", "name": "Kanej Fatema Keya", "rollNo": "2233081550", "classId": "c5", "guardianName": "Abul Fatema", "contact": "555-0117", "email": "kanej.keya@school.com", "address": "Chittagong, BD", "dateOfBirth": "2014-05-17", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "A+", "profileImage": null },
-    { "id": "s_2233081556", "name": "Anika Ebnat", "rollNo": "2233081556", "classId": "c5", "guardianName": "Jamal Ebnat", "contact": "555-0118", "email": "anika.ebnat@school.com", "address": "Chittagong, BD", "dateOfBirth": "2014-06-18", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "B-", "profileImage": null },
-    { "id": "s_2233081569", "name": "Farjana Bushra", "rollNo": "2233081569", "classId": "c5", "guardianName": "Kamal Bushra", "contact": "555-0119", "email": "farjana.bushra@school.com", "address": "Chittagong, BD", "dateOfBirth": "2014-07-19", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "s_2233081531", "name": "Most. Khushi Akter", "rollNo": "2233081531", "classId": "c4", "guardianName": "Rahim Akter", "contact": "555-0120", "email": "khushi.akter@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-08-20", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "O-", "profileImage": null },
-    { "id": "s_2233081545", "name": "Sanzida Sultana", "rollNo": "2233081545", "classId": "c4", "guardianName": "Karim Sultana", "contact": "555-0121", "email": "sanzida.sultana@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-09-21", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "A-", "profileImage": null },
-    { "id": "s_2233081582", "name": "Sanjida Akter Ruma", "rollNo": "2233081582", "classId": "c4", "guardianName": "Salim Akter", "contact": "555-0122", "email": "sanjida.ruma@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-10-22", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "B+", "profileImage": null },
-    { "id": "s_2233081053", "name": "Jannatul Mawya", "rollNo": "2233081053", "classId": "c4", "guardianName": "Ferdous Mawya", "contact": "555-0123", "email": "jannatul.mawya@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-11-23", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "O+", "profileImage": null },
-    { "id": "s_2233081272", "name": "Md.Zonaed Hossain", "rollNo": "2233081272", "classId": "c4", "guardianName": "Bilal Hossain", "contact": "555-0124", "email": "zonaed.hossain@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-12-24", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "A+", "profileImage": null },
-    { "id": "s_2233081265", "name": "Md.Rokib hasan noyon", "rollNo": "2233081265", "classId": "c4", "guardianName": "Jamal Hasan", "contact": "555-0125", "email": "rokib.noyon@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-01-25", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "B-", "profileImage": null },
-    { "id": "s_2233081260", "name": "Md Abrar Projoy", "rollNo": "2233081260", "classId": "c4", "guardianName": "Dalim Projoy", "contact": "555-0126", "email": "abrar.projoy@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-02-26", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "AB+", "profileImage": null },
-    { "id": "s_2233081268", "name": "Tuton Ghosh", "rollNo": "2233081268", "classId": "c4", "guardianName": "T. Ghosh", "contact": "555-0127", "email": "tuton.ghosh@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-03-27", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "O-", "profileImage": null },
-    { "id": "s_2233081269", "name": "Mohammad Hosen", "rollNo": "2233081269", "classId": "c4", "guardianName": "Abdul Hosen", "contact": "555-0128", "email": "mohammad.hosen@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-04-28", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "A-", "profileImage": null },
-    { "id": "s_2231081042", "name": "Israt jahan shimu", "rollNo": "2231081042", "classId": "c4", "guardianName": "Iqbal Jahan", "contact": "555-0129", "email": "israt.shimu@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-05-29", "gender": "Female", "enrollmentDate": "2021-04-01", "bloodGroup": "B+", "profileImage": null },
-    { "id": "s_2233081246", "name": "Md Junaid", "rollNo": "2233081246", "classId": "c4", "guardianName": "Yusuf Junaid", "contact": "555-0130", "email": "md.junaid@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-06-30", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "O+", "profileImage": null },
-    { "id": "s_2233081257", "name": "Md. Samiuzzaman", "rollNo": "2233081257", "classId": "c4", "guardianName": "S. Zaman", "contact": "555-0131", "email": "md.samiuzzaman@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-07-01", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "A+", "profileImage": null }
+    { "id": "s34", "name": "Mst Tasnim Amina Tanha", "rollNo": "2233081040", "classId": "c4", "guardianName": "Amina Tanha", "contact": "555-0101", "email": "tasnim.tanha@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-01-01", "gender": "Female", "enrollmentDate": "2023-04-01", "bloodGroup": "B+", "profileImage": null },
+    { "id": "s35", "name": "Ratul Hasan", "rollNo": "2233081244", "classId": "c4", "guardianName": "Kabir Hasan", "contact": "555-0102", "email": "ratul.hasan@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-02-02", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s36", "name": "Jubayer Ahmed Ratul", "rollNo": "2233081263", "classId": "c4", "guardianName": "Farid Ahmed", "contact": "555-0103", "email": "jubayer.ratul@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-03-03", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A+", "profileImage": null },
+    { "id": "s37", "name": "Jamil Sarkar Hamim", "rollNo": "2233081267", "classId": "c4", "guardianName": "Ali Sarkar", "contact": "555-0104", "email": "jamil.hamim@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-04-04", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "B-", "profileImage": null },
+    { "id": "s38", "name": "Arindom Chakrabarty Turjo", "rollNo": "2233081311", "classId": "c4", "guardianName": "G. Chakrabarty", "contact": "555-0105", "email": "arindom.turjo@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-05-05", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "AB+", "profileImage": null },
+    { "id": "s39", "name": "Monayem Hossain", "rollNo": "2233081251", "classId": "c4", "guardianName": "Nur Hossain", "contact": "555-0106", "email": "monayem.hossain@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-06-06", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O-", "profileImage": null },
+    { "id": "s40", "name": "Prottoy Mankin", "rollNo": "2233081204", "classId": "c4", "guardianName": "David Mankin", "contact": "555-0107", "email": "prottoy.mankin@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-07-07", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A-", "profileImage": null },
+    { "id": "s41", "name": "Tahmidul Islam Afrose", "rollNo": "2233081223", "classId": "c4", "guardianName": "Rafiqul Islam", "contact": "555-0109", "email": "tahmidul.afrose@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-09-09", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s42", "name": "Tahsinul Islam Imrose", "rollNo": "2233081222", "classId": "c4", "guardianName": "Rafiqul Islam", "contact": "555-0110", "email": "tahsinul.imrose@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-10-10", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "A+", "profileImage": null },
+    { "id": "s43", "name": "Junidur Rahman", "rollNo": "2233081237", "classId": "c4", "guardianName": "Habibur Rahman", "contact": "555-0111", "email": "junidur.rahman@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-11-11", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "B-", "profileImage": null },
+    { "id": "s44", "name": "Mamun Shake", "rollNo": "2233081255", "classId": "c4", "guardianName": "Abdullah Shake", "contact": "555-0112", "email": "mamun.shake@school.com", "address": "Dhaka, BD", "dateOfBirth": "2015-12-12", "gender": "Male", "enrollmentDate": "2023-04-01", "bloodGroup": "AB+", "profileImage": null },
+    { "id": "s45", "name": "Raian Mahadi", "rollNo": "2233081266", "classId": "c4", "guardianName": "Fahim Mahadi", "contact": "555-0113", "email": "raian.mahadi@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-01-13", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "O-", "profileImage": null },
+    { "id": "s46", "name": "Md Saiful Islam", "rollNo": "2233081220", "classId": "c4", "guardianName": "Sirajul Islam", "contact": "555-0114", "email": "saiful.islam@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-02-14", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "A-", "profileImage": null },
+    { "id": "s47", "name": "Shourav Beswas", "rollNo": "2233081228", "classId": "c4", "guardianName": "B. Beswas", "contact": "555-0115", "email": "shourav.beswas@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-03-15", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "B+", "profileImage": null },
+    { "id": "s48", "name": "Meherub Hassan Badhon", "rollNo": "2233081271", "classId": "c4", "guardianName": "Anwar Hassan", "contact": "555-0116", "email": "meherub.badhon@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-04-16", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s49", "name": "Fatema Tuz Zahara", "rollNo": "2233231070", "classId": "c5", "guardianName": "Alvee Shaheb", "contact": "555-0117", "email": "fatema.zahara@school.com", "address": "Tongi, BD", "dateOfBirth": "2004-11-23", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s50", "name": "Anika Ebnat", "rollNo": "2233081556", "classId": "c5", "guardianName": "Jamal Ebnat", "contact": "555-0118", "email": "anika.ebnat@school.com", "address": "Chittagong, BD", "dateOfBirth": "2014-06-18", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "B-", "profileImage": null },
+    { "id": "s51", "name": "Farjana Bushra", "rollNo": "2233081569", "classId": "c5", "guardianName": "Kamal Bushra", "contact": "555-0119", "email": "farjana.bushra@school.com", "address": "Chittagong, BD", "dateOfBirth": "2014-07-19", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "AB+", "profileImage": null },
+    { "id": "s52", "name": "Most. Khushi Akter", "rollNo": "2233081531", "classId": "c4", "guardianName": "Rahim Akter", "contact": "555-0120", "email": "khushi.akter@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-08-20", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "O-", "profileImage": null },
+    { "id": "s53", "name": "Sanzida Sultana", "rollNo": "2233081545", "classId": "c4", "guardianName": "Karim Sultana", "contact": "555-0121", "email": "sanzida.sultana@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-09-21", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "A-", "profileImage": null },
+    { "id": "s54", "name": "Sanjida Akter Ruma", "rollNo": "2233081582", "classId": "c4", "guardianName": "Salim Akter", "contact": "555-0122", "email": "sanjida.ruma@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-10-22", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "B+", "profileImage": null },
+    { "id": "s55", "name": "Jannatul Mawya", "rollNo": "2233081053", "classId": "c4", "guardianName": "Ferdous Mawya", "contact": "555-0123", "email": "jannatul.mawya@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-11-23", "gender": "Female", "enrollmentDate": "2022-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s56", "name": "Md.Zonaed Hossain", "rollNo": "2233081272", "classId": "c4", "guardianName": "Bilal Hossain", "contact": "555-0124", "email": "zonaed.hossain@school.com", "address": "Dhaka, BD", "dateOfBirth": "2014-12-24", "gender": "Male", "enrollmentDate": "2022-04-01", "bloodGroup": "A+", "profileImage": null },
+    { "id": "s57", "name": "Md.Rokib hasan noyon", "rollNo": "2233081265", "classId": "c4", "guardianName": "Jamal Hasan", "contact": "555-0125", "email": "rokib.noyon@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-01-25", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "B-", "profileImage": null },
+    { "id": "s58", "name": "Md Abrar Projoy", "rollNo": "2233081260", "classId": "c4", "guardianName": "Dalim Projoy", "contact": "555-0126", "email": "abrar.projoy@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-02-26", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "AB+", "profileImage": null },
+    { "id": "s59", "name": "Tuton Ghosh", "rollNo": "2233081268", "classId": "c4", "guardianName": "T. Ghosh", "contact": "555-0127", "email": "tuton.ghosh@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-03-27", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "O-", "profileImage": null },
+    { "id": "s60", "name": "Mohammad Hosen", "rollNo": "2233081269", "classId": "c4", "guardianName": "Abdul Hosen", "contact": "555-0128", "email": "mohammad.hosen@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-04-28", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "A-", "profileImage": null },
+    { "id": "s61", "name": "Israt jahan shimu", "rollNo": "2231081042", "classId": "c4", "guardianName": "Iqbal Jahan", "contact": "555-0129", "email": "israt.shimu@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-05-29", "gender": "Female", "enrollmentDate": "2021-04-01", "bloodGroup": "B+", "profileImage": null },
+    { "id": "s62", "name": "Md Junaid", "rollNo": "2233081246", "classId": "c4", "guardianName": "Yusuf Junaid", "contact": "555-0130", "email": "md.junaid@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-06-30", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "O+", "profileImage": null },
+    { "id": "s63", "name": "Md. Samiuzzaman", "rollNo": "2233081257", "classId": "c4", "guardianName": "S. Zaman", "contact": "555-0131", "email": "md.samiuzzaman@school.com", "address": "Dhaka, BD", "dateOfBirth": "2013-07-01", "gender": "Male", "enrollmentDate": "2021-04-01", "bloodGroup": "A+", "profileImage": null }
   ],
 "teachers": [
     { "id": "t1", "name": "Mr. Davis", "departmentId": "d1", "subject": "Math", "contact": "987-654-3210", "email": "davis@school.com", "address": "222 Teacher Rd", "joiningDate": "2018-07-15", "qualifications": "M.Sc. in Mathematics", "bloodGroup": "O+", "profileImage": "https://placehold.co/150x150/EFEFEF/333?text=MD", "baseSalary": 50000 },
@@ -305,45 +326,45 @@ const embeddedDatabase = {
     { "attendanceId": "att1", "studentId": "s1", "classId": "c1", "date": "2025-07-28", "status": "Present" },
     { "attendanceId": "att2", "studentId": "s2", "classId": "c1", "date": "2025-07-28", "status": "Absent" },
     { "attendanceId": "att3", "studentId": "s3", "classId": "c2", "date": "2025-07-28", "status": "Present" },
-    { "attendanceId": "att4", "studentId": "s_2233081040", "classId": "c4", "date": "2025-07-28", "status": "Present" }
+    { "attendanceId": "att4", "studentId": "s4", "classId": "c4", "date": "2025-07-28", "status": "Present" }
   ],
   "fees": [
     { "id": "f1", "studentId": "s1", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-20" },
     { "id": "f2", "studentId": "s2", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
     { "id": "f3", "studentId": "s1", "feeType": "Exam Fee", "amount": 500, "status": "Paid", "dueDate": "2025-09-01", "paidDate": "2025-07-20" },
     { "id": "f4", "studentId": "s3", "feeType": "Tuition Fee", "amount": 4500, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
-    { "id": "f_2233081040", "studentId": "s_2233081040", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
-    { "id": "f_2233081244", "studentId": "s_2233081244", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-22" },
-    { "id": "f_2233081263", "studentId": "s_2233081263", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-23" },
-    { "id": "f_2233081267", "studentId": "s_2233081267", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-24" },
-    { "id": "f_2233081311", "studentId": "s_2233081311", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-25" },
-    { "id": "f_2233081251", "studentId": "s_2233081251", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-26" },
-    { "id": "f_2233081204", "studentId": "s_2233081204", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-27" },
-    { "id": "f_2233081205", "studentId": "s_2233081205", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-28" },
-    { "id": "f_2233081223", "studentId": "s_2233081223", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-29" },
-    { "id": "f_2233081222", "studentId": "s_2233081222", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-15" },
-    { "id": "f_2233081237", "studentId": "s_2233081237", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-16" },
-    { "id": "f_2233081255", "studentId": "s_2233081255", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-17" },
-    { "id": "f_2233081266", "studentId": "s_2233081266", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-18" },
-    { "id": "f_2233081220", "studentId": "s_2233081220", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-19" },
-    { "id": "f_2233081228", "studentId": "s_2233081228", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
-    { "id": "f_2233081271", "studentId": "s_2233081271", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-01" },
-    { "id": "f_2233081550", "studentId": "s_2233081550", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-02" },
-    { "id": "f_2233081556", "studentId": "s_2233081556", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-03" },
-    { "id": "f_2233081569", "studentId": "s_2233081569", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-04" },
-    { "id": "f_2233081531", "studentId": "s_2233081531", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-05" },
-    { "id": "f_2233081545", "studentId": "s_2233081545", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-06" },
-    { "id": "f_2233081582", "studentId": "s_2233081582", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-07" },
-    { "id": "f_2233081053", "studentId": "s_2233081053", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-08" },
-    { "id": "f_2233081272", "studentId": "s_2233081272", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-09" },
-    { "id": "f_2233081265", "studentId": "s_2233081265", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-10" },
-    { "id": "f_2233081260", "studentId": "s_2233081260", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-11" },
-    { "id": "f_2233081268", "studentId": "s_2233081268", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-12" },
-    { "id": "f_2233081269", "studentId": "s_2233081269", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-13" },
-    { "id": "f_2231081042", "studentId": "s_2231081042", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-14" },
-    { "id": "f_2233081246", "studentId": "s_2233081246", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-20" },
-    { "id": "f_2233081257", "studentId": "s_2233081257", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
-    { "id": "f_fine_s2", "studentId": "s2", "feeType": "Library Fine", "amount": 25, "status": "Unpaid", "dueDate": "2025-08-15", "paidDate": null }
+    { "id": "f5", "studentId": "s4", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
+    { "id": "f6", "studentId": "s5", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-22" },
+    { "id": "f7", "studentId": "s6", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-23" },
+    { "id": "f8", "studentId": "s7", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-24" },
+    { "id": "f9", "studentId": "s8", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-25" },
+    { "id": "f10", "studentId": "s9", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-26" },
+    { "id": "f11", "studentId": "s10", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-27" },
+    { "id": "f12", "studentId": "s11", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-28" },
+    { "id": "f13", "studentId": "s12", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-29" },
+    { "id": "f14", "studentId": "s13", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-15" },
+    { "id": "f15", "studentId": "s14", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-16" },
+    { "id": "f16", "studentId": "s15", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-17" },
+    { "id": "f17", "studentId": "s16", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-18" },
+    { "id": "f18", "studentId": "s17", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-19" },
+    { "id": "f19", "studentId": "s18", "feeType": "Tuition Fee", "amount": 5000, "status": "Unpaid", "dueDate": "2025-08-10", "paidDate": null },
+    { "id": "f20", "studentId": "s19", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-01" },
+    { "id": "f21", "studentId": "s20", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-02" },
+    { "id": "f22", "studentId": "s21", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-03" },
+    { "id": "f23", "studentId": "s22", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-04" },
+    { "id": "f24", "studentId": "s23", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-05" },
+    { "id": "f25", "studentId": "s24", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-06" },
+    { "id": "f26", "studentId": "s25", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-07" },
+    { "id": "f27", "studentId": "s26", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-08" },
+    { "id": "f28", "studentId": "s27", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-09" },
+    { "id": "f29", "studentId": "s28", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-10" },
+    { "id": "f30", "studentId": "s29", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-11" },
+    { "id": "f31", "studentId": "s30", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-12" },
+    { "id": "f32", "studentId": "s31", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-13" },
+    { "id": "f33", "studentId": "s32", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-14" },
+    { "id": "f34", "studentId": "s33", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-20" },
+    { "id": "f35", "studentId": "s34", "feeType": "Tuition Fee", "amount": 5000, "status": "Paid", "dueDate": "2025-08-10", "paidDate": "2025-07-21" },
+    { "id": "f36", "studentId": "s35", "feeType": "Library Fine", "amount": 25, "status": "Unpaid", "dueDate": "2025-08-15", "paidDate": null }
   ],
   "salaries": [
     { "id": "sal1", "teacherId": "t1", "baseSalary": 50000, "bonus": 2000, "deductions": 1500, "netPay": 50500, "month": "2025-07", "status": "Paid", "paidDate": "2025-07-28" },
@@ -359,14 +380,60 @@ const embeddedDatabase = {
     { "id": "ex1", "name": "Class Test I", "classId": "c1", "subjectId": "sub2", "teacherId": "t2", "date": "2025-08-15", "maxMarks": 25 },
     { "id": "ex2", "name": "Mid-Term Exam", "classId": "c1", "subjectId": "sub4", "teacherId": "t4", "date": "2025-09-17", "maxMarks": 100 },
     { "id": "ex3", "name": "Class Test I", "classId": "c2", "subjectId": "sub1", "teacherId": "t1", "date": "2025-08-16", "maxMarks": 25 },
-    { "id": "ex4", "name": "Mid-Term Exam", "classId": "c4", "subjectId": "sub11", "teacherId": "t12", "date": "2025-09-15", "maxMarks": 100 }
+    { "id": "ex4", "name": "Mid-Term Exam", "classId": "c4", "subjectId": "sub11", "teacherId": "t12", "date": "2025-09-15", "maxMarks": 100 },
+    { "id": "ex5", "name": "Final Term Exam", "classId": "c1", "subjectId": "sub2", "teacherId": "t2", "date": "2025-12-10", "maxMarks": 100 },
+    { "id": "ex6", "name": "Class Test II", "classId": "c2", "subjectId": "sub1", "teacherId": "t1", "date": "2025-10-20", "maxMarks": 25 },
+    { "id": "ex7", "name": "Quiz I", "classId": "c3", "subjectId": "sub5", "teacherId": "t5", "date": "2025-08-20", "maxMarks": 15 },
+    { "id": "ex8", "name": "Practical Exam", "classId": "c5", "subjectId": "sub7", "teacherId": "t7", "date": "2025-11-05", "maxMarks": 50 },
+    { "id": "ex9", "name": "Mid-Term Exam", "classId": "c3", "subjectId": "sub6", "teacherId": "t6", "date": "2025-09-22", "maxMarks": 100 },
+    { "id": "ex10", "name": "Class Test I", "classId": "c6", "subjectId": "sub10", "teacherId": "t10", "date": "2025-08-18", "maxMarks": 25 },
+    { "id": "ex11", "name": "Final Term Exam", "classId": "c2", "subjectId": "sub3", "teacherId": "t3", "date": "2025-12-12", "maxMarks": 100 },
+    { "id": "ex12", "name": "Class Test II", "classId": "c1", "subjectId": "sub4", "teacherId": "t4", "date": "2025-10-25", "maxMarks": 25 },
+    { "id": "ex13", "name": "Assignment I", "classId": "c4", "subjectId": "sub8", "teacherId": "t8", "date": "2025-09-01", "maxMarks": 20 },
+    { "id": "ex14", "name": "Mid-Term Exam", "classId": "c5", "subjectId": "sub9", "teacherId": "t9", "date": "2025-09-28", "maxMarks": 100 },
+    { "id": "ex15", "name": "Quiz II", "classId": "c6", "subjectId": "sub12", "teacherId": "t11", "date": "2025-11-15", "maxMarks": 15 },
+    { "id": "ex16", "name": "Class Test I", "classId": "c7", "subjectId": "sub13", "teacherId": "t13", "date": "2025-08-21", "maxMarks": 25 },
+    { "id": "ex17", "name": "Final Term Exam", "classId": "c3", "subjectId": "sub5", "teacherId": "t5", "date": "2025-12-15", "maxMarks": 100 },
+    { "id": "ex18", "name": "Oral Exam", "classId": "c1", "subjectId": "sub2", "teacherId": "t2", "date": "2025-11-20", "maxMarks": 30 },
+    { "id": "ex19", "name": "Mid-Term Exam", "classId": "c7", "subjectId": "sub14", "teacherId": "t14", "date": "2025-10-02", "maxMarks": 100 },
+    { "id": "ex20", "name": "Class Test III", "classId": "c2", "subjectId": "sub1", "teacherId": "t1", "date": "2025-11-18", "maxMarks": 25 },
+    { "id": "ex21", "name": "Project Evaluation", "classId": "c5", "subjectId": "sub7", "teacherId": "t7", "date": "2025-12-01", "maxMarks": 75 },
+    { "id": "ex22", "name": "Quiz I", "classId": "c8", "subjectId": "sub15", "teacherId": "t15", "date": "2025-08-25", "maxMarks": 15 },
+    { "id": "ex23", "name": "Mid-Term Exam", "classId": "c8", "subjectId": "sub15", "teacherId": "t15", "date": "2025-10-05", "maxMarks": 100 },
+    { "id": "ex24", "name": "Final Term Exam", "classId": "c6", "subjectId": "sub10", "teacherId": "t10", "date": "2025-12-18", "maxMarks": 100 },
+    { "id": "ex25", "name": "Class Test II", "classId": "c7", "subjectId": "sub13", "teacherId": "t13", "date": "2025-10-30", "maxMarks": 25 },
+    { "id": "ex26", "name": "Lab Exam", "classId": "c1", "subjectId": "sub4", "teacherId": "t4", "date": "2025-11-28", "maxMarks": 40 }
   ],
   "results": [
     { "resultId": "res1", "examId": "ex1", "studentId": "s1", "marks": 22 },
     { "resultId": "res2", "examId": "ex1", "studentId": "s2", "marks": 19 },
     { "resultId": "res3", "examId": "ex2", "studentId": "s1", "marks": 85 },
     { "resultId": "res4", "examId": "ex2", "studentId": "s2", "marks": 78 },
-    { "resultId": "res5", "examId": "ex3", "studentId": "s3", "marks": 24 }
+    { "resultId": "res5", "examId": "ex3", "studentId": "s3", "marks": 24 },
+    { "resultId": "res6", "examId": "ex5", "studentId": "s1", "marks": 92 },
+    { "resultId": "res7", "examId": "ex5", "studentId": "s2", "marks": 88 },
+    { "resultId": "res8", "examId": "ex6", "studentId": "s3", "marks": 21 },
+    { "resultId": "res9", "examId": "ex4", "studentId": "s7", "marks": 75 },
+    { "resultId": "res10", "examId": "ex7", "studentId": "s4", "marks": 12 },
+    { "resultId": "res11", "examId": "ex8", "studentId": "s5", "marks": 45 },
+    { "resultId": "res12", "examId": "ex9", "studentId": "s23", "marks": 81 },
+    { "resultId": "res13", "examId": "ex10", "studentId": "s33", "marks": 20 },
+    { "resultId": "res14", "examId": "ex11", "studentId": "s3", "marks": 78 },
+    { "resultId": "res15", "examId": "ex12", "studentId": "s1", "marks": 23 },
+    { "resultId": "res16", "examId": "ex13", "studentId": "s4", "marks": 18 },
+    { "resultId": "res17", "examId": "ex14", "studentId": "s5", "marks": 88 },
+    { "resultId": "res18", "examId": "ex15", "studentId": "s27", "marks": 14 },
+    { "resultId": "res19", "examId": "ex16", "studentId": "s6", "marks": 19 },
+    { "resultId": "res20", "examId": "ex17", "studentId": "s38", "marks": 91 },
+    { "resultId": "res21", "examId": "ex18", "studentId": "s2", "marks": 25 },
+    { "resultId": "res22", "examId": "ex19", "studentId": "s7", "marks": 68 },
+    { "resultId": "res23", "examId": "ex20", "studentId": "s3", "marks": 22 },
+    { "resultId": "res24", "examId": "ex21", "studentId": "s5", "marks": 65 },
+    { "resultId": "res25", "examId": "ex22", "studentId": "s8", "marks": 11 },
+    { "resultId": "res26", "examId": "ex23", "studentId": "s8", "marks": 76 },
+    { "resultId": "res27", "examId": "ex24", "studentId": "s31", "marks": 82 },
+    { "resultId": "res28", "examId": "ex25", "studentId": "s6", "marks": 21 },
+    { "resultId": "res29", "examId": "ex26", "studentId": "s1", "marks": 33 }
   ],
   "library": {
     "books": [
@@ -375,43 +442,214 @@ const embeddedDatabase = {
       { "bookId": "b3", "title": "The Adventures of Tom Sawyer", "author": "Mark Twain", "publicationYear": 1876, "isbn": "978-0-14-303956-3", "genre": "Fiction", "totalCopies": 15, "availableCopies": 15 },
       { "bookId": "b4", "title": "Pride and Prejudice", "author": "Jane Austen", "publicationYear": 1813, "isbn": "978-0-14-143951-8", "genre": "Romance", "totalCopies": 7, "availableCopies": 7 },
       { "bookId": "b5", "title": "To Kill a Mockingbird", "author": "Harper Lee", "publicationYear": 1960, "isbn": "978-0-06-112008-4", "genre": "Fiction", "totalCopies": 12, "availableCopies": 10 },
-      { "bookId": "b6", "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "publicationYear": 1925, "isbn": "978-0-7432-7356-5", "genre": "Fiction", "totalCopies": 8, "availableCopies": 8 }
+      { "bookId": "b6", "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "publicationYear": 1925, "isbn": "978-0-7432-7356-5", "genre": "Fiction", "totalCopies": 8, "availableCopies": 8 },
+      { "bookId": "b7", "title": "Fundamentals of Physics", "author": "Halliday, Resnick, Walker", "publicationYear": 2013, "isbn": "978-1-118-23072-5", "genre": "Science", "totalCopies": 8, "availableCopies": 6 },
+      { "bookId": "b8", "title": "Principles of Economics", "author": "N. Gregory Mankiw", "publicationYear": 2020, "isbn": "978-0-357-13348-4", "genre": "Economics", "totalCopies": 6, "availableCopies": 6 },
+      { "bookId": "b9", "title": "The Nightingale", "author": "Kristin Hannah", "publicationYear": 2015, "isbn": "978-0-312-57722-3", "genre": "Historical Fiction", "totalCopies": 9, "availableCopies": 9 },
+      { "bookId": "b10", "title": "1984", "author": "George Orwell", "publicationYear": 1949, "isbn": "978-0-452-28423-4", "genre": "Dystopian", "totalCopies": 10, "availableCopies": 10 },
+      { "bookId": "b11", "title": "The Catcher in the Rye", "author": "J.D. Salinger", "publicationYear": 1951, "isbn": "978-0-316-76948-0", "genre": "Fiction", "totalCopies": 6, "availableCopies": 5 },
+      { "bookId": "b12", "title": "Sapiens: A Brief History of Humankind", "author": "Yuval Noah Harari", "publicationYear": 2011, "isbn": "978-0-06-231609-7", "genre": "Non-Fiction", "totalCopies": 12, "availableCopies": 12 },
+      { "bookId": "b13", "title": "The Hobbit", "author": "J.R.R. Tolkien", "publicationYear": 1937, "isbn": "978-0-618-00221-4", "genre": "Fantasy", "totalCopies": 15, "availableCopies": 14 },
+      { "bookId": "b14", "title": "Cosmos", "author": "Carl Sagan", "publicationYear": 1980, "isbn": "978-0-345-33132-7", "genre": "Science", "totalCopies": 7, "availableCopies": 7 },
+      { "bookId": "b15", "title": "Clean Code: A Handbook of Agile Software Craftsmanship", "author": "Robert C. Martin", "publicationYear": 2008, "isbn": "978-0-13-235088-4", "genre": "Technology", "totalCopies": 20, "availableCopies": 18 },
+      { "bookId": "b16", "title": "The Lord of the Rings", "author": "J.R.R. Tolkien", "publicationYear": 1954, "isbn": "978-0-618-64015-7", "genre": "Fantasy", "totalCopies": 10, "availableCopies": 10 },
+      { "bookId": "b17", "title": "A People's History of the United States", "author": "Howard Zinn", "publicationYear": 1980, "isbn": "978-0-06-083865-2", "genre": "History", "totalCopies": 8, "availableCopies": 8 },
+      { "bookId": "b18", "title": "The Diary of a Young Girl", "author": "Anne Frank", "publicationYear": 1947, "isbn": "978-0-553-29698-3", "genre": "Biography", "totalCopies": 9, "availableCopies": 9 },
+      { "bookId": "b19", "title": "Brave New World", "author": "Aldous Huxley", "publicationYear": 1932, "isbn": "978-0-06-085052-4", "genre": "Dystopian", "totalCopies": 7, "availableCopies": 6 },
+      { "bookId": "b20", "title": "Moby-Dick", "author": "Herman Melville", "publicationYear": 1851, "isbn": "978-1-5032-8078-6", "genre": "Fiction", "totalCopies": 5, "availableCopies": 5 },
+      { "bookId": "b21", "title": "War and Peace", "author": "Leo Tolstoy", "publicationYear": 1869, "isbn": "978-1-4000-7998-8", "genre": "Historical Fiction", "totalCopies": 4, "availableCopies": 4 },
+      { "bookId": "b22", "title": "The Selfish Gene", "author": "Richard Dawkins", "publicationYear": 1976, "isbn": "978-0-19-929115-1", "genre": "Science", "totalCopies": 6, "availableCopies": 6 },
+      { "bookId": "b23", "title": "Calculus: Early Transcendentals", "author": "James Stewart", "publicationYear": 2015, "isbn": "978-1-285-74155-0", "genre": "Mathematics", "totalCopies": 25, "availableCopies": 25 },
+      { "bookId": "b24", "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "publicationYear": 2011, "isbn": "978-0-374-53355-7", "genre": "Psychology", "totalCopies": 11, "availableCopies": 10 },
+      { "bookId": "b25", "title": "One Hundred Years of Solitude", "author": "Gabriel Garcia Marquez", "publicationYear": 1967, "isbn": "978-0-06-088328-7", "genre": "Magical Realism", "totalCopies": 8, "availableCopies": 8 },
+      { "bookId": "b26", "title": "The Structure of Scientific Revolutions", "author": "Thomas S. Kuhn", "publicationYear": 1962, "isbn": "978-0-226-45808-3", "genre": "Philosophy", "totalCopies": 5, "availableCopies": 5 },
+      { "bookId": "b27", "title": "Guns, Germs, and Steel", "author": "Jared Diamond", "publicationYear": 1997, "isbn": "978-0-393-31755-8", "genre": "History", "totalCopies": 9, "availableCopies": 9 },
+      { "bookId": "b28", "title": "Frankenstein", "author": "Mary Shelley", "publicationYear": 1818, "isbn": "978-0-486-28211-4", "genre": "Gothic Fiction", "totalCopies": 13, "availableCopies": 13 },
+      { "bookId": "b29", "title": "The Art of Computer Programming", "author": "Donald E. Knuth", "publicationYear": 1968, "isbn": "978-0-201-89683-1", "genre": "Technology", "totalCopies": 7, "availableCopies": 7 }
     ],
     "transactions": [
-      { "transactionId": "lt1", "bookId": "b1", "memberId": "s3", "issueDate": "2025-07-15", "dueDate": "2025-07-29", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt2", "bookId": "b2", "memberId": "s1", "issueDate": "2025-07-10", "dueDate": "2025-07-24", "returnDate": "2025-07-22", "status": "Returned" },
-      { "transactionId": "lt3", "bookId": "b1", "memberId": "s2", "issueDate": "2025-07-01", "dueDate": "2025-07-15", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt4", "bookId": "b5", "memberId": "s_2233081040", "issueDate": "2025-07-25", "dueDate": "2025-08-08", "returnDate": null, "status": "Issued" },
-      { "transactionId": "lt5", "bookId": "b1", "memberId": "s5", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" }
+      { "transactionId": "lt1", "bookId": "b1", "studentId": "s3", "issueDate": "2025-07-15", "dueDate": "2025-07-29", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt2", "bookId": "b2", "studentId": "s1", "issueDate": "2025-07-10", "dueDate": "2025-07-24", "returnDate": "2025-07-22", "status": "Returned" },
+      { "transactionId": "lt3", "bookId": "b1", "studentId": "s2", "issueDate": "2025-07-01", "dueDate": "2025-07-15", "returnDate": null, "status": "Overdue" },
+      { "transactionId": "lt4", "bookId": "b5", "studentId": "s8", "issueDate": "2025-07-25", "dueDate": "2025-08-08", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt5", "bookId": "b1", "studentId": "s5", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt6", "bookId": "b6", "studentId": "s4", "issueDate": "2025-07-28", "dueDate": "2025-08-11", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt7", "bookId": "b5", "studentId": "s5", "issueDate": "2025-07-12", "dueDate": "2025-07-26", "returnDate": "2025-07-28", "status": "Returned" },
+      { "transactionId": "lt8", "bookId": "b7", "studentId": "s1", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt9", "bookId": "b11", "studentId": "s6", "issueDate": "2025-07-20", "dueDate": "2025-08-03", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt10", "bookId": "b13", "studentId": "s7", "issueDate": "2025-07-22", "dueDate": "2025-08-05", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt11", "bookId": "b15", "studentId": "s8", "issueDate": "2025-07-18", "dueDate": "2025-08-01", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt12", "bookId": "b15", "studentId": "s23", "issueDate": "2025-07-19", "dueDate": "2025-08-02", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt13", "bookId": "b19", "studentId": "s31", "issueDate": "2025-07-21", "dueDate": "2025-08-04", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt14", "bookId": "b24", "studentId": "s2", "issueDate": "2025-07-25", "dueDate": "2025-08-08", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt15", "bookId": "b7", "studentId": "s3", "issueDate": "2025-07-26", "dueDate": "2025-08-09", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt16", "bookId": "b10", "studentId": "s4", "issueDate": "2025-07-10", "dueDate": "2025-07-24", "returnDate": "2025-07-23", "status": "Returned" },
+      { "transactionId": "lt17", "bookId": "b4", "studentId": "s5", "issueDate": "2025-07-08", "dueDate": "2025-07-22", "returnDate": "2025-07-21", "status": "Returned" },
+      { "transactionId": "lt18", "bookId": "b9", "studentId": "s1", "issueDate": "2025-06-30", "dueDate": "2025-07-14", "returnDate": null, "status": "Overdue" },
+      { "transactionId": "lt19", "bookId": "b12", "studentId": "s22", "issueDate": "2025-07-02", "dueDate": "2025-07-16", "returnDate": "2025-07-15", "status": "Returned" },
+      { "transactionId": "lt20", "bookId": "b20", "studentId": "s6", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt21", "bookId": "b21", "studentId": "s7", "issueDate": "2025-07-28", "dueDate": "2025-08-11", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt22", "bookId": "b22", "studentId": "s8", "issueDate": "2025-07-27", "dueDate": "2025-08-10", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt23", "bookId": "b25", "studentId": "s1", "issueDate": "2025-07-14", "dueDate": "2025-07-28", "returnDate": "2025-07-28", "status": "Returned" },
+      { "transactionId": "lt24", "bookId": "b26", "studentId": "s2", "issueDate": "2025-07-13", "dueDate": "2025-07-27", "returnDate": null, "status": "Overdue" },
+      { "transactionId": "lt25", "bookId": "b28", "studentId": "s3", "issueDate": "2025-07-29", "dueDate": "2025-08-12", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt26", "bookId": "b16", "studentId": "s4", "issueDate": "2025-07-16", "dueDate": "2025-07-30", "returnDate": null, "status": "Issued" },
+      { "transactionId": "lt27", "bookId": "b17", "studentId": "s5", "issueDate": "2025-07-17", "dueDate": "2025-07-31", "returnDate": null, "status": "Issued" }
     ],
-    "reservations": [
-      { "reservationId": "resv1", "bookId": "b1", "memberId": "s4", "requestDate": "2025-07-28", "status": "Pending" }
+  "reservations": [
+      { "reservationId": "resv1", "bookId": "b1", "studentId": "s4", "requestDate": "2025-07-28", "status": "Pending" },
+      { "reservationId": "resv2", "bookId": "b6", "studentId": "s2", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv3", "bookId": "b2", "studentId": "s22", "requestDate": "2025-07-20", "status": "Fulfilled" },
+      { "reservationId": "resv4", "bookId": "b7", "studentId": "s23", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv5", "bookId": "b15", "studentId": "s1", "requestDate": "2025-07-28", "status": "Pending" },
+      { "reservationId": "resv6", "bookId": "b19", "studentId": "s3", "requestDate": "2025-07-27", "status": "Pending" },
+      { "reservationId": "resv7", "bookId": "b1", "studentId": "s6", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv8", "bookId": "b5", "studentId": "s7", "requestDate": "2025-07-26", "status": "Fulfilled" },
+      { "reservationId": "resv9", "bookId": "b26", "studentId": "s8", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv10", "bookId": "b11", "studentId": "s30", "requestDate": "2025-07-28", "status": "Pending" },
+      { "reservationId": "resv11", "bookId": "b13", "studentId": "s2", "requestDate": "2025-07-25", "status": "Fulfilled" },
+      { "reservationId": "resv12", "bookId": "b24", "studentId": "s4", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv13", "bookId": "b1", "studentId": "s5", "requestDate": "2025-07-24", "status": "Cancelled" },
+      { "reservationId": "resv14", "bookId": "b2", "studentId": "s6", "requestDate": "2025-07-23", "status": "Fulfilled" },
+      { "reservationId": "resv15", "bookId": "b7", "studentId": "s7", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv16", "bookId": "b15", "studentId": "s8", "requestDate": "2025-07-22", "status": "Fulfilled" },
+      { "reservationId": "resv17", "bookId": "b19", "studentId": "s1", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv18", "bookId": "b26", "studentId": "s2", "requestDate": "2025-07-21", "status": "Cancelled" },
+      { "reservationId": "resv19", "bookId": "b5", "studentId": "s3", "requestDate": "2025-07-29", "status": "Pending" },
+      { "reservationId": "resv20", "bookId": "b6", "studentId": "s4", "requestDate": "2025-07-20", "status": "Fulfilled" },
+      { "reservationId": "resv21", "bookId": "b10", "studentId": "s5", "requestDate": "2025-07-28", "status": "Pending" },
+      { "reservationId": "resv22", "bookId": "b12", "studentId": "s33", "requestDate": "2025-07-27", "status": "Pending" },
+      { "reservationId": "resv23", "bookId": "b23", "studentId": "s30", "requestDate": "2025-07-29", "status": "Pending" }
     ],
     "acquisitions": [
-      {"acquisitionId": "acq1","title": "Introduction to AI", "author": "Stuart Russell","requestedBy": "t12", "requestDate": "2025-07-15", "status": "Approved", "price": 4200, "supplier": "Academic Books Ltd." }
+      { "acquisitionId": "acq1", "bookId": "b6", "title": "Introduction to AI", "author": "Stuart Russell", "acquiredDate": "2025-07-15", "price": 4200, "supplier": "Academic Books Ltd." },
+      { "acquisitionId": "acq2", "bookId": "b7", "title": "Data Structures in C", "author": "Mark Allen Weiss", "acquiredDate": "2025-07-10", "price": 3500, "supplier": "Campus Textbooks" },
+      { "acquisitionId": "acq3", "bookId": "b8", "title": "World History: A Modern Perspective", "author": "John Merriman", "acquiredDate": "2025-06-25", "price": 3800, "supplier": "Global Distributors" },
+      { "acquisitionId": "acq4", "bookId": "b10", "title": "1984", "author": "George Orwell", "acquiredDate": "2025-05-10", "price": 850, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq5", "bookId": "b11", "title": "The Catcher in the Rye", "author": "J.D. Salinger", "acquiredDate": "2025-05-10", "price": 900, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq6", "bookId": "b12", "title": "Sapiens: A Brief History of Humankind", "author": "Yuval Noah Harari", "acquiredDate": "2025-05-12", "price": 1500, "supplier": "Global Distributors" },
+      { "acquisitionId": "acq7", "bookId": "b13", "title": "The Hobbit", "author": "J.R.R. Tolkien", "acquiredDate": "2025-05-15", "price": 1100, "supplier": "Fantasy Books Co." },
+      { "acquisitionId": "acq8", "bookId": "b14", "title": "Cosmos", "author": "Carl Sagan", "acquiredDate": "2025-05-20", "price": 1350, "supplier": "Scientific Press" },
+      { "acquisitionId": "acq9", "bookId": "b15", "title": "Clean Code", "author": "Robert C. Martin", "acquiredDate": "2025-05-21", "price": 2800, "supplier": "Tech Books Unlimited" },
+      { "acquisitionId": "acq10", "bookId": "b16", "title": "The Lord of the Rings", "author": "J.R.R. Tolkien", "acquiredDate": "2025-05-25", "price": 2200, "supplier": "Fantasy Books Co." },
+      { "acquisitionId": "acq11", "bookId": "b17", "title": "A People's History of the United States", "author": "Howard Zinn", "acquiredDate": "2025-06-01", "price": 1800, "supplier": "Global Distributors" },
+      { "acquisitionId": "acq12", "bookId": "b18", "title": "The Diary of a Young Girl", "author": "Anne Frank", "acquiredDate": "2025-06-02", "price": 750, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq13", "bookId": "b19", "title": "Brave New World", "author": "Aldous Huxley", "acquiredDate": "2025-06-05", "price": 950, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq14", "bookId": "b20", "title": "Moby-Dick", "author": "Herman Melville", "acquiredDate": "2025-06-05", "price": 1000, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq15", "bookId": "b21", "title": "War and Peace", "author": "Leo Tolstoy", "acquiredDate": "2025-06-08", "price": 1400, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq16", "bookId": "b22", "title": "The Selfish Gene", "author": "Richard Dawkins", "acquiredDate": "2025-06-10", "price": 1600, "supplier": "Scientific Press" },
+      { "acquisitionId": "acq17", "bookId": "b23", "title": "Calculus: Early Transcendentals", "author": "James Stewart", "acquiredDate": "2025-06-15", "price": 4500, "supplier": "Academic Books Ltd." },
+      { "acquisitionId": "acq18", "bookId": "b24", "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "acquiredDate": "2025-06-18", "price": 1750, "supplier": "Global Distributors" },
+      { "acquisitionId": "acq19", "bookId": "b25", "title": "One Hundred Years of Solitude", "author": "Gabriel Garcia Marquez", "acquiredDate": "2025-06-20", "price": 1150, "supplier": "World Literature House" },
+      { "acquisitionId": "acq20", "bookId": "b26", "title": "The Structure of Scientific Revolutions", "author": "Thomas S. Kuhn", "acquiredDate": "2025-06-22", "price": 1900, "supplier": "Scientific Press" },
+      { "acquisitionId": "acq21", "bookId": "b27", "title": "Guns, Germs, and Steel", "author": "Jared Diamond", "acquiredDate": "2025-06-28", "price": 2100, "supplier": "Global Distributors" },
+      { "acquisitionId": "acq22", "bookId": "b28", "title": "Frankenstein", "author": "Mary Shelley", "acquiredDate": "2025-07-01", "price": 800, "supplier": "Classic Reads Inc." },
+      { "acquisitionId": "acq23", "bookId": "b29", "title": "The Art of Computer Programming", "author": "Donald E. Knuth", "acquiredDate": "2025-07-05", "price": 5500, "supplier": "Tech Books Unlimited" }
     ],
-    "readingLists": [
-      { "id": "rl1", "name": "Physics Fundamentals", "classId": "c1", "teacherId": "t2", "bookIds": ["b2"] },
-      { "id": "rl2", "name": "Classic American Literature", "classId": "c4", "teacherId": "t4", "bookIds": ["b3", "b5", "b6"] }
-    ]
+ "readingLists": [
+    { "id": "rl1", "name": "Physics Fundamentals", "classId": "c1", "teacherId": "t2", "bookIds": ["b2"] },
+    { "id": "rl2", "name": "Classic American Literature", "classId": "c4", "teacherId": "t4", "bookIds": ["b3", "b5", "b6"] },
+    { "id": "rl3", "name": "Introduction to Algebra", "classId": "c2", "teacherId": "t1", "bookIds": ["b1", "b4"] },
+    { "id": "rl4", "name": "World History: Ancient Civilizations", "classId": "c3", "teacherId": "t3", "bookIds": ["b7", "b8", "b9"] },
+    { "id": "rl5", "name": "Biology: The Cell", "classId": "c5", "teacherId": "t2", "bookIds": ["b10", "b11"] },
+    { "id": "rl6", "name": "Shakespearean Tragedies", "classId": "c4", "teacherId": "t4", "bookIds": ["b12", "b13"] },
+    { "id": "rl7", "name": "Calculus I", "classId": "c2", "teacherId": "t1", "bookIds": ["b14", "b15"] },
+    { "id": "rl8", "name": "European Renaissance Art", "classId": "c5", "teacherId": "t5", "bookIds": ["b16", "b17", "b18"] },
+    { "id": "rl9", "name": "Chemistry: Atomic Structure", "classId": "c3", "teacherId": "t6", "bookIds": ["b19", "b20"] },
+    { "id": "rl10", "name": "Intro to Programming with Python", "classId": "c3", "teacherId": "t7", "bookIds": ["b21", "b22"] },
+    { "id": "rl11", "name": "The Cold War Era", "classId": "c3", "teacherId": "t3", "bookIds": ["b23", "b24", "b25"] },
+    { "id": "rl12", "name": "Environmental Science", "classId": "c4", "teacherId": "t8", "bookIds": ["b26", "b27"] },
+    { "id": "rl13", "name": "Modern Poetry", "classId": "c1", "teacherId": "t4", "bookIds": ["b28", "b29", "b30"] },
+    { "id": "rl14", "name": "Quantum Mechanics", "classId": "c1", "teacherId": "t2", "bookIds": ["b31", "b32"] },
+    { "id": "rl15", "name": "Introduction to Philosophy", "classId": "c1", "teacherId": "t9", "bookIds": ["b33", "b34"] },
+    { "id": "rl16", "name": "Data Structures and Algorithms", "classId": "c5", "teacherId": "t7", "bookIds": ["b35", "b36"] },
+    { "id": "rl17", "name": "Microeconomics Principles", "classId": "c5", "teacherId": "t10", "bookIds": ["b37"] },
+    { "id": "rl18", "name": "Macroeconomics Principles", "classId": "c5", "teacherId": "t10", "bookIds": ["b38", "b39"] },
+    { "id": "rl19", "name": "Music Theory I", "classId": "c1", "teacherId": "t5", "bookIds": ["b40", "b41"] },
+    { "id": "rl20", "name": "Geology: Plate Tectonics", "classId": "c3", "teacherId": "t8", "bookIds": ["b42"] },
+    { "id": "rl21", "name": "Abnormal Psychology", "classId": "c4", "teacherId": "t9", "bookIds": ["b43", "b44", "b45"] },
+    { "id": "rl22", "name": "Organic Chemistry I", "classId": "c2", "teacherId": "t6", "bookIds": ["b46", "b47"] }
+]
   },
   "transport": {
     "vehicles": [
       { "vehicleId": "v1", "vehicleNumber": "DH-GA-1234", "driverName": "Mr. Kamal", "driverContact": "01711-000001", "capacity": 30 },
       { "vehicleId": "v2", "vehicleNumber": "DH-GA-5678", "driverName": "Mr. Jamal", "driverContact": "01711-000002", "capacity": 30 },
-      { "vehicleId": "v3", "vehicleNumber": "DH-CA-9101", "driverName": "Mr. Rahim", "driverContact": "01711-000003", "capacity": 25 }
+      { "vehicleId": "v3", "vehicleNumber": "DH-CA-9101", "driverName": "Mr. Rahim", "driverContact": "01711-000003", "capacity": 25 },
+      { "vehicleId": "v4", "vehicleNumber": "DH-DA-2233", "driverName": "Mr. Selim", "driverContact": "01711-000004", "capacity": 40 },
+      { "vehicleId": "v5", "vehicleNumber": "DH-MA-4455", "driverName": "Mr. Karim", "driverContact": "01711-000005", "capacity": 25 },
+      { "vehicleId": "v6", "vehicleNumber": "DH-GA-6677", "driverName": "Mr. Bashar", "driverContact": "01711-000006", "capacity": 30 },
+      { "vehicleId": "v7", "vehicleNumber": "DH-CA-8899", "driverName": "Mr. Anis", "driverContact": "01711-000007", "capacity": 25 },
+      { "vehicleId": "v8", "vehicleNumber": "DH-DA-1012", "driverName": "Mr. Faruk", "driverContact": "01711-000008", "capacity": 40 },
+      { "vehicleId": "v9", "vehicleNumber": "DH-MA-3456", "driverName": "Mr. Nabil", "driverContact": "01711-000009", "capacity": 25 },
+      { "vehicleId": "v10", "vehicleNumber": "DH-GA-7890", "driverName": "Mr. Ratan", "driverContact": "01711-000010", "capacity": 30 },
+      { "vehicleId": "v11", "vehicleNumber": "DH-CA-1122", "driverName": "Mr. Mizan", "driverContact": "01711-000011", "capacity": 25 },
+      { "vehicleId": "v12", "vehicleNumber": "DH-DA-3344", "driverName": "Mr. Sohel", "driverContact": "01711-000012", "capacity": 40 },
+      { "vehicleId": "v13", "vehicleNumber": "DH-MA-5566", "driverName": "Mr. Alom", "driverContact": "01711-000013", "capacity": 25 },
+      { "vehicleId": "v14", "vehicleNumber": "DH-GA-7788", "driverName": "Mr. Babul", "driverContact": "01711-000014", "capacity": 30 },
+      { "vehicleId": "v15", "vehicleNumber": "DH-CA-9900", "driverName": "Mr. Palash", "driverContact": "01711-000015", "capacity": 25 },
+      { "vehicleId": "v16", "vehicleNumber": "DH-DA-1213", "driverName": "Mr. Jewel", "driverContact": "01711-000016", "capacity": 40 },
+      { "vehicleId": "v17", "vehicleNumber": "DH-MA-1415", "driverName": "Mr. Manik", "driverContact": "01711-000017", "capacity": 25 },
+      { "vehicleId": "v18", "vehicleNumber": "DH-GA-1617", "driverName": "Mr. Sumon", "driverContact": "01711-000018", "capacity": 30 },
+      { "vehicleId": "v19", "vehicleNumber": "DH-CA-1819", "driverName": "Mr. Arif", "driverContact": "01711-000019", "capacity": 25 },
+      { "vehicleId": "v20", "vehicleNumber": "DH-DA-2021", "driverName": "Mr. Asif", "driverContact": "01711-000020", "capacity": 40 },
+      { "vehicleId": "v21", "vehicleNumber": "DH-MA-2223", "driverName": "Mr. Emon", "driverContact": "01711-000021", "capacity": 25 },
+      { "vehicleId": "v22", "vehicleNumber": "DH-GA-2425", "driverName": "Mr. Biplob", "driverContact": "01711-000022", "capacity": 30 },
+      { "vehicleId": "v23", "vehicleNumber": "DH-CA-2627", "driverName": "Mr. Firoz", "driverContact": "01711-000023", "capacity": 25 }
     ],
     "routes": [
       { "routeId": "r1", "routeName": "Route A - North", "stops": ["Stop A1", "Stop A2", "Stop A3"] },
       { "routeId": "r2", "routeName": "Route B - South", "stops": ["Stop B1", "Stop B2", "Stop B3"] },
-      { "routeId": "r3", "routeName": "Route C - East", "stops": ["Stop C1", "Stop C2", "Stop C3", "Stop C4"] }
+      { "routeId": "r3", "routeName": "Route C - East", "stops": ["Stop C1", "Stop C2", "Stop C3", "Stop C4"] },
+      { "routeId": "r4", "routeName": "Route D - West", "stops": ["Stop D1", "Stop D2", "Stop D3"] },
+      { "routeId": "r5", "routeName": "Route E - Central", "stops": ["Stop E1", "Stop E2", "Stop E3", "Stop E4"] },
+      { "routeId": "r6", "routeName": "Route F - North-East", "stops": ["Stop F1", "Stop F2", "Stop F3"] },
+      { "routeId": "r7", "routeName": "Route G - South-West", "stops": ["Stop G1", "Stop G2", "Stop G3"] },
+      { "routeId": "r8", "routeName": "Express Route 1", "stops": ["Campus", "Main Hub 1", "Main Hub 2"] },
+      { "routeId": "r9", "routeName": "Express Route 2", "stops": ["Campus", "Main Hub 3", "Main Hub 4"] },
+      { "routeId": "r10", "routeName": "Route H - Inner Circle", "stops": ["Stop H1", "Stop H2", "Stop H3", "Stop H4", "Stop H5"] },
+      { "routeId": "r11", "routeName": "Route I - Outer Circle", "stops": ["Stop I1", "Stop I2", "Stop I3", "Stop I4", "Stop I5"] },
+      { "routeId": "r12", "routeName": "Route J - North-West", "stops": ["Stop J1", "Stop J2", "Stop J3"] },
+      { "routeId": "r13", "routeName": "Route K - South-East", "stops": ["Stop K1", "Stop K2", "Stop K3", "Stop K4"] },
+      { "routeId": "r14", "routeName": "Special Route A", "stops": ["Campus", "Faculty Quarters", "Admin Building"] },
+      { "routeId": "r15", "routeName": "Night Route A", "stops": ["Campus", "Hostel A", "Hostel B", "Hostel C"] },
+      { "routeId": "r16", "routeName": "Night Route B", "stops": ["Campus", "Hostel D", "Hostel E", "Library"] },
+      { "routeId": "r17", "routeName": "Route L - Riverside", "stops": ["Stop L1", "Stop L2", "Stop L3"] },
+      { "routeId": "r18", "routeName": "Route M - Hillside", "stops": ["Stop M1", "Stop M2"] },
+      { "routeId": "r19", "routeName": "Route N - Downtown", "stops": ["Stop N1", "Stop N2", "Stop N3", "Stop N4"] },
+      { "routeId": "r20", "routeName": "Route O - Suburban East", "stops": ["Stop O1", "Stop O2", "Stop O3"] },
+      { "routeId": "r21", "routeName": "Route P - Suburban West", "stops": ["Stop P1", "Stop P2", "Stop P3"] },
+      { "routeId": "r22", "routeName": "Inter-Campus Shuttle", "stops": ["Main Campus", "Science Campus", "Arts Campus"] },
+      { "routeId": "r23", "routeName": "Weekend Route", "stops": ["Campus", "Shopping Mall", "Cinema Hall", "Park"] }
     ],
     "assignments": [
       { "assignmentId": "ta1", "studentId": "s1", "vehicleId": "v1", "routeId": "r1" },
       { "assignmentId": "ta2", "studentId": "s2", "vehicleId": "v1", "routeId": "r1" },
       { "assignmentId": "ta3", "studentId": "s3", "vehicleId": "v2", "routeId": "r2" },
-      { "assignmentId": "ta4", "studentId": "s_2233081040", "vehicleId": "v1", "routeId": "r1" },
+      { "assignmentId": "ta4", "studentId": "s40", "vehicleId": "v1", "routeId": "r1" },
       { "assignmentId": "ta5", "studentId": "s4", "vehicleId": "v3", "routeId": "r3" },
+      { "assignmentId": "ta6", "studentId": "s5", "vehicleId": "v2", "routeId": "r2" },
+      { "assignmentId": "ta7", "studentId": "s30", "vehicleId": "v3", "routeId": "r3" },
+      { "assignmentId": "ta8", "studentId": "s23", "vehicleId": "v4", "routeId": "r4" },
+      { "assignmentId": "ta9", "studentId": "s6", "vehicleId": "v4", "routeId": "r4" },
+      { "assignmentId": "ta10", "studentId": "s7", "vehicleId": "v5", "routeId": "r5" },
+      { "assignmentId": "ta11", "studentId": "s8", "vehicleId": "v5", "routeId": "r5" },
+      { "assignmentId": "ta12", "studentId": "s9", "vehicleId": "v6", "routeId": "r6" },
+      { "assignmentId": "ta13", "studentId": "s10", "vehicleId": "v6", "routeId": "r6" },
+      { "assignmentId": "ta14", "studentId": "s11", "vehicleId": "v7", "routeId": "r7" },
+      { "assignmentId": "ta15", "studentId": "s12", "vehicleId": "v7", "routeId": "r7" },
+      { "assignmentId": "ta16", "studentId": "s13", "vehicleId": "v8", "routeId": "r8" },
+      { "assignmentId": "ta17", "studentId": "s14", "vehicleId": "v8", "routeId": "r8" },
+      { "assignmentId": "ta18", "studentId": "s15", "vehicleId": "v9", "routeId": "r9" },
+      { "assignmentId": "ta19", "studentId": "s16", "vehicleId": "v9", "routeId": "r9" },
+      { "assignmentId": "ta20", "studentId": "s17", "vehicleId": "v10", "routeId": "r10" },
+      { "assignmentId": "ta21", "studentId": "s18", "vehicleId": "v10", "routeId": "r10" },
+      { "assignmentId": "ta22", "studentId": "s19", "vehicleId": "v11", "routeId": "r11" },
+      { "assignmentId": "ta23", "studentId": "s20", "vehicleId": "v11", "routeId": "r11" },
+      { "assignmentId": "ta24", "studentId": "s21", "vehicleId": "v12", "routeId": "r12" },
+      { "assignmentId": "ta25", "studentId": "s22", "vehicleId": "v12", "routeId": "r12" },
+      { "assignmentId": "ta26", "studentId": "s23", "vehicleId": "v1", "routeId": "r1" },
+      { "assignmentId": "ta27", "studentId": "s24", "vehicleId": "v2", "routeId": "r2" }
     ]
   }
 };
@@ -590,7 +828,7 @@ const store = {
 // ===================================================================================
 const ui = {
     loginPage: document.getElementById('login-page'),
-    app: document.getElementById('app'),
+    app: document.getElementById('app'),                
     loginForm: document.getElementById('login-form'),
     loginMessage: document.getElementById('login-message'),
     logoutButton: document.getElementById('logout-button'),
@@ -771,6 +1009,8 @@ function navigateTo(page) {
         'dashboard': renderDashboard,
         'students': renderStudentsPage,
         'teachers': renderTeachersPage,
+        'staff': renderStaffPage,
+        'staff': renderStaffPage,
         'classes': renderClassesPage,
         'attendance': renderAttendancePage,
         'fees': renderFeesPage,
@@ -920,9 +1160,10 @@ async function renderDashboard() {
         }
     // ADMIN DASHBOARD
     } else {
+ const totalStaffCount = Object.values(appDatabase.users).filter(user => user.role !== 'Student').length;        
         const statCards = [
             { title: 'Total Students', value: students.length, icon: 'fa-user-graduate', color: 'blue' },
-            { title: 'Total Staff', value: teachers.length + 2, icon: 'fa-users-cog', color: 'green' }, // +2 for accountant, librarian
+            { title: 'Total Staff', value: totalStaffCount, icon: 'fa-users-cog', color: 'green' },            
             { title: 'Total Fees Due', value: `BDT ${fees.filter(f => f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0).toLocaleString()}`, icon: 'fa-file-invoice-dollar', color: 'yellow' },
             { title: 'Books on Loan', value: store.get('library', 'transactions').filter(t => t.status === 'Issued').length, icon: 'fa-book', color: 'indigo' },
         ];
@@ -964,6 +1205,8 @@ async function renderDashboard() {
         renderDashboardCharts(fees, students);
     }
 }
+
+
 
 async function renderStudentsPage() {
     const classes = store.get('classes');
@@ -1010,21 +1253,27 @@ async function renderStudentsPage() {
             { label: 'Guardian', key: 'guardianName' },
             { label: 'Contact', key: 'contact' },
         ],
-        formFields: [
-            { name: 'name', label: 'Full Name', type: 'text', required: true },
-            { name: 'email', label: 'Email', type: 'email', required: true },
-            { name: 'rollNo', label: 'Roll Number', type: 'text', required: true },
-            { name: 'classId', label: 'Class', type: 'select', options: classes.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true },
-            { name: 'gender', label: 'Gender', type: 'select', options: '<option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option>', required: true },
-            { name: 'bloodGroup', label: 'Blood Group', type: 'select', options: '<option value="">Select</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option>' },
-            { name: 'guardianName', label: 'Guardian Name', type: 'text', required: true },
-            { name: 'contact', label: 'Guardian Contact', type: 'tel', required: true },
-            { name: 'address', label: 'Address', type: 'textarea' },
-        ]
+formFields: [
+    { name: 'name', label: 'Full Name', type: 'text', required: true },
+    { name: 'email', label: 'Email', type: 'email', required: true },
+    { name: 'rollNo', label: 'Roll Number', type: 'text', required: true },
+    { name: 'dateOfBirth', label: 'Date of Birth', type: 'date', required: true },
+    { name: 'classId', label: 'Class', type: 'select', options: classes.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true },
+    { name: 'gender', label: 'Gender', type: 'select', options: '<option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option>', required: true },
+    { name: 'bloodGroup', label: 'Blood Group', type: 'select', options: '<option value="">Select</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option>' },
+    { name: 'previousSchool', label: 'Previous School', type: 'text' },  
+     { name: 'guardianName', label: 'Guardian Name', type: 'text', required: true },
+    { name: 'fatherName', label: 'Father\'s Name', type: 'text', required: true },
+    { name: 'fatherPhone', label: 'Father\'s Contact', type: 'tel', required: true },
+    { name: 'motherName', label: 'Mother\'s Name', type: 'text', required: true },
+    { name: 'motherPhone', label: 'Mother\'s Contact', type: 'tel' },
+    { name: 'address', label: 'Current Address', type: 'textarea', required: true },
+]
     };
 
     renderGenericListPage({ ...baseConfig, ...configOverrides });
 }
+
 
 async function renderTeachersPage() {
     const departments = store.get('departments');
@@ -1048,6 +1297,428 @@ async function renderTeachersPage() {
         ],
         searchKeys: ['name', 'subject', 'email']
     });
+if (currentUser.role === 'Admin') {
+    teacherPageConfig.customAddFunction = () => {
+        openFormModal(`Add New ${teacherPageConfig.title}`, teacherPageConfig.formFields, async (formData) => {
+            const newTeacher = await apiService.create(teacherPageConfig.collectionName, formData);
+            const username = formData.email.toLowerCase();
+            const defaultPassword = 'teacher';
+            appDatabase.users[username] = {
+                password: defaultPassword,
+                role: "Teacher",
+                teacherId: newTeacher.id
+            };
+            await apiService.save();
+            showToast(`${teacherPageConfig.title} added successfully! Default password is "${defaultPassword}".`, 'success');
+            renderGenericListPage(teacherPageConfig);
+        });
+    };
+}
+}
+
+// Function to render the new Staff & Colleagues page
+async function renderStaffPage() {
+    // 1. Consolidate all staff members into a single list
+    const users = appDatabase.users;
+    const teachers = store.get('teachers');
+    
+    // Use Object.entries to correctly get the username (key)
+// Located inside the renderStaffPage function
+
+const allStaff = Object.entries(users)
+    .filter(([username, userObject]) => userObject.role !== 'Student') // Exclude students
+    .map(([username, userObject]) => {
+        
+        // --- THIS SECTION IS CORRECTLY IMPLEMENTED ---
+        let details = {
+            id: username, // Correctly use the username as the unique ID
+            name: userObject.name,
+            role: userObject.role,
+            email: userObject.email,
+            contact: userObject.contact || 'N/A'
+        };
+        // If it's a teacher, get more details from the 'teachers' store
+        if (userObject.role === 'Teacher' && userObject.teacherId) {
+            const teacherDetails = teachers.find(t => t.id === userObject.teacherId);
+            if (teacherDetails) {
+                details = { ...details, ...teacherDetails, id: username }; // Ensure id is not overwritten
+            }
+        }
+        return details;
+        // --- END OF THE CORRECTLY IMPLEMENTED SECTION ---
+
+    });
+
+    // 2. Get a unique list of all roles for the filter dropdown
+    const allRoles = [...new Set(allStaff.map(s => s.role))];
+    const roleFilterOptions = [
+        { value: '', label: 'All Roles' },
+        ...allRoles.map(role => ({ value: role, label: role }))
+    ];
+
+    // 3. Configure the generic list page
+    const config = {
+        title: 'Staff & Colleagues',
+        collectionName: 'users', // We use 'users' conceptually, but provide the data directly
+        data: allStaff, // Provide the consolidated data
+        columns: [
+            { label: 'Name', key: 'name', sortable: true },
+            { label: 'Role / Profession', key: 'role', sortable: true },
+            { label: 'Email', key: 'email' },
+            { label: 'Contact', key: 'contact' },
+        ],
+        searchKeys: ['name', 'role', 'email'],
+        hideAddButton: true,
+        // Only show actions if the user is an Admin
+        hideActions: currentUser.role !== 'Admin', 
+        
+        // Custom filter for roles
+        customHeader: `
+            <select id="role-filter" class="p-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">
+                ${roleFilterOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+            </select>
+        `,
+    };
+
+    // 4. Call the wrapper function to render the page
+    renderFilteredGenericListPage(config);
+}
+
+// Wrapper around renderGenericListPage to handle pre-filtered data and custom filters
+// --- REPLACE YOUR ENTIRE EXISTING renderFilteredGenericListPage FUNCTION WITH THIS ---
+
+// Wrapper around renderGenericListPage to handle pre-filtered data and custom filters
+function renderFilteredGenericListPage(config) {
+        window.currentPageConfig = config; 
+
+    const { title, columns, hideAddButton, hideActions, customHeader, data, searchKeys } = config;
+    let originalItems = [...data]; 
+
+    const renderTable = (itemsToRender) => {
+        // ... this inner function does not need to be changed ...
+        const tableContainer = document.getElementById('generic-list-container');
+        if (!tableContainer) return;
+        
+        if (itemsToRender.length === 0) {
+            tableContainer.innerHTML = `<p class="text-center text-slate-400 py-8">No staff members found matching the criteria.</p>`;
+            return;
+        }
+
+        tableContainer.innerHTML = `
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="min-w-full">
+                    <thead class="bg-slate-700">
+                        <tr>
+                            ${columns.map(c => `<th class="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">${c.label}</th>`).join('')}
+                            ${!hideActions ? `<th class="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider">Actions</th>` : ''}
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-700">
+                        ${itemsToRender.map(item => `
+                            <tr class="hover:bg-slate-700/30">
+                                ${columns.map(c => `<td class="px-4 py-4 whitespace-nowrap text-sm">${c.render ? c.render(item) : (item[c.key] || 'N/A')}</td>`).join('')}
+                                ${!hideActions ? `
+                                    <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button class="text-blue-400 hover:text-blue-300 edit-staff-btn" data-id="${item.id}">Edit</button>
+                                    </td>
+                                ` : ''}
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>`;
+    };
+    
+    // --- MODIFICATION START ---
+    // The main HTML structure is updated to conditionally include the "Add Staff" button.
+    ui.contentArea.innerHTML = `
+        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 shadow-md animate-fade-in">
+            <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
+                <h3 class="text-xl font-semibold">${title} Management</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <input type="text" id="search-input" placeholder="Search by name, role, etc..." class="p-2 rounded-lg bg-slate-700 border border-slate-600 focus:ring-2 focus:ring-blue-500">
+                    ${customHeader || ''}
+                    
+                    <!-- This is the new button, which only renders if the current user is an Admin -->
+                    ${currentUser.role === 'Admin' ? `
+                        <button id="add-staff-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+                            <i class="fas fa-plus"></i> Add Staff
+                        </button>
+                    ` : ''}
+
+                </div>
+            </div>
+            <div id="generic-list-container"></div>
+        </div>
+    `;
+
+    renderTable(originalItems);
+    
+    // Attach event listeners for the edit buttons (this part is unchanged)
+    document.querySelectorAll('.edit-staff-btn').forEach(btn => {
+        btn.onclick = () => {
+            const staffId = btn.dataset.id;
+            openStaffEditModal(staffId);
+        };
+    });
+
+    // --- This is the new logic for the "Add Staff" button ---
+// --- REPLACE YOUR EXISTING addStaffBtn.onclick HANDLER WITH THIS ---
+
+if (currentUser.role === 'Admin') {
+    const addStaffBtn = document.getElementById('add-staff-btn');
+    if (addStaffBtn) {
+        addStaffBtn.onclick = () => {
+            // Define the complete set of fields for a new staff member
+            const formFields = [
+                { name: 'name', label: 'Full Name', type: 'text', required: true },
+                { name: 'email', label: 'Email (will be username)', type: 'email', required: true },
+                { name: 'role', label: 'Role / Profession', type: 'text', required: true, placeholder: 'e.g., Clerk, Nanny, etc.' },
+                { name: 'contact', label: 'Contact Number', type: 'tel' },
+                { name: 'address', label: 'Address', type: 'textarea' },
+                { name: 'nid', label: 'National ID Number', type: 'text' },
+                { name: 'bloodGroup', label: 'Blood Group', type: 'select', options: '<option value="">Select</option><option value="A+">A+</option><option value="A-">A-</option><option value="B+">B+</option><option value="B-">B-</option><option value="AB+">AB+</option><option value="AB-">AB-</option><option value="O+">O+</option><option value="O-">O-</option>' },
+                { name: 'password', label: 'Initial Password', type: 'text', required: true },
+            ];
+
+            openFormModal('Add New Staff Member', formFields, async (formData) => {
+                const username = formData.email.toLowerCase();
+                if (appDatabase.users[username]) {
+                    showToast('A user with this email already exists.', 'error');
+                    return; // Stop execution if user exists
+                }
+
+                // Create the new user object, including the new fields
+                appDatabase.users[username] = {
+                    name: formData.name,
+                    email: formData.email,
+                    role: formData.role,
+                    contact: formData.contact,
+                    password: formData.password,
+                    address: formData.address,
+                    nid: formData.nid,
+                    bloodGroup: formData.bloodGroup,
+                    nidImage: formData.nidImage || null, // Get NID image from the modal
+                    profileImage: formData.profileImage || null // Get profile image
+                };
+
+                await apiService.save();
+                showToast('New staff member added successfully!', 'success');
+                renderStaffPage();
+            });
+        };
+    }
+}
+    // --- MODIFICATION END ---
+
+
+    const handleFilter = () => {
+        // ... this function does not need to be changed ...
+        const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
+        const roleFilterValue = document.getElementById('role-filter')?.value || '';
+        let filteredItems = [...originalItems];
+        if (searchTerm && searchKeys.length > 0) {
+            filteredItems = filteredItems.filter(item => 
+                searchKeys.some(key => item[key] && String(item[key]).toLowerCase().includes(searchTerm))
+            );
+        }
+        if (roleFilterValue) {
+            filteredItems = filteredItems.filter(item => item.role === roleFilterValue);
+        }
+        renderTable(filteredItems);
+    };
+
+    document.getElementById('search-input').oninput = handleFilter;
+    document.getElementById('role-filter').onchange = handleFilter;
+}
+
+
+function openStaffEditModal(staffId) {
+     const baseUserData = appDatabase.users[staffId];
+    if (!baseUserData) {
+        showToast('Could not find staff member data.', 'error');
+        return;
+    }
+    let staffData = { ...baseUserData };
+    if (staffData.role === 'Teacher' && staffData.teacherId) {
+        const teacherDetails = appDatabase.teachers.find(t => t.id === staffData.teacherId);
+        if (teacherDetails) {
+            // Merge the detailed info into our staffData object
+            staffData = { ...staffData, ...teacherDetails };
+        }
+    }
+
+    let newProfileImageData = null;
+
+    // Define standard fields to reduce repetition
+    const standardFieldConfigs = [
+        { name: 'name',    label: 'Name',    type: 'text' },
+        { name: 'role',    label: 'Role',    type: 'text' },
+        { name: 'email',   label: 'Email',   type: 'email' },
+        { name: 'contact', label: 'Contact', type: 'tel' }
+    ];
+    const standardFields = standardFieldConfigs.map(f => f.name);
+
+    // Generate HTML for standard fields programmatically
+    const standardFieldsHtml = standardFieldConfigs.map(field => `
+        <div>
+            <label class="block text-sm font-medium text-slate-300">${field.label}</label>
+            <input type="${field.type}" name="${field.name}" value="${staffData[field.name] || ''}" class="mt-1 block w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+    `).join('');
+
+    const customFields = Object.keys(staffData).filter(key =>
+        !standardFields.includes(key) && !['password', 'profileImage', 'teacherId'].includes(key)
+    );
+
+    const formHtml = `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-h-[65vh] overflow-y-auto custom-scrollbar pr-2">
+            
+            <div class="md:col-span-1 space-y-4">
+                <h4 class="text-lg font-semibold text-slate-200">Profile Actions</h4>
+                <div class="text-center relative group w-32 h-32 mx-auto">
+                    <img id="staff-edit-img-preview" src="${staffData.profileImage || generateInitialsAvatar(staffData.name)}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover border-4 border-slate-700 shadow-lg">
+                    <label for="staff-image-upload" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-full cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-camera text-2xl text-white"></i>
+                    </label>
+                    <input type="file" id="staff-image-upload" accept="image/*" class="hidden">
+                </div>
+                <div class="text-center">
+                    <p class="font-bold text-xl text-white">${staffData.name}</p>
+                    <p class="text-blue-400">${staffData.role}</p>
+                    <p class="text-xs text-slate-500 mt-1">Username: ${staffId}</p>
+                </div>
+                <div class="space-y-2 pt-4 border-t border-slate-700">
+                    <button type="button" id="reset-staff-password-btn" class="w-full text-sm bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-2"><i class="fas fa-key"></i> Reset Password</button>
+      <button type="button" id="delete-staff-btn" class="w-full text-sm bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-2"><i class="fas fa-trash-alt"></i> Delete Staff Member</button>
+                </div>
+            </div>
+            
+            <div class="md:col-span-2">
+                <form id="edit-staff-form" class="space-y-4">
+                    <h4 class="text-lg font-semibold text-slate-200">Basic Information</h4>
+                    ${standardFieldsHtml}
+                    
+                    <hr class="border-slate-600">
+                    <h4 class="text-lg font-semibold text-slate-200">Custom Fields</h4>
+                    <div id="dynamic-fields-container" class="space-y-3">
+                        ${customFields.map(key => `
+                            <div class="flex gap-2 items-center dynamic-field-row">
+                                <input type="text" value="${key}" class="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-md font-bold" readonly>
+                                <input type="text" value="${staffData[key]}" data-key="${key}" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md">
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+                        <button type="button" id="add-staff-field-btn" class="text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-3 rounded-lg"><i class="fas fa-plus mr-1"></i> Add Field</button>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    ui.modalTitle.textContent = `Edit Staff Profile`;
+    ui.modalBody.innerHTML = formHtml;
+
+    // --- All event listeners remain the same ---
+    document.getElementById('staff-image-upload').addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                newProfileImageData = e.target.result;
+                document.getElementById('staff-edit-img-preview').src = newProfileImageData;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('reset-staff-password-btn').addEventListener('click', async () => {
+        const newPassword = prompt(`Enter a new password for ${staffData.name}.\nLeave blank to cancel.`);
+        if (newPassword && newPassword.trim() !== '') {
+            appDatabase.users[staffId].password = newPassword.trim();
+            await apiService.save();
+            showToast('Password has been reset successfully!', 'success');
+        } else {
+            showToast('Password reset cancelled.', 'info');
+        }
+    });
+    
+    document.getElementById('delete-staff-btn').addEventListener('click', () => {
+        showConfirmationModal(`Are you sure you want to permanently delete ${staffData.name}? This action cannot be undone.`, async () => {
+            if (staffData.role === 'Teacher' && staffData.teacherId) {
+                appDatabase.teachers = appDatabase.teachers.filter(t => t.id !== staffData.teacherId);
+            }
+            delete appDatabase.users[staffId];
+            await apiService.save();
+            showToast('Staff member has been deleted.', 'success');
+            closeAnimatedModal(ui.modal);
+            renderStaffPage();
+        });
+    });
+
+    document.getElementById('add-staff-field-btn').addEventListener('click', () => {
+        const container = document.getElementById('dynamic-fields-container');
+        const newFieldRow = document.createElement('div');
+        newFieldRow.className = 'flex gap-2 items-center new-field-row';
+        newFieldRow.innerHTML = `
+            <input type="text" placeholder="Field Name (e.g., Department)" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md new-key">
+            <input type="text" placeholder="Field Value (e.g., Accounts)" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md new-value">
+            <button type="button" class="text-red-500 remove-field-btn"><i class="fas fa-trash"></i></button>
+        `;
+        container.appendChild(newFieldRow);
+        
+        newFieldRow.querySelector('.remove-field-btn').addEventListener('click', (e) => {
+            e.currentTarget.parentElement.remove();
+        });
+    });
+
+    document.getElementById('edit-staff-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const updatedStaffData = { ...staffData };
+
+        if (newProfileImageData) {
+            updatedStaffData.profileImage = newProfileImageData;
+        }
+        
+        standardFields.forEach(field => {
+            updatedStaffData[field] = form[field].value;
+        });
+        
+        document.querySelectorAll('#dynamic-fields-container .dynamic-field-row input[data-key]').forEach(input => {
+            updatedStaffData[input.dataset.key] = input.value;
+        });
+
+        document.querySelectorAll('#dynamic-fields-container .new-field-row').forEach(row => {
+            const key = row.querySelector('.new-key').value.trim();
+            const value = row.querySelector('.new-value').value.trim();
+            if (key) {
+                updatedStaffData[key] = value;
+            }
+        });
+        
+        appDatabase.users[staffId] = updatedStaffData;
+        await apiService.save();
+
+        showToast('Staff information updated successfully!', 'success');
+        closeAnimatedModal(ui.modal);
+        renderStaffPage();
+    });
+
+    const modalWidthClass = '!max-w-lg';
+    const modalContent = ui.modal.querySelector('.modal-content');
+    modalContent.classList.add('!max-w-4xl', 'rounded-md');
+    modalContent.classList.remove('rounded-lg');
+    openAnimatedModal(ui.modal);
+    
+ ui.modal.addEventListener('transitionend', () => {
+        if (!ui.modal.classList.contains('show')) {
+            modalContent.classList.remove(modalWidthClass, 'rounded-md');
+            modalContent.classList.add('rounded-lg');
+        }
+    }, { once: true });
 }
 
 async function renderDepartmentsPage() {
@@ -1594,13 +2265,17 @@ async function renderNoticesPage() {
         await store.refresh('notices');
         const allNotices = store.get('notices'); 
         const teachersMap = store.getMap('teachers');
+        const studentsMap = store.getMap('students');
         const classesMap = store.getMap('classes');
         teachersMap.set('admin', { name: 'Admin' });
 
         const relevantNotices = allNotices.filter(n => {
+            if (n.type === 'private_message') {
+                return n.authorId === currentUser.id || n.target === currentUser.id;
+            }
             if (currentUser.role === 'Admin') return true;
             if (currentUser.role === 'Teacher') {
-                return n.target === 'All' || n.target === 'Teacher' || n.target === 'Staff' || n.target === currentUser.id;
+                return n.target === 'All' || n.target === 'Teacher' || n.target === 'Staff';
             }
             if (currentUser.role === 'Student') {
                 return n.target === 'All' || n.target === 'Student' || n.target === `class_${currentUser.classId}`;
@@ -1612,13 +2287,16 @@ async function renderNoticesPage() {
         }).sort((a, b) => new Date(b.date) - new Date(a.date));
 
         if (relevantNotices.length === 0) {
-            noticeListContainer.innerHTML = '<p class="text-center text-slate-400 py-8">No notices found.</p>';
+            noticeListContainer.innerHTML = '<p class="text-center text-slate-400 py-8">No notices or messages found.</p>';
             return;
         }
 
         noticeListContainer.innerHTML = relevantNotices.map(item => {
             let audienceText, borderColor = 'border-blue-500';
-            if (item.target === 'All') audienceText = 'For: All';
+            if(item.type === 'private_message') {
+                audienceText = `Private Message`; 
+                borderColor = 'border-purple-500';
+            } else if (item.target === 'All') audienceText = 'For: All';
             else if (item.target === 'Student') { audienceText = `For: All Students`; borderColor = 'border-green-500'; }
             else if (item.target === 'Teacher') { audienceText = `For: All Teachers`; borderColor = 'border-yellow-500'; }
             else if (item.target === 'Staff') { audienceText = `For: Staff Only`; borderColor = 'border-purple-500'; }
@@ -1626,10 +2304,9 @@ async function renderNoticesPage() {
                 const classId = item.target.split('_')[1];
                 audienceText = `For: ${classesMap.get(classId)?.name || 'Specific Class'}`;
                 borderColor = 'border-red-500';
-            } else if (item.target === 'admin') { audienceText = `To: Admin`; borderColor = 'border-slate-500'; }
-            else { audienceText = `To: You`; borderColor = 'border-teal-500'; }
+            }
             
-            const authorName = teachersMap.get(item.authorId)?.name || store.get('students').find(s=>s.id === item.authorId)?.name || 'School System';
+            const authorName = teachersMap.get(item.authorId)?.name || studentsMap.get(item.authorId)?.name || 'School System';
             return createNoticeCard(item, authorName, audienceText, borderColor);
         }).join('');
         
@@ -1637,6 +2314,7 @@ async function renderNoticesPage() {
     }
 
     function attachActionListeners() {
+        // Handler for the delete button
         document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = () => {
             showConfirmationModal('Are you sure you want to delete this notice?', async () => {
                 await apiService.remove('notices', btn.dataset.id);
@@ -1644,11 +2322,36 @@ async function renderNoticesPage() {
                 renderList();
             });
         });
+
+        // NEW: Handler for the reply button
+        document.querySelectorAll('.reply-btn').forEach(btn => {
+            btn.onclick = () => {
+                const studentId = btn.dataset.authorId;
+                const studentName = btn.dataset.authorName;
+
+                // Use the existing powerful form modal to send a reply
+                openFormModal(`Reply to ${studentName}`, [
+                    { name: 'content', label: 'Your Message', type: 'textarea', required: true }
+                ], async (formData) => {
+                    await apiService.create('notices', {
+                        title: `Reply from Teacher: ${currentUser.name}`,
+                        content: formData.content,
+                        date: new Date().toISOString(),
+                        target: studentId, // Send the reply back to the student
+                        authorId: currentUser.id, // The teacher is the author
+                        type: 'private_message' // Mark it as private
+                    });
+                    showToast('Reply sent!', 'success');
+                    await store.refresh('notices');
+                    renderList(); // Re-render the page to show the new reply in the history
+                });
+            };
+        });
     }
     
     if (currentUser.role === 'Admin' || currentUser.role === 'Teacher') {
         document.getElementById('add-new-btn').onclick = () => {
-            openFormModal('Send New Notice', [
+            openFormModal('Send New Public Notice', [
                 { name: 'title', label: 'Title', type: 'text', required: true },
                 { name: 'content', label: 'Content', type: 'textarea', required: true },
                 { 
@@ -1675,12 +2378,17 @@ async function renderNoticesPage() {
     renderList();
 }
 async function renderLibraryPage() {
+    // --- 1. DATA FETCHING AND PREPARATION ---
     await Promise.all([
         store.refresh('library', 'books'),
         store.refresh('library', 'transactions'),
         store.refresh('library', 'reservations'),
+        store.refresh('library', 'acquisitions'),
         store.refresh('library', 'readingLists'),
-        store.refresh('fees')
+        store.refresh('fees'),
+        store.refresh('students'),
+        store.refresh('teachers'),
+        store.refresh('classes')
     ]);
 
     const libraryData = {
@@ -1691,18 +2399,31 @@ async function renderLibraryPage() {
         acquisitions: store.get('library', 'acquisitions')
     };
 
-    const memberMap = store.getMap('members');
-    const bookMap = store.getMap('books');
+    const studentMap = store.getMap('students');
+    const teacherMap = store.getMap('teachers');
+    const memberMap = new Map([...studentMap, ...teacherMap]);
+    const bookMap = new Map(libraryData.books.map(b => [b.bookId, b]));
     const FINE_PER_DAY = 5;
 
+    // --- 2. HELPER & CORE LOGIC FUNCTIONS ---
+
     const formatDate = (isoDate) => isoDate ? new Date(isoDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
+    
     const calculateOverdueDays = (dueDate) => {
         const due = new Date(dueDate);
-        const today = new Date();
+        const today = new Date(); // Use the real current date
         today.setHours(0, 0, 0, 0);
         due.setHours(0, 0, 0, 0);
         if (today <= due) return 0;
         return Math.ceil((today - due) / (1000 * 60 * 60 * 24));
+    };
+
+    const completeReturn = async (transaction) => {
+        await apiService.update('library', transaction.transactionId, { status: 'Returned', returnDate: new Date().toISOString().slice(0, 10) }, 'transactions', 'transactionId');
+        const book = bookMap.get(transaction.bookId);
+        if (book) {
+            await apiService.update('library', book.bookId, { availableCopies: book.availableCopies + 1 }, 'books', 'bookId');
+        }
     };
 
     const handleReturn = async (transactionId) => {
@@ -1710,21 +2431,11 @@ async function renderLibraryPage() {
         if (!transaction) return;
 
         const overdueDays = calculateOverdueDays(transaction.dueDate);
-        const completeReturn = async (transaction) => {
-            await apiService.update('library', transaction.transactionId, { status: 'Returned', returnDate: new Date().toISOString().slice(0, 10) }, 'transactions', 'transactionId');
-            const book = bookMap.get(transaction.bookId);
-            if (book) {
-                await apiService.update('library', book.bookId, { availableCopies: book.availableCopies + 1 }, 'books', 'bookId');
-            }
-            showToast('Book returned successfully!', 'success');
-            renderLibraryPage();
-        };
-
         if (overdueDays > 0) {
             const fineAmount = overdueDays * FINE_PER_DAY;
             showConfirmationModal(`This book is ${overdueDays} days overdue. A fine of BDT ${fineAmount} will be added. Proceed?`, async () => {
                 await apiService.create('fees', {
-                    studentId: transaction.memberId,
+                    studentId: transaction.memberId, // Matches original data structure
                     feeType: 'Library Fine',
                     amount: fineAmount,
                     status: 'Unpaid',
@@ -1732,30 +2443,57 @@ async function renderLibraryPage() {
                 });
                 await completeReturn(transaction);
                 showToast(`Fine of BDT ${fineAmount} added.`, 'info');
+                renderLibraryPage();
             });
         } else {
             await completeReturn(transaction);
+            showToast('Book returned successfully!', 'success');
+            renderLibraryPage();
         }
     };
     
-    // --- UI RENDERING ---
+    const cancelRequest = async (reservationId) => {
+        showConfirmationModal('Are you sure you want to cancel this book request?', async () => {
+            await apiService.remove('library', reservationId, 'reservations', 'reservationId');
+            showToast('Your book request has been cancelled.', 'success');
+            renderLibraryPage();
+        });
+    };
+
+    const exportToCsv = (filename, headers, rows) => {
+        let csvContent = "data:text/csv;charset=utf-8," 
+            + headers.join(",") + "\n" 
+            + rows.map(e => e.join(",")).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast(`Report ${filename} downloaded.`, 'success');
+    };
+
+    // --- 3. UI RENDERING ---
+
     const renderTabs = () => {
         let tabs = [];
-        if (currentUser.role === 'Admin' || currentUser.role === 'Librarian') {
+        const isAdmin = currentUser.role === 'Admin' || currentUser.role === 'Librarian';
+
+        if (isAdmin) {
             tabs = [
                 { id: 'lib-dashboard', label: 'Dashboard', icon: 'fa-chart-line' },
                 { id: 'catalog', label: 'Book Catalog', icon: 'fa-book' },
                 { id: 'transactions', label: 'Transactions', icon: 'fa-exchange-alt' },
                 { id: 'reservations', label: 'Reservations', icon: 'fa-clock' },
                 { id: 'members', label: 'Members', icon: 'fa-users' },
-                { id: 'reading-lists-admin', label: 'Reading Lists', icon: 'fa-list-ol' },
                 { id: 'reports', label: 'Reports', icon: 'fa-file-export' },
             ];
         } else { // Student or Teacher
             tabs = [
                 { id: 'catalog', label: 'Search Books', icon: 'fa-search' },
                 { id: 'my-books', label: 'My Books & History', icon: 'fa-book-reader' },
-                { id: 'reading-lists-member', label: 'Reading Lists', icon: 'fa-list-ol' },
+                { id: 'reading-lists', label: 'Reading Lists', icon: 'fa-list-ol' },
             ];
         }
 
@@ -1773,42 +2511,117 @@ async function renderLibraryPage() {
 
     ui.contentArea.innerHTML = `<div class="bg-slate-800/50 p-4 sm:p-6 rounded-xl border border-slate-700 animate-fade-in">${renderTabs()}</div>`;
 
-    // --- TAB-SPECIFIC RENDERERS ---
+    // --- 4. TAB-SPECIFIC RENDERERS ---
 
-    const renderLibrarianDashboard = () => {
-        const container = document.getElementById('lib-dashboard');
-        const totalBooks = libraryData.books.reduce((sum, book) => sum + book.totalCopies, 0);
-        const booksOnLoan = libraryData.transactions.filter(t => t.status === 'Issued').length;
-        const overdueBooks = libraryData.transactions.filter(t => t.status === 'Issued' && calculateOverdueDays(t.dueDate) > 0).length;
-        const totalMembers = memberMap.size;
+const renderLibrarianDashboard = () => {
+    // --- 1. (NEW) CALCULATE DATA FOR THE CHART ---
+    // We count the occurrences of each genre from the transaction history.
+    const genreCounts = libraryData.transactions.reduce((acc, transaction) => {
+        const book = bookMap.get(transaction.bookId);
+        if (book && book.genre) {
+            acc[book.genre] = (acc[book.genre] || 0) + 1;
+        }
+        return acc;
+    }, {});
+
+    const container = document.getElementById('lib-dashboard');
+    const totalBooks = libraryData.books.reduce((sum, book) => sum + book.totalCopies, 0);
+    const booksOnLoan = libraryData.transactions.filter(t => t.status === 'Issued').length;
+    const overdueBooks = libraryData.transactions.filter(t => t.status === 'Issued' && calculateOverdueDays(t.dueDate) > 0).length;
+    const totalMembers = memberMap.size;
+    
+    const cardData = [
+        { title: 'Total Books', value: totalBooks, icon: 'fa-book-journal-whills', color: 'blue' },
+        { title: 'Books on Loan', value: booksOnLoan, icon: 'fa-people-arrows', color: 'green' },
+        { title: 'Overdue Books', value: overdueBooks, icon: 'fa-exclamation-triangle', color: 'red' },
+        { title: 'Total Members', value: totalMembers, icon: 'fa-users', color: 'purple' },
+    ];
+    
+    // --- 2. (UPDATED) ADD HTML FOR THE CHART ---
+    container.innerHTML = `
+        <h3 class="text-2xl font-bold mb-6 text-white">Library Dashboard</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            ${cardData.map(createDashboardCard).join('')}
+        </div>
         
-        const cardData = [
-            { title: 'Total Books', value: totalBooks, icon: 'fa-book-journal-whills', color: 'blue' },
-            { title: 'Books on Loan', value: booksOnLoan, icon: 'fa-people-arrows', color: 'green' },
-            { title: 'Overdue Books', value: overdueBooks, icon: 'fa-exclamation-triangle', color: 'red' },
-            { title: 'Total Members', value: totalMembers, icon: 'fa-users', color: 'purple' },
-        ];
-        
-        container.innerHTML = `
-            <h3 class="text-2xl font-bold mb-6 text-white">Library Dashboard</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                ${cardData.map(createDashboardCard).join('')}
+        <!-- START: New Chart Section -->
+        <div class="mt-8 bg-slate-800/50 p-4 sm:p-6 rounded-xl border border-slate-700">
+            <h4 class="text-xl font-semibold mb-4 text-white">Popular Genres (by borrows)</h4>
+            <div class="max-w-sm mx-auto">
+                 ${Object.keys(genreCounts).length > 0 ? `<canvas id="genreChart"></canvas>`: `<p class="text-center text-slate-500 py-8">No transaction data available to generate genre chart.</p>`}
             </div>
-            <!-- More components can be added here, like charts -->
-        `;
-    };
+        </div>
+    `;
+
+    // --- 3. (NEW) INITIALIZE THE CHART WITH JAVASCRIPT ---
+    // This code runs only if there is data to show.
+    if (Object.keys(genreCounts).length > 0) {
+        const chartCanvas = document.getElementById('genreChart').getContext('2d');
+        new Chart(chartCanvas, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(genreCounts),
+                datasets: [{
+                    label: 'Borrows',
+                    data: Object.values(genreCounts),
+                    backgroundColor: [ // Colors similar to the image
+                        '#4299E1', '#48BB78', '#F56565', '#ED8936', '#9F7AEA',
+                        '#ED64A6', '#667EEA', '#38B2AC', '#EF4444', '#FBBF24', '#A78BFA'
+                    ],
+                    borderColor: '#1E293B', // Background color for spacing
+                    borderWidth: 3,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#CBD5E0', // Light gray text for legend
+                            font: {
+                                size: 14
+                            },
+                            boxWidth: 20,
+                            padding: 7
+                        }
+                    }
+                }
+            }
+        });
+    }
+};
 
     const renderCatalog = (containerId) => {
         const container = document.getElementById(containerId);
+        const isAdmin = currentUser.role === 'Admin' || currentUser.role === 'Librarian';
+
         container.innerHTML = `
             <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-                <input type="text" id="book-search" placeholder="Search by title, author, or genre..." class="w-full md:w-1/2 p-2 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white">
-                ${currentUser.role === 'Admin' || currentUser.role === 'Librarian' ? `<button id="add-book-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus"></i> Add New Book</button>` : ''}
+                <input type="text" id="book-search" placeholder="Search by title, author, genre, or ISBN..." class="w-full md:w-1/2 p-2 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white">
+                <div class="flex items-center gap-2">
+                    ${isAdmin ? `<button id="add-book-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus"></i> Add Book</button>` : ''}
+                    ${currentUser.role === 'Teacher' ? `<button id="request-acquisition-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-bookmark"></i> Request Acquisition</button>` : ''}
+                </div>
             </div>
             <div id="catalog-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>`;
 
         if (document.getElementById('add-book-btn')) {
             document.getElementById('add-book-btn').onclick = () => openBookForm();
+        }
+        if (document.getElementById('request-acquisition-btn')) {
+            document.getElementById('request-acquisition-btn').onclick = () => {
+                openFormModal('Request a New Book for Acquisition', [
+                    { name: 'title', label: 'Book Title', type: 'text', required: true },
+                    { name: 'author', label: 'Author', type: 'text', required: true },
+                    { name: 'reason', label: 'Reason for Request (e.g., for course XYZ)', type: 'textarea', required: true },
+                ], async (formData) => {
+                    const acquisitionRequest = { ...formData, requesterId: currentUser.id, requesterName: currentUser.name, requestDate: new Date().toISOString().slice(0, 10), status: 'Pending' };
+                    await apiService.create('library', acquisitionRequest, 'acquisitions');
+                    showToast('Acquisition request submitted successfully!', 'success');
+                });
+            };
         }
 
         const openBookForm = (book = {}) => {
@@ -1827,6 +2640,19 @@ async function renderLibraryPage() {
                 renderLibraryPage();
             });
         };
+        
+        const handleAddToList = async (bookId) => {
+            const myLists = libraryData.readingLists.filter(l => l.teacherId === currentUser.id);
+            if (myLists.length === 0) { showToast('Please create a reading list first from the "Reading Lists" tab.', 'info'); return; }
+            openFormModal('Add Book to Reading List', [{ name: 'listId', label: 'Select List', type: 'select', options: myLists.map(l => `<option value="${l.id}">${l.name}</option>`).join(''), required: true }, ], async (formData) => {
+                const list = myLists.find(l => l.id === formData.listId);
+                if (list && !list.bookIds.includes(bookId)) {
+                    list.bookIds.push(bookId); await apiService.update('library', list.id, { bookIds: list.bookIds }, 'readingLists', 'id');
+                    showToast('Book added to list!', 'success'); renderReadingLists();
+                } else if (list) { showToast('This book is already in the selected list.', 'error'); }
+            });
+        };
+
         const renderBookList = (books) => {
             const listContainer = document.getElementById('catalog-list');
             if (books.length === 0) { listContainer.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-slate-500">No books found.</p></div>`; return; }
@@ -1839,8 +2665,9 @@ async function renderLibraryPage() {
                     <p class="text-xs text-slate-500 mt-1">Genre: ${book.genre} | Pub: ${book.publicationYear}</p>
                     <div class="flex-grow my-3"><span class="px-2 py-1 text-xs font-semibold rounded-full ${book.availableCopies > 0 ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}">${book.availableCopies > 0 ? `${book.availableCopies} of ${book.totalCopies} Available` : 'Unavailable'}</span></div>
                     <div class="mt-auto pt-3 border-t border-slate-700/50 flex flex-col gap-2">
-                        ${(currentUser.role !== 'Admin' && currentUser.role !== 'Librarian') ? (book.availableCopies <= 0 ? (isRequestedByCurrentUser ? `<button class="w-full bg-yellow-600 text-white font-bold py-2 px-3 rounded-lg cursor-not-allowed text-sm" disabled><i class="fas fa-clock mr-2"></i>Requested</button>` : `<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg request-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-hand-paper mr-2"></i>Request</button>`) : '') : ''}
-                        ${currentUser.role === 'Admin' || currentUser.role === 'Librarian' ? `<button class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg edit-book-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-edit mr-2"></i>Edit</button>` : ''}
+                        ${!isAdmin ? (book.availableCopies <= 0 ? (isRequestedByCurrentUser ? `<button class="w-full bg-yellow-600 text-white font-bold py-2 px-3 rounded-lg cursor-not-allowed text-sm" disabled><i class="fas fa-clock mr-2"></i>Requested</button>` : `<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg request-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-hand-paper mr-2"></i>Request</button>`) : '') : ''}
+                        ${isAdmin ? `<button class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg edit-book-btn text-sm" data-bookid="${book.bookId}"><i class="fas fa-edit mr-2"></i>Edit</button>` : ''}
+                        ${currentUser.role === 'Teacher' ? `<button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-3 rounded-lg add-to-list-btn text-sm mt-2" data-bookid="${book.bookId}"><i class="fas fa-plus mr-2"></i>Add to Reading List</button>` : ''}
                     </div>
                 </div>`;
             }).join('');
@@ -1850,10 +2677,11 @@ async function renderLibraryPage() {
                 renderLibraryPage();
             });
             document.querySelectorAll('.edit-book-btn').forEach(btn => { btn.onclick = () => { const bookToEdit = libraryData.books.find(b => b.bookId === btn.dataset.bookid); if (bookToEdit) openBookForm(bookToEdit); } });
+            document.querySelectorAll('.add-to-list-btn').forEach(btn => btn.onclick = () => handleAddToList(btn.dataset.bookid));
         };
         document.getElementById('book-search').oninput = (e) => {
-            const term = e.target.value.toLowerCase();
-            const filteredBooks = libraryData.books.filter(b => b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term) || b.genre.toLowerCase().includes(term));
+            const term = e.target.value.toLowerCase().replace(/-/g, '');
+            const filteredBooks = libraryData.books.filter(b => b.title.toLowerCase().includes(term) || b.author.toLowerCase().includes(term) || b.genre.toLowerCase().includes(term) || (b.isbn && b.isbn.replace(/-/g, '').includes(term)));
             renderBookList(filteredBooks);
         };
         renderBookList(libraryData.books);
@@ -1863,16 +2691,76 @@ async function renderLibraryPage() {
         const container = document.getElementById('transactions');
         container.innerHTML = `
             <div class="flex justify-end mb-4"><button id="issue-book-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fas fa-plus-circle"></i> Issue Book</button></div>
-            <div class="overflow-x-auto bg-slate-800 rounded-lg"><table class="min-w-full text-sm text-left"><thead class="bg-slate-700 text-slate-300 uppercase"><tr><th class="p-3">Book</th><th class="p-3">Member</th><th class="p-3">Issue Date</th><th class="p-3">Due Date</th><th class="p-3">Status</th><th class="p-3 text-right">Actions</th></tr></thead><tbody class="text-slate-300">${libraryData.transactions.sort((a,b) => new Date(b.issueDate) - new Date(a.issueDate)).map(t => { const overdueDays = calculateOverdueDays(t.dueDate); const member = memberMap.get(t.memberId); return `<tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold">${bookMap.get(t.bookId)?.title || 'N/A'}</td><td class="p-3">${member?.name || 'N/A'}</td><td class="p-3">${formatDate(t.issueDate)}</td><td class="p-3 ${t.status === 'Issued' && overdueDays > 0 ? 'text-red-400 font-bold' : ''}">${formatDate(t.dueDate)}</td><td class="p-3"><span class="status-badge status-${t.status.toLowerCase()}">${t.status}</span></td><td class="p-3 text-right">${t.status === 'Issued' ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded return-btn text-xs" data-id="${t.transactionId}">Mark Returned</button>` : `<span class="text-slate-500 text-xs">Returned on ${formatDate(t.returnDate)}</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+            <div class="overflow-x-auto bg-slate-800 rounded-lg"><table class="min-w-full text-sm text-left"><thead class="bg-slate-700 text-slate-300 uppercase"><tr><th class="p-3">Book</th><th class="p-3">Member</th><th class="p-3">Issue Date</th><th class="p-3">Due Date</th><th class="p-3">Status</th><th class="p-3 text-right">Actions</th></tr></thead><tbody class="text-slate-300">${libraryData.transactions.sort((a,b) => new Date(b.issueDate) - new Date(a.issueDate)).map(t => { const overdueDays = calculateOverdueDays(t.dueDate); const member = memberMap.get(t.memberId); return `<tr class="border-b border-slate-700 hover:bg-slate-700/50"><td class="p-3 font-semibold">${bookMap.get(t.bookId)?.title || 'N/A'}</td><td class="p-3">${member?.name || 'N/A'} <span class="text-xs text-slate-500">(${member?.role || 'N/A'})</span></td><td class="p-3">${formatDate(t.issueDate)}</td><td class="p-3 ${t.status === 'Issued' && overdueDays > 0 ? 'text-red-400 font-bold' : ''}">${formatDate(t.dueDate)}</td><td class="p-3"><span class="status-badge status-${t.status.toLowerCase()}">${t.status}</span></td><td class="p-3 text-right">${t.status === 'Issued' ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded return-btn text-xs" data-id="${t.transactionId}">Mark Returned</button>` : `<span class="text-slate-500 text-xs">Returned on ${formatDate(t.returnDate)}</span>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+        
         document.getElementById('issue-book-btn').onclick = () => {
-            const availableBooks = libraryData.books.filter(b => b.availableCopies > 0); const allMembers = [ ...store.get('students'), ...store.get('teachers') ];
-            openFormModal('Issue a Book', [ { name: 'bookId', label: 'Book', type: 'select', options: availableBooks.map(b => `<option value="${b.bookId}">${b.title} (${b.author})</option>`).join(''), required: true }, { name: 'memberId', label: 'Member (Student or Teacher)', type: 'select', options: allMembers.map(s => `<option value="${s.id}">${s.name} (${s.email})</option>`).join(''), required: true }, { name: 'dueDate', label: 'Due Date', type: 'date', required: true } ], async (formData) => {
+            const availableBooks = libraryData.books.filter(b => b.availableCopies > 0);
+            const allMembers = Array.from(memberMap.values());
+
+            const formFields = [ { name: 'bookId', label: 'Book', type: 'select', options: availableBooks.map(b => `<option value="${b.bookId}">${b.title} (${b.author})</option>`).join(''), required: true }, { name: 'memberId', label: 'Member', type: 'select', options: allMembers.map(m => `<option value="${m.id}" data-role="${m.role}">${m.name} (${m.role})</option>`).join(''), required: true }, { name: 'dueDate', label: 'Due Date', type: 'date', required: true } ];
+            
+            openFormModal('Issue a Book', formFields, async (formData) => {
                 await apiService.create('library', { ...formData, issueDate: new Date().toISOString().slice(0, 10), status: 'Issued', returnDate: null }, 'transactions');
                 const book = bookMap.get(formData.bookId); await apiService.update('library', book.bookId, { availableCopies: book.availableCopies - 1 }, 'books', 'bookId');
                 showToast('Book issued successfully', 'success'); renderLibraryPage();
             });
+
+            const memberSelect = document.getElementById('memberId'); 
+            const dueDateInput = document.getElementById('dueDate');
+            const updateDueDate = () => {
+                if (!memberSelect || !dueDateInput) return;
+                const selectedOption = memberSelect.options[memberSelect.selectedIndex];
+                const memberRole = selectedOption.dataset.role;
+                let defaultDueDate = new Date();
+                const loanDays = (memberRole === 'Teacher') ? 28 : 14;
+                defaultDueDate.setDate(defaultDueDate.getDate() + loanDays);
+                dueDateInput.value = defaultDueDate.toISOString().slice(0, 10);
+            };
+            memberSelect.onchange = updateDueDate; 
+            updateDueDate(); // Set initial value
         };
         document.querySelectorAll('.return-btn').forEach(btn => btn.onclick = () => handleReturn(btn.dataset.id));
+    };
+
+    const renderReservations = () => {
+        const container = document.getElementById('reservations');
+        const pendingReservations = libraryData.reservations.filter(r => r.status === 'Pending');
+        container.innerHTML = `
+            <h3 class="text-xl font-semibold mb-4 text-white">Pending Book Requests</h3><div class="space-y-3">${pendingReservations.length > 0 ? pendingReservations.map(r => { const book = bookMap.get(r.bookId); const member = memberMap.get(r.memberId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span> requested by <span class="font-semibold text-blue-300">${member?.name || 'N/A'}</span></div><div>${book?.availableCopies > 0 ? `<button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded issue-from-request-btn" data-resid="${r.reservationId}" data-bookid="${r.bookId}" data-memberid="${r.memberId}">Approve & Issue</button>` : `<span class="text-yellow-400 font-semibold">Book Unavailable</span>`}</div></div>`; }).join('') : '<p class="text-slate-500 italic">There are no pending book requests.</p>'}</div>`;
+        document.querySelectorAll('.issue-from-request-btn').forEach(btn => btn.onclick = async (e) => {
+            const { resid, bookid, memberid } = e.currentTarget.dataset;
+            const member = memberMap.get(memberid);
+            const loanDays = (member.role === 'Teacher') ? 28 : 14;
+            const dueDate = new Date(new Date().setDate(new Date().getDate() + loanDays)).toISOString().slice(0, 10);
+
+            await apiService.create('library', { bookId: bookid, memberId: memberid, status: 'Issued', issueDate: new Date().toISOString().slice(0, 10), dueDate: dueDate }, 'transactions');
+            await apiService.update('library', resid, { status: 'Fulfilled' }, 'reservations', 'reservationId');
+            const book = bookMap.get(bookid); await apiService.update('library', bookid, { availableCopies: book.availableCopies - 1 }, 'books', 'bookId');
+            showToast(`Book issued to ${member.name}!`, 'success'); renderLibraryPage();
+        });
+    };
+
+    const renderMemberManagement = () => {
+        const container = document.getElementById('members'); 
+        const allMembers = Array.from(memberMap.values());
+        container.innerHTML = `<input type="text" id="member-search" placeholder="Search by name or email..." class="w-full md:w-1/2 p-2 mb-4 rounded-lg bg-slate-800 border border-slate-700 focus:ring-2 focus:ring-blue-500 text-white"><div id="member-list" class="space-y-3"></div>`;
+        const renderMemberList = (members) => {
+            document.getElementById('member-list').innerHTML = members.map(member => {
+                const transactions = libraryData.transactions.filter(t => t.memberId === member.id);
+                const fines = store.get('fees').filter(f => f.studentId === member.id && f.feeType === 'Library Fine' && f.status === 'Unpaid').reduce((sum, f) => sum + f.amount, 0);
+                return `<div class="p-4 rounded-lg bg-slate-800/70"><div class="flex justify-between items-start"><div><p class="font-bold text-white">${member.name}</p><p class="text-sm text-slate-400">${member.email}</p><p class="text-xs px-2 py-0.5 mt-1 inline-block rounded-full bg-purple-500/20 text-purple-300">${member.role}</p></div><div class="text-right"><p class="text-sm text-slate-300">Borrowed: ${transactions.length}</p>${fines > 0 ? `<p class="text-sm font-bold text-red-400">Fine: BDT ${fines}</p>` : ''}</div></div></div>`;
+            }).join('');
+        };
+        document.getElementById('member-search').oninput = (e) => { const term = e.target.value.toLowerCase(); const filteredMembers = allMembers.filter(m => m.name.toLowerCase().includes(term) || (m.email && m.email.toLowerCase().includes(term))); renderMemberList(filteredMembers); };
+        renderMemberList(allMembers);
+    };
+
+    const renderReports = () => {
+        const container = document.getElementById('reports');
+        container.innerHTML = `<h3 class="text-xl font-semibold mb-4 text-white">Generate & Export Reports</h3><div class="space-y-6"><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Inventory Reports</h4><button id="export-inventory-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg">Export Full Inventory (.csv)</button></div><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Financial Reports</h4><button id="export-fines-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">Export Unpaid Fines (.csv)</button></div><div class="bg-slate-800 p-4 rounded-lg"><h4 class="font-semibold mb-2 text-slate-200">Transaction Log</h4><div class="flex items-center gap-4"><input type="date" id="report-start-date" class="p-2 rounded-lg bg-slate-700 border-slate-600 text-white"><span class="text-slate-400">to</span><input type="date" id="report-end-date" class="p-2 rounded-lg bg-slate-700 border-slate-600 text-white"><button id="export-transactions-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Export Transactions</button></div></div></div>`;
+        document.getElementById('export-inventory-btn').onclick = () => { const headers = ['Book_ID', 'Title', 'Author', 'Genre', 'Publication_Year', 'ISBN', 'Total_Copies', 'Available_Copies']; const rows = libraryData.books.map(b => [b.bookId, `"${b.title.replace(/"/g, '""')}"`, `"${b.author.replace(/"/g, '""')}"`, b.genre, b.publicationYear, b.isbn, b.totalCopies, b.availableCopies]); exportToCsv('library_inventory.csv', headers, rows); };
+        document.getElementById('export-fines-btn').onclick = () => { const headers = ['Member_Name', 'Member_Email', 'Fee_Type', 'Amount', 'Due_Date']; const rows = store.get('fees').filter(f => f.feeType === 'Library Fine' && f.status === 'Unpaid').map(f => { const member = memberMap.get(f.studentId); return [member?.name, member?.email, f.feeType, f.amount, f.dueDate]; }); exportToCsv('unpaid_library_fines.csv', headers, rows); };
+        document.getElementById('export-transactions-btn').onclick = () => { const startDate = document.getElementById('report-start-date').value; const endDate = document.getElementById('report-end-date').value; if(!startDate || !endDate) { showToast('Please select a start and end date for the report.', 'error'); return; } const filteredTransactions = libraryData.transactions.filter(t => { const issueDate = new Date(t.issueDate); return issueDate >= new Date(startDate) && issueDate <= new Date(endDate); }); const headers = ['Transaction_ID', 'Book_Title', 'Member_Name', 'Issue_Date', 'Due_Date', 'Return_Date', 'Status']; const rows = filteredTransactions.map(t => { const book = bookMap.get(t.bookId); const member = memberMap.get(t.memberId); return [t.transactionId, book?.title, member?.name, t.issueDate, t.dueDate, t.returnDate || 'N/A', t.status]; }); exportToCsv(`transactions_${startDate}_to_${endDate}.csv`, headers, rows); };
     };
 
     const renderMyBooks = () => {
@@ -1881,6 +2769,8 @@ async function renderLibraryPage() {
         const issuedBooks = myTransactions.filter(t => t.status === 'Issued');
         const historyBooks = myTransactions.filter(t => t.status === 'Returned');
         const myReservations = libraryData.reservations.filter(r => r.memberId === currentUser.id && r.status === 'Pending');
+        const myFines = store.get('fees').filter(f => f.studentId === currentUser.id && f.feeType === 'Library Fine' && f.status === 'Unpaid');
+
         container.innerHTML = `
             <div class="space-y-8">
                  <div>
@@ -1889,72 +2779,100 @@ async function renderLibraryPage() {
                 </div>
                 <div>
                     <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-clock mr-2 text-yellow-400"></i>My Pending Requests</h4>
-                    <div class="space-y-3">${myReservations.length > 0 ? myReservations.map(r => { const book = bookMap.get(r.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span></div><span class="status-badge status-pending">Pending</span></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have no pending book requests.</p>'}</div>
+                    <div class="space-y-3">${myReservations.length > 0 ? myReservations.map(r => { const book = bookMap.get(r.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span></div><div class="flex items-center gap-4"><span class="status-badge status-pending">Pending</span><button class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-lg text-sm cancel-request-btn" data-resid="${r.reservationId}">Cancel</button></div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">You have no pending book requests.</p>'}</div>
                 </div>
                 <div>
                     <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-history mr-2 text-gray-400"></i>Borrowing History</h4>
                     <div class="space-y-3">${historyBooks.length > 0 ? historyBooks.map(t => { const book = bookMap.get(t.bookId); return `<div class="p-4 rounded-lg bg-slate-800/70 flex flex-wrap justify-between items-center gap-4"><div><span class="font-bold text-white">${book?.title || 'N/A'}</span></div><div class="text-slate-400">Returned: ${formatDate(t.returnDate)}</div></div>`; }).join('') : '<p class="text-slate-500 italic px-4">No borrowing history yet.</p>'}</div>
                 </div>
+                <div>
+                    <h4 class="text-xl font-semibold mb-3 text-white"><i class="fas fa-exclamation-triangle mr-2 text-red-500"></i>My Library Fines</h4>
+                    <div class="space-y-3">${myFines.length > 0 ? myFines.map(f => `<div class="p-4 rounded-lg bg-red-900/50 border border-red-800 flex flex-wrap justify-between items-center gap-4"><div>Fine for late return. Amount: <span class="font-bold text-white">BDT ${f.amount}</span></div><button class="bg-green-600 hover:bg-green-700 text-white font-bold py-1 px-3 rounded-lg" onclick="alert('Integration with a payment gateway is required.')">Pay Now</button></div>`).join('') : '<p class="text-slate-500 italic px-4">You have no outstanding library fines. Great job!</p>'}</div>
+                </div>
             </div>`;
+        document.querySelectorAll('.cancel-request-btn').forEach(btn => btn.onclick = () => cancelRequest(btn.dataset.resid));
     };
     
-    const renderMemberReadingLists = () => {
-        const container = document.getElementById('reading-lists-member');
-        let memberLists = [];
-        if(currentUser.role === 'Student'){
-            memberLists = libraryData.readingLists.filter(list => list.classId === currentUser.classId);
-        } else if (currentUser.role === 'Teacher'){
-            memberLists = libraryData.readingLists.filter(list => list.teacherId === currentUser.id);
-        }
-
-        container.innerHTML = `
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold text-white">Reading Lists</h3>
-                ${currentUser.role === 'Teacher' ? `<button id="create-list-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Create New List</button>`:''}
-            </div>
-            <div class="space-y-4">${memberLists.length > 0 ? memberLists.map(list => `<div class="p-4 bg-slate-800 rounded-lg"><h4 class="text-lg font-bold text-white">${list.name}</h4><ul class="mt-2 space-y-2 list-disc list-inside">${list.bookIds.map(bookId => { const book = bookMap.get(bookId); return book ? `<li class="text-slate-300 ml-4">${book.title}</li>` : ''; }).join('')}</ul></div>`).join('') : '<p class="text-slate-500 italic">No reading lists found for you.</p>'}</div>`;
-    
-        if(document.getElementById('create-list-btn')){
+    const renderReadingLists = () => {
+        const container = document.getElementById('reading-lists');
+        if (currentUser.role === 'Teacher') {
+            const myReadingLists = libraryData.readingLists.filter(l => l.teacherId === currentUser.id);
+            container.innerHTML = `
+                <div class="flex justify-between items-center mb-4"><h3 class="text-xl font-semibold text-white">My Reading Lists</h3><button id="create-list-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Create New List</button></div>
+                <div class="space-y-4">${myReadingLists.length > 0 ? myReadingLists.map(list => `<div class="p-4 bg-slate-800 rounded-lg"><div class="flex justify-between items-center"><h4 class="text-lg font-bold text-white">${list.name}</h4><button class="text-red-500 delete-list-btn" data-listid="${list.id}"><i class="fas fa-trash"></i></button></div><p class="text-sm text-slate-400">Assigned to: ${store.get('classes').find(c => c.id === list.classId)?.name || 'N/A'}</p><ul class="mt-2 space-y-2 list-disc list-inside">${list.bookIds.map(bookId => { const book = bookMap.get(bookId); return book ? `<li class="text-slate-300 ml-4">${book.title}</li>` : ''; }).join('')}</ul></div>`).join('') : '<p class="text-slate-500 italic">You have not created any reading lists.</p>'}</div>`;
+            
             document.getElementById('create-list-btn').onclick = () => {
                 const myClasses = store.get('classes').filter(c => c.teacherId === currentUser.id);
-                openFormModal('Create Reading List', [
-                    { name: 'name', label: 'List Name', type: 'text', required: true },
-                    { name: 'classId', label: 'Assign to Class', type: 'select', options: myClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true }
+                if (myClasses.length === 0) { showToast("You must be assigned to a class to create a reading list.", "error"); return; }
+                openFormModal('Create New Reading List', [
+                    { name: 'name', label: 'List Name (e.g., "History 101 Required Reading")', type: 'text', required: true },
+                    { name: 'classId', label: 'Assign to Class', type: 'select', options: myClasses.map(c => `<option value="${c.id}">${c.name}</option>`).join(''), required: true },
                 ], async (formData) => {
                     await apiService.create('library', { ...formData, teacherId: currentUser.id, bookIds: [] }, 'readingLists');
-                    showToast('Reading list created!', 'success');
+                    showToast('Reading list created!', 'success'); renderLibraryPage();
+                });
+            };
+            document.querySelectorAll('.delete-list-btn').forEach(btn => {
+                btn.onclick = () => showConfirmationModal('Are you sure you want to delete this list?', async () => {
+                    await apiService.remove('library', btn.dataset.listid, 'readingLists', 'id');
                     renderLibraryPage();
                 });
-            }
+            });
+        } else { // Student View
+            const myClassLists = libraryData.readingLists.filter(list => list.classId === currentUser.classId);
+            container.innerHTML = `
+                <h3 class="text-2xl font-bold mb-6 text-white">Course Reading Lists</h3>
+                <div class="space-y-6">${myClassLists.length > 0 ? myClassLists.map(list => {
+                    const teacher = teacherMap.get(list.teacherId);
+                    return `<div class="p-4 sm:p-6 bg-slate-800 rounded-lg shadow-md"><div class="border-b border-slate-700 pb-3 mb-3"><h4 class="text-xl font-bold text-white">${list.name}</h4><p class="text-sm text-slate-400">Curated by: ${teacher ? teacher.name : 'N/A'}</p></div><ul class="space-y-3">${list.bookIds.map(bookId => { const book = bookMap.get(bookId); if (!book) return ''; return `<li class="text-slate-300 flex items-center gap-3"><i class="fas fa-book text-teal-400"></i><div><a href="#" class="font-semibold hover:underline view-book-in-catalog" data-book-title="${book.title}">${book.title}</a><span class="text-slate-500 text-sm block">by ${book.author}</span></div></li>`; }).join('')}</ul></div>`}).join('') : '<p class="text-slate-500 italic">Your teachers have not assigned any reading lists for your class yet.</p>'}</div>`;
+            document.querySelectorAll('.view-book-in-catalog').forEach(link => {
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    document.querySelector('.tab-link[data-tab="catalog"]').click();
+                    const searchInput = document.getElementById('book-search');
+                    searchInput.value = link.dataset.bookTitle;
+                    searchInput.dispatchEvent(new Event('input'));
+                };
+            });
         }
     };
 
-
-    // --- INITIAL TAB ACTIVATION ---
+    // --- 5. INITIAL TAB ACTIVATION ---
     if (currentUser.role === 'Admin' || currentUser.role === 'Librarian') {
         renderLibrarianDashboard();
         renderCatalog('catalog');
         renderTransactions();
-        document.getElementById('reservations').innerHTML = '<p>Reservations management coming soon.</p>';
-        document.getElementById('members').innerHTML = '<p>Member management coming soon.</p>';
-        document.getElementById('reading-lists-admin').innerHTML = '<p>Admin view for reading lists coming soon.</p>';
-        document.getElementById('reports').innerHTML = '<p>Report generation coming soon.</p>';
-    } else {
+        renderReservations();
+        renderMemberManagement();
+        renderReports();
+    } else { // Student or Teacher
         renderCatalog('catalog');
         renderMyBooks();
-        renderMemberReadingLists();
+        renderReadingLists();
     }
 
     // Tab switching logic
     document.querySelectorAll('.tab-link').forEach(button => {
         button.addEventListener('click', (e) => {
-            document.querySelectorAll('.tab-link').forEach(btn => btn.classList.remove('active', 'text-blue-400', 'border-blue-400'));
-            e.currentTarget.classList.add('active', 'text-blue-400', 'border-blue-400');
+            const tabButton = e.currentTarget;
+            // Deactivate all tabs
+            document.querySelectorAll('.tab-link').forEach(btn => {
+                btn.classList.remove('active', 'text-blue-400', 'border-blue-400');
+                btn.classList.add('text-slate-400', 'border-transparent');
+            });
+            // Hide all content
             document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
-            document.getElementById(e.currentTarget.dataset.tab).classList.remove('hidden');
+            // Activate clicked tab
+            tabButton.classList.add('active', 'text-blue-400', 'border-blue-400');
+            tabButton.classList.remove('text-slate-400', 'border-transparent');
+            // Show clicked tab's content
+            document.getElementById(tabButton.dataset.tab).classList.remove('hidden');
         });
     });
 }
+
+
+
 async function renderTransportPage() {
     const transportData = store.get('transport');
     const studentMap = store.getMap('students');
@@ -2015,59 +2933,94 @@ async function renderTransportPage() {
     `;
 }
 async function renderContactTeacherPage() {
+    // --- 1. DATA FETCHING & PREPARATION ---
     const classes = store.get('classes');
     const teachers = store.get('teachers');
+    const notices = store.get('notices');
 
     const myClass = classes.find(c => c.id === currentUser.classId);
     const classTeacher = myClass ? teachers.find(t => t.id === myClass.teacherId) : null;
     
-    const baseInputClasses = "shadow-sm appearance-none border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-700 text-slate-200 border-slate-600";
+    if (!classTeacher) {
+        ui.contentArea.innerHTML = `<p class="text-red-400 text-center p-8">Your class teacher information is not available.</p>`;
+        return;
+    }
 
+    // --- 2. SIMULATE CHAT HISTORY (NOW FILTERED FOR PRIVACY) ---
+    const conversationHistory = notices.filter(msg => 
+        msg.type === 'private_message' && // <-- Ensures we only get private chats
+        ((msg.authorId === currentUser.id && msg.target === classTeacher.id) ||
+        (msg.authorId === classTeacher.id && msg.target === currentUser.id))
+    ).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // --- 3. DYNAMIC HTML RENDERING (No changes here) ---
     ui.contentArea.innerHTML = `
-        <div class="bg-slate-800/50 p-6 rounded-xl shadow-md border border-slate-700 max-w-lg mx-auto animate-fade-in">
-            <h3 class="text-xl font-semibold text-gray-100 mb-4 border-b pb-2 border-slate-700">Contact My Teacher</h3>
-            ${classTeacher ? `
-                <p class="text-slate-300 mb-4">You can send a message to your class teacher, <strong>${classTeacher.name}</strong>, via the portal.</p>
-                <form id="contact-teacher-form" class="space-y-4">
-                    <div>
-                        <label for="message-subject" class="block text-slate-300 text-sm font-bold mb-2">Subject</label>
-                        <input type="text" id="message-subject" required class="${baseInputClasses}">
+        <div class="max-w-4xl mx-auto animate-fade-in">
+            <div class="bg-slate-800/80 border border-slate-700 rounded-2xl shadow-2xl flex flex-col h-[75vh]">
+                <div class="flex items-center p-4 border-b border-slate-700">
+                    <img src="${classTeacher.profileImage || generateInitialsAvatar(classTeacher.name)}" alt="${classTeacher.name}" class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h3 class="text-lg font-bold text-white">${classTeacher.name}</h3>
+                        <p class="text-xs text-green-400 flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>Online</p>
                     </div>
-                    <div>
-                        <label for="message-body" class="block text-slate-300 text-sm font-bold mb-2">Your Message</label>
-                        <textarea id="message-body" rows="8" required class="${baseInputClasses}"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transform hover:scale-105 transition-transform duration-200 shadow-md">
-                        Send Message
-                    </button>
-                </form>
-            ` : `
-                <p class="text-red-400">Your class teacher information is not available.</p>
-            `}
+                </div>
+                <div id="chat-body" class="flex-1 p-6 space-y-6 overflow-y-auto custom-scrollbar">
+                    ${conversationHistory.map(msg => {
+                        const isSentByMe = msg.authorId === currentUser.id;
+                        const messageText = msg.content.split('\\n\\n(')[0]; 
+                        return `
+                            <div class="flex items-end gap-3 ${isSentByMe ? 'justify-end' : 'justify-start'}">
+                                ${!isSentByMe ? `<img src="${classTeacher.profileImage || generateInitialsAvatar(classTeacher.name)}" alt="T" class="w-8 h-8 rounded-full object-cover flex-shrink-0">` : ''}
+                                <div class="max-w-xs md:max-w-md p-3 rounded-2xl ${isSentByMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-slate-700 text-slate-200 rounded-bl-none'}">
+                                    <p class="text-sm">${messageText}</p>
+                                    <p class="text-xs opacity-60 mt-1 text-right">${new Date(msg.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                                </div>
+                            </div>
+                        `;
+                    }).join('') || `<p class="text-slate-500 text-center text-sm">This is the beginning of your conversation with ${classTeacher.name}.</p>`}
+                </div>
+                <div class="p-4 border-t border-slate-700 bg-slate-800/50 rounded-b-2xl">
+                    <form id="contact-teacher-form" class="flex items-center gap-4">
+                        <input type="text" id="message-body" placeholder="Type your message here..." autocomplete="off" required class="flex-1 bg-slate-700 border-slate-600 text-white placeholder-slate-400 rounded-full py-3 px-5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center transform transition-transform hover:scale-110">
+                            <i class="fas fa-paper-plane text-xl"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     `;
 
-    if (classTeacher) {
-        const form = document.getElementById('contact-teacher-form');
+    // --- 4. POST-RENDER LOGIC & EVENT LISTENERS ---
+    const chatBody = document.getElementById('chat-body');
+    if (chatBody) {
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    const form = document.getElementById('contact-teacher-form');
+    if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const messageInput = document.getElementById('message-body');
+            const messageBody = messageInput.value;
+            if (!messageBody.trim()) return;
+
             const submitButton = form.querySelector('button[type="submit"]');
+            messageInput.disabled = true;
             submitButton.disabled = true;
-            submitButton.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Sending...`;
-            const subject = document.getElementById('message-subject').value;
-            const body = document.getElementById('message-body').value;
-            
+
+            // The 'notices' collection is used as a messaging channel
             await apiService.create('notices', {
-                title: `Message from Student ${currentUser.name}: ${subject}`,
-                content: body + `\n\n(Student Email: ${currentUser.email})`,
-                date: new Date().toISOString().slice(0, 10),
+                title: `Message from Student: ${currentUser.name}`,
+                content: messageBody,
+                date: new Date().toISOString(),
                 target: classTeacher.id,
-                authorId: currentUser.id
+                authorId: currentUser.id,
+                type: 'private_message' // <-- THIS IS THE CRUCIAL ADDITION
             });
-            showToast('Message sent to your teacher!', 'success');
-            e.target.reset();
-            submitButton.disabled = false;
-            submitButton.innerHTML = `Send Message`;
+            
+            await store.refresh('notices');
+            renderContactTeacherPage(); 
         });
     }
 }
@@ -2410,18 +3363,29 @@ function createDashboardCard({ title, value, icon, color }) {
     `;
 }
 function createNoticeCard(notice, authorName, audienceText, borderColor) {
+    let actionButtonsHtml = '';
+
+    // NEW: Add a Reply button for teachers on private messages they have received
+    if (notice.type === 'private_message' && currentUser.role === 'Teacher' && notice.authorId !== currentUser.id) {
+        actionButtonsHtml += `<button class="text-blue-400 hover:text-blue-300 reply-btn" data-author-id="${notice.authorId}" data-author-name="${authorName}" title="Reply to ${authorName}"><i class="fas fa-reply"></i></button>`;
+    }
+
+    // Add a Delete button for Admins or the original author of the message/notice
+    if (currentUser.role === 'Admin' || currentUser.id === notice.authorId) {
+        // Add a left margin if a reply button is already present to create space
+        const marginLeftClass = actionButtonsHtml ? 'ml-4' : '';
+        actionButtonsHtml += `<button class="${marginLeftClass} text-red-500 hover:text-red-700 delete-btn" data-id="${notice.id}" title="Delete"><i class="fas fa-trash-alt"></i></button>`;
+    }
+
     return `
         <div class="p-4 border-l-4 ${borderColor} bg-slate-800/50 rounded-r-lg">
             <div class="flex justify-between items-start">
                 <div>
                     <p class="font-bold text-lg">${notice.title}</p>
-                    <p class="text-xs text-slate-400">Date: ${notice.date} | ${audienceText} | From: ${authorName}</p>
+                    <p class="text-xs text-slate-400">Date: ${new Date(notice.date).toLocaleString()} | ${audienceText} | From: ${authorName}</p>
                     <p class="mt-2 text-slate-300 whitespace-pre-wrap">${notice.content}</p>
                 </div>
-                ${(currentUser.role === 'Admin' || currentUser.id === notice.authorId) ? `
-                <div class="flex-shrink-0 ml-4">
-                    <button class="text-red-500 hover:text-red-700 delete-btn" data-id="${notice.id}"><i class="fas fa-trash-alt"></i></button>
-                </div>` : ''}
+                ${actionButtonsHtml ? `<div class="flex-shrink-0 ml-4 flex items-center">${actionButtonsHtml}</div>` : ''}
             </div>
         </div>`;
 }
@@ -2651,10 +3615,14 @@ function showToast(message, type = 'success') {
 }
 
 async function renderGenericListPage(config) {
+    // A global reference to the current page's configuration
+    // This allows our generic modal to access page-specific callbacks like onDeleteItem
+    window.currentPageConfig = config; 
+    
     const { title, collectionName, columns, formFields, searchKeys, hideAddButton = false, hideActions = false, dataFilter, classFilter, classFilterOptions, customHeader, customListeners } = config;
     
     await store.refresh(collectionName);
-    let items = store.get(collectionName);
+    let items = config.data || store.get(collectionName); // Use provided data if it exists
     if (dataFilter) items = items.filter(dataFilter);
     let originalItems = [...items]; 
 
@@ -2683,7 +3651,6 @@ async function renderGenericListPage(config) {
                                 ${!hideActions && !columns.find(c => c.label === 'Action') ? `
                                     <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <button class="text-blue-400 hover:text-blue-300 edit-btn" data-id="${item.id}">Edit</button>
-                                        <button class="text-red-400 hover:text-red-300 ml-4 delete-btn" data-id="${item.id}">Delete</button>
                                     </td>
                                 ` : ''}
                             </tr>
@@ -2694,24 +3661,34 @@ async function renderGenericListPage(config) {
         attachActionListeners();
     };
 
-    const attachActionListeners = () => {
-        document.querySelectorAll('.edit-btn').forEach(btn => btn.onclick = () => {
-            const item = originalItems.find(i => i.id === btn.dataset.id);
-            openFormModal(`Edit ${title}`, formFields, async (formData) => {
-                await apiService.update(collectionName, item.id, formData);
-                showToast(`${title} updated successfully!`, 'success');
-                renderGenericListPage(config);
-            }, item);
-        });
+// --- INSIDE renderGenericListPage -> attachActionListeners ---
 
-        document.querySelectorAll('.delete-btn').forEach(btn => btn.onclick = () => {
-            showConfirmationModal(`Are you sure you want to delete this ${title.toLowerCase()}?`, async () => {
-                await apiService.remove(collectionName, btn.dataset.id);
-                showToast(`${title} deleted successfully.`, 'success');
-                renderGenericListPage(config);
-            });
+    const attachActionListeners = () => {
+        // --- THIS IS THE KEY MODIFICATION ---
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.onclick = () => {
+                const item = originalItems.find(i => i.id === btn.dataset.id);
+                
+                // Define the function for handling deletion of this item
+                config.onDeleteItem = (itemId) => {
+                    showConfirmationModal(`Are you sure you want to delete this ${title.toLowerCase()}?`, async () => {
+                        await apiService.remove(collectionName, itemId);
+                        showToast(`${title} deleted successfully.`, 'success');
+                        closeAnimatedModal(ui.modal); // Close the edit modal after deletion
+                        renderGenericListPage(config); // Re-render the page
+                    });
+                };
+                
+                // Now, simply call our new powerful openFormModal. It will do all the work!
+                openFormModal(`Edit ${title}`, formFields, async (formData) => {
+                    await apiService.update(collectionName, item.id, formData);
+                    showToast(`${title} updated successfully!`, 'success');
+                    renderGenericListPage(config);
+                }, item);
+            };
         });
-         if(customListeners) customListeners();
+        
+        if(customListeners) customListeners();
     };
     
     ui.contentArea.innerHTML = `
@@ -2734,6 +3711,7 @@ async function renderGenericListPage(config) {
     const addNewBtn = document.getElementById('add-new-btn');
     if (addNewBtn) {
         addNewBtn.onclick = () => {
+            // Use the same modal for adding, which will appear without the "Profile Actions" column
             openFormModal(`Add New ${title}`, formFields, async (formData) => {
                 await apiService.create(collectionName, formData);
                 showToast(`${title} added successfully!`, 'success');
@@ -2745,19 +3723,15 @@ async function renderGenericListPage(config) {
     const handleFilter = () => {
         const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
         const classFilterValue = document.getElementById('class-filter')?.value || '';
-
         let filteredItems = [...originalItems];
-        
         if (searchTerm && searchKeys.length > 0) {
             filteredItems = filteredItems.filter(item => 
                 searchKeys.some(key => item[key] && String(item[key]).toLowerCase().includes(searchTerm))
             );
         }
-
         if (classFilter && classFilterValue) {
             filteredItems = filteredItems.filter(item => item.classId === classFilterValue);
         }
-        
         renderTable(filteredItems);
     };
 
@@ -2765,51 +3739,174 @@ async function renderGenericListPage(config) {
     if(classFilter) document.getElementById('class-filter').onchange = handleFilter;
 }
 
+
+// --- REPLACE YOUR ENTIRE EXISTING openFormModal FUNCTION WITH THIS NEW ONE ---
+
+// --- REPLACE YOUR ENTIRE EXISTING openFormModal FUNCTION WITH THIS NEW ONE ---
+
 function openFormModal(title, formFields, onSubmit, initialData = {}) {
-    ui.modalTitle.textContent = title;
-    
-    ui.modalBody.innerHTML = `
-        <form id="modal-form" class="space-y-4">
-            ${formFields.map(field => `
-                <div>
-                    <label for="${field.name}" class="block text-sm font-medium text-slate-300">${field.label}</label>
-                    ${field.type === 'textarea' ? `
-                        <textarea id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} class="mt-1 block w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">${initialData[field.name] || ''}</textarea>
-                    ` : field.type === 'select' ? `
-                        <select id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} class="mt-1 block w-full pl-3 pr-10 py-2 bg-slate-800 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            ${field.options}
-                        </select>
-                    ` : `
-                        <input type="${field.type}" id="${field.name}" name="${field.name}" value="${initialData[field.name] || ''}" ${field.required ? 'required' : ''} placeholder="${field.placeholder || ''}" class="mt-1 block w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    `}
+    const config = window.currentPageConfig || {};
+    const isEditing = Object.keys(initialData).length > 0;
+    let newProfileImageData = null;
+
+    let profileActionsHtml = '';
+    // NEW: Determine if this modal should always have the profile sidebar.
+    // The "users" collection is the special case for our Staff page.
+    const isProfileModal = ['students', 'teachers', 'users'].includes(config.collectionName);
+
+    if (isProfileModal) {
+        let avatarSrc, profileName, subtitleHtml, actionButtonsHtml;
+
+        if (isEditing) {
+            // --- Case 1: We ARE editing. Use the existing data. ---
+            avatarSrc = initialData.profileImage || generateInitialsAvatar(initialData.name);
+            profileName = initialData.name;
+            
+            if (config.collectionName === 'students') {
+                subtitleHtml = `<p class="text-slate-400 text-sm">Roll: ${initialData.rollNo || 'N/A'}</p>`;
+            } else if (config.collectionName === 'teachers' || config.collectionName === 'users') {
+                subtitleHtml = `<p class="text-blue-400">${initialData.role || 'N/A'}</p>`;
+            }
+
+            actionButtonsHtml = `
+                <div class="space-y-2 pt-4 border-t border-slate-700">
+                    <button type="button" id="modal-reset-password-btn" class="w-full text-sm bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-2"><i class="fas fa-key"></i> Reset Password</button>
+                    <button type="button" id="modal-delete-btn" class="w-full text-sm delete-btn-style text-white font-bold py-2 px-3 rounded-lg flex items-center justify-center gap-2"><i class="fas fa-trash-alt"></i> Delete ${config.title || 'Item'}</button>
                 </div>
-            `).join('')}
-            <div class="pt-4 flex justify-end">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Save Changes</button>
+            `;
+        } else {
+            // --- Case 2: We are ADDING a new user. Show placeholders. ---
+            avatarSrc = generateInitialsAvatar('?');
+            profileName = "New Profile";
+            subtitleHtml = `<p class="text-slate-400 text-sm">Upload an image and fill in the details.</p>`;
+            actionButtonsHtml = ''; // No delete/reset buttons for a new user
+        }
+
+        profileActionsHtml = `
+            <div class="md:col-span-1 space-y-4 text-center p-4 bg-slate-900/50 rounded-lg profile-actions-column">
+                <h4 class="text-lg font-semibold text-slate-200">Profile Actions</h4>
+                <div class="relative group w-24 h-24 mx-auto">
+                    <label for="modal-image-upload" class="cursor-pointer">
+                        <img id="modal-img-preview" src="${avatarSrc}" alt="Profile Picture" class="w-24 h-24 rounded-full object-cover border-4 border-slate-700 shadow-lg">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="fas fa-camera text-xl text-white"></i>
+                        </div>
+                    </label>
+                    <input type="file" id="modal-image-upload" accept="image/*" class="hidden">
+                </div>
+                <div>
+                    <p class="font-bold text-xl text-white">${profileName}</p>
+                    ${subtitleHtml}
+                </div>
+                ${actionButtonsHtml}
+            </div>
+        `;
+    }
+
+    // The rest of the function continues as before, building the form fields...
+    const standardFieldNames = formFields.map(f => f.name);
+    const customFields = isEditing ? Object.keys(initialData).filter(key => 
+        !standardFieldNames.includes(key) && !['id', 'profileImage', 'password', 'studentId', 'teacherId', 'nidImage'].includes(key)
+    ) : [];
+
+    const standardFieldsHtml = formFields.map(field => {
+        const value = initialData[field.name] || '';
+        const labelHtml = `<label for="${field.name}" class="block text-sm font-medium text-slate-300">${field.label}</label>`;
+        const inputClasses = "mt-1 block w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500";
+        let fieldHtml = '';
+        if (field.type === 'textarea') {
+            fieldHtml = `<textarea id="${field.name}" name="${field.name}" rows="4" ${field.required ? 'required' : ''} class="${inputClasses}">${value}</textarea>`;
+        } else if (field.type === 'select') {
+            fieldHtml = `<select id="${field.name}" name="${field.name}" ${field.required ? 'required' : ''} class="${inputClasses}">${field.options}</select>`;
+        } else {
+            fieldHtml = `<input type="${field.type}" id="${field.name}" name="${field.name}" value="${value}" ${field.required ? 'required' : ''} placeholder="${field.placeholder || ''}" class="${inputClasses}">`;
+        }
+        return `<div>${labelHtml}${fieldHtml}</div>`;
+    }).join('');
+
+    const formHtml = `
+        <form id="modal-form" class="space-y-4">
+            <div class="grid grid-cols-1 ${profileActionsHtml ? 'md:grid-cols-3' : ''} gap-6 max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                ${profileActionsHtml}
+                <div class="${profileActionsHtml ? 'md:col-span-2' : 'col-span-1'}">
+                    <h4 class="text-lg font-semibold text-slate-200">Basic Information</h4>
+                    <div class="space-y-4 mt-2">${standardFieldsHtml}</div>
+                    ${isEditing ? `
+                    <hr class="border-slate-600 my-4">
+                    <h4 class="text-lg font-semibold text-slate-200">Custom Fields</h4>
+                    <div id="dynamic-fields-container" class="space-y-3 mt-2">
+                        ${customFields.map(key => `<div class="flex gap-2 items-center dynamic-field-row"><input type="text" value="${key}" class="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-md font-bold" readonly><input type="text" value="${initialData[key]}" data-key="${key}" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md"></div>`).join('')}
+                    </div>
+                    <button type="button" id="add-field-btn" class="mt-3 text-sm bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-3 rounded-lg"><i class="fas fa-plus mr-1"></i> Add Field</button>
+                    ` : ''}
+                </div>
+            </div>
+            <div class="flex justify-end pt-4 border-t border-slate-600">
+                <button type="submit" class="form-submit-btn">Save Changes</button>
             </div>
         </form>
     `;
 
+    ui.modalTitle.textContent = title;
+    ui.modalBody.innerHTML = formHtml;
+    
+    // Setup all event listeners
     formFields.forEach(field => {
-        if (field.type === 'select' && initialData[field.name]) {
-            document.getElementById(field.name).value = initialData[field.name];
+        if (field.type === 'select' && initialData[field.name]) { document.getElementById(field.name).value = initialData[field.name]; }
+    });
+
+    if (isProfileModal) {
+        document.getElementById('modal-image-upload').addEventListener('change', (event) => { const file = event.target.files[0]; if(file){ const reader = new FileReader(); reader.onload = (e) => { newProfileImageData = e.target.result; document.getElementById('modal-img-preview').src = newProfileImageData; }; reader.readAsDataURL(file); } });
+        if (isEditing) {
+            document.getElementById('modal-delete-btn').onclick = () => { if (config.onDeleteItem) config.onDeleteItem(initialData.id); };
+            const resetPasswordBtn = document.getElementById('modal-reset-password-btn');
+            if (resetPasswordBtn) {
+                resetPasswordBtn.onclick = async () => {
+                    let userAccountEntry;
+                    if(config.collectionName === 'students') { userAccountEntry = Object.entries(appDatabase.users).find(([key, val]) => val.studentId === initialData.id); } 
+                    else if (config.collectionName === 'teachers') { userAccountEntry = Object.entries(appDatabase.users).find(([key, val]) => val.teacherId === initialData.id); }
+                    else { userAccountEntry = Object.entries(appDatabase.users).find(([key, val]) => key === initialData.id); } // For staff page
+                    if (!userAccountEntry) { showToast('Could not find linked user account.', 'error'); return; }
+                    const username = userAccountEntry[0];
+                    const newPassword = prompt(`Enter a new password for ${initialData.name}.\nLeave blank to cancel.`);
+                    if (newPassword && newPassword.trim() !== '') { appDatabase.users[username].password = newPassword.trim(); await apiService.save(); showToast('Password reset.', 'success'); }
+                };
+            }
         }
-    });
+    }
     
-    document.getElementById('modal-form').addEventListener('submit', (e) => {
+    const addFieldBtn = document.getElementById('add-field-btn');
+    if(addFieldBtn) { addFieldBtn.onclick = () => { const container = document.getElementById('dynamic-fields-container'); const newFieldRow = document.createElement('div'); newFieldRow.className = 'flex gap-2 items-center new-field-row'; newFieldRow.innerHTML = `<input type="text" placeholder="Field Name" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md new-key"><input type="text" placeholder="Field Value" class="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-md new-value"><button type="button" class="text-red-500 remove-field-btn"><i class="fas fa-trash"></i></button>`; container.appendChild(newFieldRow); newFieldRow.querySelector('.remove-field-btn').addEventListener('click', (e) => e.currentTarget.parentElement.remove()); }; }
+
+    document.getElementById('modal-form').addEventListener('submit', async (e) => {
         e.preventDefault();
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Saving...`;
         const formData = Object.fromEntries(new FormData(e.target));
-        onSubmit(formData);
-        closeAnimatedModal(ui.modal);
+        if (newProfileImageData) { formData.profileImage = newProfileImageData; }
+        if (isEditing) {
+            document.querySelectorAll('#dynamic-fields-container .dynamic-field-row input[data-key]').forEach(input => { formData[input.dataset.key] = input.value; });
+            document.querySelectorAll('#dynamic-fields-container .new-field-row').forEach(row => { const key = row.querySelector('.new-key').value.trim(); const value = row.querySelector('.new-value').value.trim(); if (key) { formData[key] = value; } });
+        }
+        try { await onSubmit(formData); } 
+        catch (error) { console.error("Error submitting form:", error); showToast('An error occurred while saving.', 'error'); } 
+        finally { submitButton.disabled = false; submitButton.innerHTML = originalButtonText; closeAnimatedModal(ui.modal); }
     });
-    
+
+    const modalContent = ui.modal.querySelector('.modal-content');
+    modalContent.classList.add('!max-w-4xl');
     openAnimatedModal(ui.modal);
+    ui.modal.addEventListener('transitionend', () => { if (!ui.modal.classList.contains('show')) { modalContent.classList.remove('!max-w-4xl'); } }, { once: true });
 }
 
 function exportToCsv(filename, headers, rows) {
-    const sanitizeCell = (cell) => {
+   const sanitizeCell = (cell) => {
         let strCell = String(cell === null || cell === undefined ? '' : cell);
-        if (strCell.includes(',')) {
+        // If the cell contains a comma, quote, or newline, enclose it in quotes
+        if (strCell.search(/("|,|\n)/g) >= 0) {
+            // Also, double up any existing quotes
             strCell = `"${strCell.replace(/"/g, '""')}"`;
         }
         return strCell;
@@ -2829,4 +3926,3 @@ function exportToCsv(filename, headers, rows) {
     document.body.removeChild(link);
     showToast(`Report ${filename} downloaded.`, 'success');
 }
-        
